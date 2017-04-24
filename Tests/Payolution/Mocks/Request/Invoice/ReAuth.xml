@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Request version="1.0">
+  <Header>
+    <Security sender="{{sender}}"/>
+  </Header>
+  <Transaction channel="{{channel}}" mode="CONNECTOR_TEST">
+    <User pwd="{{pwd}}" login="{{login}}"/>
+    <Identification>
+      <TransactionID>42</TransactionID>
+      <ReferenceID>40288b162da3e294012db761fd734134</ReferenceID> <!-- unique id from PA_response.xml -->
+      <ShopperID>customerid123456</ShopperID>
+    </Identification>
+    <Payment code="VA.PA">
+      <Presentation>
+        <Amount>349.99</Amount>
+        <Usage>Trx 42</Usage>
+        <Currency>EUR</Currency>
+      </Presentation>
+    </Payment>
+    <Account>
+      <Brand>PAYOLUTION_INVOICE</Brand>
+    </Account>
+    <Analysis>
+      <Criterion name="PAYOLUTION_TAX_AMOUNT">50.98</Criterion>
+      <Criterion name="PAYOLUTION_REQUEST_SYSTEM_VENDOR">CustomSystemName_ProgrammingLanguage_XML</Criterion>
+      <Criterion name="PAYOLUTION_REQUEST_SYSTEM_VERSION">CustomSystemVersion</Criterion>
+      <Criterion name="PAYOLUTION_REQUEST_SYSTEM_TYPE">Webshop</Criterion>
+      <Criterion name="PAYOLUTION_WEBSHOP_URL">www.shop.example.com</Criterion>
+      <Criterion name="PAYOLUTION_MODULE_NAME">PaymentModuleName</Criterion>
+      <Criterion name="PAYOLUTION_MODULE_VERSION">PaymentModuleVersion</Criterion>
+      <Criterion name="PAYOLUTION_INVOICE_ID">125</Criterion>
+      <Criterion name="PAYOLUTION_ITEM_DESCR_1">Phone</Criterion>
+      <Criterion name="PAYOLUTION_ITEM_PRICE_1">349.99</Criterion>
+      <Criterion name="PAYOLUTION_ITEM_TAX_1">49.99</Criterion>
+      <Criterion name="PAYOLUTION_ITEM_DESCR_2">Cover</Criterion>
+      <Criterion name="PAYOLUTION_ITEM_PRICE_2">9.99</Criterion>
+      <Criterion name="PAYOLUTION_ITEM_TAX_2">0.99</Criterion>
+    </Analysis>
+  </Transaction>
+</Request>

@@ -1,0 +1,27 @@
+[api_context]
+sender =
+login =
+pwd =
+
+
+[api_context_invoice]
+channel =
+channel_precheck =
+
+[api_context_b2b_invoice]
+channel =
+channel_precheck =
+
+[api_context_installment]
+channel =
+channel_precheck =
+user =
+password =
+
+[api_context_elv]
+channel =
+channel_precheck =
+
+
+
+

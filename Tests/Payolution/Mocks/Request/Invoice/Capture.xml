@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Request version="1.0">
+  <Header>
+    <Security sender="{{sender}}"/>
+  </Header>
+  <Transaction channel="{{channel}}" mode="CONNECTOR_TEST">
+    <User pwd="{{pwd}}" login="{{login}}"/>
+    <Identification>
+      <TransactionID>125</TransactionID>
+      <ReferenceID>40288b162da3e294012db761fd734134</ReferenceID>
+      <InvoiceID>125</InvoiceID>
+      <ShopperID>customerid123456</ShopperID>
+    </Identification>
+    <Payment code="VA.CP">
+      <Presentation>
+        <Amount>249.99</Amount>
+        <Usage>Invoice 125</Usage>
+        <Currency>EUR</Currency>
+      </Presentation>
+    </Payment>
+    <Analysis>
+      <Criterion name="PAYOLUTION_TAX_AMOUNT">50.98</Criterion>
+      <Criterion name="PAYOLUTION_REQUEST_SYSTEM_VENDOR">CustomSystemName_ProgrammingLanguage_XML</Criterion>
+      <Criterion name="PAYOLUTION_REQUEST_SYSTEM_VERSION">CustomSystemVersion</Criterion>
+      <Criterion name="PAYOLUTION_REQUEST_SYSTEM_TYPE">CronJob</Criterion>
+      <Criterion name="PAYOLUTION_MODULE_NAME">PaymentModuleName</Criterion>
+      <Criterion name="PAYOLUTION_MODULE_VERSION">PaymentModuleVersion</Criterion>
+      <Criterion name="PAYOLUTION_CUSTOMER_NUMBER">customerid123456</Criterion>
+      <Criterion name="PAYOLUTION_TRANSPORTATION_TRACKING">4564531894784</Criterion>
+      <Criterion name="PAYOLUTION_TRANSPORTATION_RETURN_TRACKING">18615486</Criterion>
+      <Criterion name="PAYOLUTION_TRANSPORTATION_COMPANY">DHL</Criterion>
+      <Criterion name="PAYOLUTION_ORDER_ID">42</Criterion>
+      <Criterion name="PAYOLUTION_INVOICE_ID">125</Criterion>
+    </Analysis>
+  </Transaction>
+</Request>
