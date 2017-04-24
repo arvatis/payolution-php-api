@@ -1,0 +1,25 @@
+{
+  "autoload": {
+    "classmap": [
+      "lib/"
+    ]
+  },
+  "autoload-dev": {
+    "classmap": [
+      "lib/",
+      "Tests"
+    ]
+  },
+  "require": {
+    "guzzlehttp/guzzle": "6.2.3",
+    "symfony/serializer": "3.2.7",
+    "symfony/property-access": "3.2.7",
+    "doctrine/common": "2.7.2",
+    "monolog/monolog": "1.22.1"
+  },
+  "require-dev": {
+    "fzaninotto/faker": "^1.6",
+    "phpunit/phpunit": "~5",
+    "phpmetrics/phpmetrics": "^2.0"
+  }
+}
