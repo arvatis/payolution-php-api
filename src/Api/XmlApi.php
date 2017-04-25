@@ -85,7 +85,7 @@ class XmlApi
     /**
      * @return string
      */
-    protected function getEndPointUrl(): string
+    protected function getEndPointUrl()
     {
         if (!$this->testMode) {
             return self::URL_XML_API;

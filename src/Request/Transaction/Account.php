@@ -27,7 +27,7 @@ class Account
     /**
      * @return string
      */
-    public function getBrand(): string
+    public function getBrand()
     {
         return $this->brand;
     }

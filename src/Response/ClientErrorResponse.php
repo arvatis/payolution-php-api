@@ -33,7 +33,7 @@ class ClientErrorResponse extends ResponseAbstract implements ResponseContract
     /**
      * @return string
      */
-    public function getErrorMessage(): string
+    public function getErrorMessage()
     {
         return $this->message;
     }
@@ -41,7 +41,7 @@ class ClientErrorResponse extends ResponseAbstract implements ResponseContract
     /**
      * @return string
      */
-    public function getStatus(): string
+    public function getStatus()
     {
         return '';
     }
@@ -49,7 +49,7 @@ class ClientErrorResponse extends ResponseAbstract implements ResponseContract
     /**
      * @return string
      */
-    public function getTransactionID(): string
+    public function getTransactionID()
     {
         return '';
     }
@@ -57,7 +57,7 @@ class ClientErrorResponse extends ResponseAbstract implements ResponseContract
     /**
      * @return string
      */
-    public function getShortId(): string
+    public function getShortId()
     {
         return '';
     }
@@ -65,7 +65,7 @@ class ClientErrorResponse extends ResponseAbstract implements ResponseContract
     /**
      * @return string
      */
-    public function getUniqueID(): string
+    public function getUniqueID()
     {
         return '';
     }

@@ -64,7 +64,7 @@ class Client implements ClientContract
     /**
      * @return string
      */
-    public function getHttpMethod(): string
+    public function getHttpMethod()
     {
         return (string)$this->httpMethod;
     }

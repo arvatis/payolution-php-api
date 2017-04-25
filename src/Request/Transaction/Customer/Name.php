@@ -45,7 +45,7 @@ class Name
     /**
      * @return string
      */
-    public function getGiven(): string
+    public function getGiven()
     {
         return $this->given;
     }
@@ -53,7 +53,7 @@ class Name
     /**
      * @return string
      */
-    public function getFamily(): string
+    public function getFamily()
     {
         return $this->family;
     }
@@ -61,7 +61,7 @@ class Name
     /**
      * @return string
      */
-    public function getSex(): string
+    public function getSex()
     {
         return $this->sex;
     }
@@ -69,7 +69,7 @@ class Name
     /**
      * @return string
      */
-    public function getBirthdate(): string
+    public function getBirthdate()
     {
         return $this->birthdate;
     }

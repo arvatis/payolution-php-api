@@ -33,7 +33,7 @@ class Criterion
     /**
      * @return string
      */
-    public function _getValue(): string
+    public function _getValue()
     {
         return $this->value;
     }
@@ -41,7 +41,7 @@ class Criterion
     /**
      * @return string
      */
-    public function _getName(): string
+    public function _getName()
     {
         return $this->name;
     }

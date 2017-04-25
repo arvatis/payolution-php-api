@@ -49,7 +49,7 @@ class Shipping extends CompositeAbstract implements CompositeContract
      *
      * @return string
      */
-    private function getShippingType($shippingAddress, $billingAddress): string
+    private function getShippingType($shippingAddress, $billingAddress)
     {
         if ($shippingAddress === $billingAddress) {
             return CriterionNames::PAYOLUTION_SHIPPING_TYPE_EQUALS_BILLING_ADDRESS;

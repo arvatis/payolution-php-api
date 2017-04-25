@@ -33,7 +33,7 @@ class Contact
     /**
      * @return string
      */
-    public function getEmail(): string
+    public function getEmail()
     {
         return $this->email;
     }
@@ -41,7 +41,7 @@ class Contact
     /**
      * @return string
      */
-    public function getIp(): string
+    public function getIp()
     {
         return $this->customerIp;
     }

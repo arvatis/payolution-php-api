@@ -45,7 +45,7 @@ class Address
     /**
      * @return string
      */
-    public function getStreet(): string
+    public function getStreet()
     {
         return $this->street;
     }
@@ -53,7 +53,7 @@ class Address
     /**
      * @return string
      */
-    public function getZip(): string
+    public function getZip()
     {
         return $this->zip;
     }
@@ -61,7 +61,7 @@ class Address
     /**
      * @return string
      */
-    public function getCity(): string
+    public function getCity()
     {
         return $this->city;
     }
@@ -69,7 +69,7 @@ class Address
     /**
      * @return string
      */
-    public function getCountry(): string
+    public function getCountry()
     {
         return $this->country;
     }

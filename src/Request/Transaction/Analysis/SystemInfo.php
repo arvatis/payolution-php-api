@@ -42,7 +42,7 @@ class SystemInfo extends CompositeAbstract implements CompositeContract
     /**
      * @return string
      */
-    private function getTotalTaxAmount(): string
+    private function getTotalTaxAmount()
     {
         return sprintf('%0.2f', array_sum(array_column($this->data['cartItems'], 'tax')));
     }

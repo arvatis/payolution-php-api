@@ -39,7 +39,7 @@ class Presentation
     /**
      * @return string
      */
-    public function getAmount(): string
+    public function getAmount()
     {
         return (string) $this->amount;
     }
@@ -47,7 +47,7 @@ class Presentation
     /**
      * @return string
      */
-    public function getUsage(): string
+    public function getUsage()
     {
         return (string) $this->usage;
     }
@@ -55,7 +55,7 @@ class Presentation
     /**
      * @return string
      */
-    public function getCurrency(): string
+    public function getCurrency()
     {
         return (string) $this->currency;
     }

@@ -46,7 +46,7 @@ class Identification
     /**
      * @return string
      */
-    public function getTransactionID(): string
+    public function getTransactionID()
     {
         return (string) $this->transactionId;
     }
@@ -56,7 +56,7 @@ class Identification
      *
      * @return string
      */
-    public function getReferenceID(): string
+    public function getReferenceID()
     {
         return (string) $this->referenceId;
     }
@@ -66,7 +66,7 @@ class Identification
      *
      * @return string
      */
-    public function getInvoiceID(): string
+    public function getInvoiceID()
     {
         return (string) $this->invoiceId;
     }
@@ -74,7 +74,7 @@ class Identification
     /**
      * @return string
      */
-    public function getShopperID(): string
+    public function getShopperID()
     {
         return (string) $this->shopperId;
     }
