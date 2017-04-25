@@ -2,20 +2,14 @@
   "name": "arvatis/payolution-php-api",
   "description": "payolution api developed for the plentymarkets payolution plugin",
   "autoload": {
-    "psr-0": {
-      "Payolution": "lib/"
+    "psr-4": {
+      "ArvPayolutionApi\\": "src/"
     }
   },
   "autoload-dev": {
-    "autoload": {
-      "psr-0": {
-        "Payolution": "lib/"
-      }
-    },
-    "classmap": [
-      "lib/",
-      "Tests"
-    ]
+    "psr-4": {
+      "ArvPayolutionApi\\": "tests/"
+    }
   },
   "require": {
     "guzzlehttp/guzzle": "6.2.3",
