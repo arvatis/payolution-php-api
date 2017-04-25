@@ -17,7 +17,7 @@ class ClientErrorResponse extends ResponseAbstract implements ResponseContract
      *
      * @param string $message
      */
-    public function __construct(string $message)
+    public function __construct($message)
     {
         $this->message = $message;
     }

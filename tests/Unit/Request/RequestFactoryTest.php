@@ -1,7 +1,6 @@
 <?php
 
 
-
 namespace ArvPayolutionApi\Unit\Request;
 
 use ArvPayolutionApi\Request\RequestFactory;

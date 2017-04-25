@@ -74,7 +74,7 @@ class Client implements ClientContract
      *
      * @return Client
      */
-    public function setHttpMethod(string $httpMethod): Client
+    public function setHttpMethod($httpMethod): Client
     {
         $this->httpMethod = $httpMethod;
 
