@@ -2,11 +2,16 @@
   "name": "arvatis/payolution-php-api",
   "description": "payolution api developed for the plentymarkets payolution plugin",
   "autoload": {
-    "classmap": [
-      "lib/"
-    ]
+    "psr-0": {
+      "Payolution": "lib/"
+    }
   },
   "autoload-dev": {
+    "autoload": {
+      "psr-0": {
+        "Payolution": "lib/"
+      }
+    },
     "classmap": [
       "lib/",
       "Tests"
