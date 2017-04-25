@@ -4,7 +4,7 @@
 
 namespace Payolution\Tests\Mocks\Request;
 
-use Payolution\Api\Request\RequestTypes;
+use Payolution\Request\RequestTypes;
 use Tests\Payolution\Helpers\Config;
 
 /**

@@ -4,11 +4,11 @@
 
 namespace Payolution\Tests\Unit\Request;
 
-use Payolution\Api\Request\RequestFactory;
-use Payolution\Api\Request\RequestPaymentTypes;
-use Payolution\Api\Request\RequestTypes;
-use Payolution\Api\Request\XmlSerializer;
-use Payolution\Api\Request\XmlSerializerFactory;
+use Payolution\Request\RequestFactory;
+use Payolution\Request\RequestPaymentTypes;
+use Payolution\Request\RequestTypes;
+use Payolution\Request\XmlSerializer;
+use Payolution\Request\XmlSerializerFactory;
 use Payolution\Tests\Mocks\Request\Elv\PreCheckData as ElvPreCheckData;
 use Payolution\Tests\Mocks\Request\Installment\PreCheckData as InstallmentPreCheckData;
 use Payolution\Tests\Mocks\Request\Invoice\CaptureData as InvoiceCaptureData;

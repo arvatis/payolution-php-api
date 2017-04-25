@@ -2,7 +2,7 @@
 
 
 
-namespace Payolution\Api\Request;
+namespace Payolution\Request;
 
 use Payolution\Request\Transaction\Analysis;
 use Payolution\Request\Transaction\Identification;

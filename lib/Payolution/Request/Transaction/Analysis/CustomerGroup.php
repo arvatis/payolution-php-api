@@ -4,7 +4,7 @@
 
 namespace Payolution\Request\Transaction\Analysis;
 
-use Payolution\Api\Request\RequestTypes;
+use Payolution\Request\RequestTypes;
 
 /**
  * Class CustomerGroup

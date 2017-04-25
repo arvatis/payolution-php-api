@@ -2,7 +2,7 @@
 
 
 
-namespace Payolution\Api\Request;
+namespace Payolution\Request;
 
 use Payolution\Request\Transaction\Account;
 use Payolution\Request\Transaction\AnalysisFactory;

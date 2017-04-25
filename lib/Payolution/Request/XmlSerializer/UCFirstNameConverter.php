@@ -2,7 +2,7 @@
 
 
 
-namespace Payolution\Api\Request\XmlSerializer;
+namespace Payolution\Request\XmlSerializer;
 
 use Symfony\Component\Serializer\NameConverter\NameConverterInterface;
 

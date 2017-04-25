@@ -4,7 +4,7 @@
 
 namespace Tests\Payolution\Helpers;
 
-use Payolution\Api\Request\RequestTypes;
+use Payolution\Request\RequestTypes;
 
 /**
  * Class Config

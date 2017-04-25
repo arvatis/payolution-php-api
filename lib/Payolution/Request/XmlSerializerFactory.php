@@ -1,10 +1,10 @@
 <?php
 
 
-namespace Payolution\Api\Request;
+namespace Payolution\Request;
 
 use Doctrine\Common\Annotations\AnnotationReader;
-use Payolution\Api\Request\XmlSerializer\UCFirstNameConverter;
+use Payolution\Request\XmlSerializer\UCFirstNameConverter;
 use Symfony\Component\Serializer\Encoder\XmlEncoder;
 use Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactory;
 use Symfony\Component\Serializer\Mapping\Loader\AnnotationLoader;

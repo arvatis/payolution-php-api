@@ -2,7 +2,7 @@
 
 
 
-namespace Payolution\Api\Request;
+namespace Payolution\Request;
 
 /**
  * Class Header

@@ -4,9 +4,9 @@
 
 namespace Payolution\Tests\Unit\Request;
 
-use Payolution\Api\Request\Header;
-use Payolution\Api\Request\XmlSerializer;
-use Payolution\Api\Request\XmlSerializerFactory;
+use Payolution\Request\Header;
+use Payolution\Request\XmlSerializer;
+use Payolution\Request\XmlSerializerFactory;
 use Payolution\Request\Transaction\Analysis;
 use Payolution\Request\Transaction\Payment;
 use Payolution\Request\Transaction\Payment\Presentation;
