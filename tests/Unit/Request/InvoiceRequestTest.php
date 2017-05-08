@@ -1,6 +1,5 @@
 <?php
 
-
 namespace ArvPayolutionApi\Unit\Request;
 
 use ArvPayolutionApi\Api\Client as ApiClient;
@@ -13,16 +12,11 @@ use GuzzleHttp\Client;
 
 /**
  * Class InvoiceRequestTest
+ *
  * @group Invoice
  */
 class InvoiceRequestTest extends \PHPUnit_Framework_TestCase
 {
-
-
-    /**
-     * @var XmlApi
-     */
-    private $xmlApi;
     /**
      * @var  PreCheckXmlMockFactory
      */
@@ -32,6 +26,11 @@ class InvoiceRequestTest extends \PHPUnit_Framework_TestCase
      * @var XmlSerializer
      */
     protected $xmlSerializer;
+
+    /**
+     * @var XmlApi
+     */
+    private $xmlApi;
 
     /** @var PreCheckDataGenerated $data */
     private $data;
@@ -54,5 +53,4 @@ class InvoiceRequestTest extends \PHPUnit_Framework_TestCase
 
         self::assertTrue($response->getSuccess());
     }
-
 }

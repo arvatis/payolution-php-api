@@ -1,32 +1,26 @@
 <?php
 
-
-
 namespace ArvPayolutionApi\Unit\Api;
 
+use ArvPayolutionApi\Api\Client as ApiClient;
+use ArvPayolutionApi\Api\XmlApi;
 use ArvPayolutionApi\Mocks\Request\Invoice\PreCheckDataGenerated;
+use ArvPayolutionApi\Mocks\Request\PreCheckXmlMockFactory;
+use ArvPayolutionApi\Request\RequestFactory;
 use ArvPayolutionApi\Request\XmlSerializer;
+use ArvPayolutionApi\Request\XmlSerializerFactory;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
-use ArvPayolutionApi\Api\Client as ApiClient;
-use ArvPayolutionApi\Request\RequestFactory;
-use ArvPayolutionApi\Request\XmlSerializerFactory;
-use ArvPayolutionApi\Api\XmlApi;
-use ArvPayolutionApi\Mocks\Request\PreCheckXmlMockFactory;
 
 /**
  * Class ClientTest
  */
 class ClientTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * @var XmlApi
-     */
-    private $xmlApi;
     /**
      * @var  PreCheckXmlMockFactory
      */
@@ -36,6 +30,10 @@ class ClientTest extends \PHPUnit_Framework_TestCase
      * @var XmlSerializer
      */
     protected $xmlSerializer;
+    /**
+     * @var XmlApi
+     */
+    private $xmlApi;
 
     /** @var PreCheckDataGenerated $data */
     private $data;
@@ -50,13 +48,14 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @group online
+     * @group testBasicRequestSuccessfullyPlaced
      */
     public function testBasicRequestSuccessfullyPlaced()
     {
         $client = new XmlApi(new ApiClient());
         $response = $client->doRequest(PreCheckXmlMockFactory::getRequestXml('Invoice', 'PreCheck'));
 
-        self::assertTrue($response->getSuccess());
+        self::assertTrue($response->getSuccess(), 'Transaction id was: ' . $response->getUniqueID());
     }
 
     /**
@@ -69,7 +68,6 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         //print_r($response);
         self::assertSame(' NOK REJECTED_VALIDATION  Format Error', $response->getErrorMessage());
     }
-
 
     /**
      * @group online
@@ -100,7 +98,6 @@ class ClientTest extends \PHPUnit_Framework_TestCase
             )));
         self::assertSame('VA.PA.60.95 NOK REJECTED_BANK  Authorization Error', $response->getErrorMessage());
     }
-
 
     /**
      * @expectedException

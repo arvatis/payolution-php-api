@@ -1,15 +1,13 @@
 <?php
 
-
-
 namespace ArvPayolutionApi\Unit\Request;
 
 use ArvPayolutionApi\Request\Header;
-use ArvPayolutionApi\Request\XmlSerializer;
-use ArvPayolutionApi\Request\XmlSerializerFactory;
 use ArvPayolutionApi\Request\Transaction\Analysis;
 use ArvPayolutionApi\Request\Transaction\Payment;
 use ArvPayolutionApi\Request\Transaction\Payment\Presentation;
+use ArvPayolutionApi\Request\XmlSerializer;
+use ArvPayolutionApi\Request\XmlSerializerFactory;
 
 /**
  * Class XmlSerializerTest

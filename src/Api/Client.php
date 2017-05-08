@@ -1,7 +1,5 @@
 <?php
 
-
-
 namespace ArvPayolutionApi\Api;
 
 use GuzzleHttp\ClientInterface;
@@ -30,12 +28,14 @@ class Client implements ClientContract
 
     /**
      * Client constructor.
+     *
      * @param ClientInterface $client
      */
     public function __construct(ClientInterface $client = null)
     {
         if ($client) {
             $this->client = $client;
+
             return;
         }
         $this->client = new \GuzzleHttp\Client();
@@ -66,7 +66,7 @@ class Client implements ClientContract
      */
     public function getHttpMethod()
     {
-        return (string)$this->httpMethod;
+        return (string) $this->httpMethod;
     }
 
     /**
@@ -86,7 +86,7 @@ class Client implements ClientContract
      */
     public function getEndpointUrl()
     {
-        return (string)$this->url;
+        return (string) $this->url;
     }
 
     /**
@@ -117,7 +117,7 @@ class Client implements ClientContract
             ]
         );
 
-        return (string)$res->getBody();
+        return (string) $res->getBody();
     }
 
     /**

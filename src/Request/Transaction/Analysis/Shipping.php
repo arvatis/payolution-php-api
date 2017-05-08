@@ -1,7 +1,5 @@
 <?php
 
-
-
 namespace ArvPayolutionApi\Request\Transaction\Analysis;
 
 use ArvPayolutionApi\Request\RequestTypes;
@@ -54,6 +52,7 @@ class Shipping extends CompositeAbstract implements CompositeContract
         if ($shippingAddress === $billingAddress) {
             return CriterionNames::PAYOLUTION_SHIPPING_TYPE_EQUALS_BILLING_ADDRESS;
         }
+
         return CriterionNames::PAYOLUTION_SHIPPING_TYPE_ALTERNATIVE_SHIPPING_ADDRESS;
     }
 }

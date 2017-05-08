@@ -1,7 +1,5 @@
 <?php
 
-
-
 namespace ArvPayolutionApi\Mocks\Faker\Providers;
 
 use Faker\Provider\Base;

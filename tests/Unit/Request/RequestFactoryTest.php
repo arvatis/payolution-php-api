@@ -1,13 +1,7 @@
 <?php
 
-
 namespace ArvPayolutionApi\Unit\Request;
 
-use ArvPayolutionApi\Request\RequestFactory;
-use ArvPayolutionApi\Request\RequestPaymentTypes;
-use ArvPayolutionApi\Request\RequestTypes;
-use ArvPayolutionApi\Request\XmlSerializer;
-use ArvPayolutionApi\Request\XmlSerializerFactory;
 use ArvPayolutionApi\Mocks\Request\Elv\PreCheckData as ElvPreCheckData;
 use ArvPayolutionApi\Mocks\Request\Installment\PreCheckData as InstallmentPreCheckData;
 use ArvPayolutionApi\Mocks\Request\Invoice\CaptureData as InvoiceCaptureData;
@@ -15,6 +9,11 @@ use ArvPayolutionApi\Mocks\Request\Invoice\PreAuthData as InvoicePreAuthData;
 use ArvPayolutionApi\Mocks\Request\Invoice\PreCheckData as InvoicePreCheckData;
 use ArvPayolutionApi\Mocks\Request\PreCheckDataContract;
 use ArvPayolutionApi\Mocks\Request\PreCheckXmlMockFactory;
+use ArvPayolutionApi\Request\RequestFactory;
+use ArvPayolutionApi\Request\RequestPaymentTypes;
+use ArvPayolutionApi\Request\RequestTypes;
+use ArvPayolutionApi\Request\XmlSerializer;
+use ArvPayolutionApi\Request\XmlSerializerFactory;
 
 /**
  * Class RequestFactoryTest

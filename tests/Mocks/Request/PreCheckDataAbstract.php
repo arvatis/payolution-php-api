@@ -1,7 +1,5 @@
 <?php
 
-
-
 namespace ArvPayolutionApi\Mocks\Request;
 
 /**
@@ -90,7 +88,7 @@ abstract class PreCheckDataAbstract implements PreCheckDataContract
             'gender' => 'M',
             'firstName' => 'Max',
             'lastName' => 'Mustermann',
-            'email' => 'max.mustermann@example.com',
+            'email' => 'whitelist-test@payolution.com',
             'customerIp' => '192.168.0.1',
             'dob' => '1970-01-30',
             'language' => 'de',

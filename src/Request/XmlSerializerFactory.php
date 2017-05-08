@@ -1,10 +1,9 @@
 <?php
 
-
 namespace ArvPayolutionApi\Request;
 
-use Doctrine\Common\Annotations\AnnotationReader;
 use ArvPayolutionApi\Request\XmlSerializer\UCFirstNameConverter;
+use Doctrine\Common\Annotations\AnnotationReader;
 use Symfony\Component\Serializer\Encoder\XmlEncoder;
 use Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactory;
 use Symfony\Component\Serializer\Mapping\Loader\AnnotationLoader;

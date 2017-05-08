@@ -1,22 +1,19 @@
 <?php
 
-
-
 namespace ArvPayolutionApi\Api;
 
-use GuzzleHttp\Exception\BadResponseException;
-use GuzzleHttp\Exception\ClientException;
-use GuzzleHttp\Exception\ServerException;
 use ArvPayolutionApi\Response\ClientErrorResponse;
 use ArvPayolutionApi\Response\ResponseContract;
 use ArvPayolutionApi\Response\XmlApiResponse;
+use GuzzleHttp\Exception\BadResponseException;
+use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Exception\ServerException;
 
 /**
  * Class XmlApi
  */
 class XmlApi
 {
-
     const URL_XML_API = 'https://gateway.payolution.com/ctpe/api';
     const URL_XML_API_SANDBOX = 'https://test-gateway.payolution.com/ctpe/api';
 
@@ -65,6 +62,7 @@ class XmlApi
 
     /**
      * @param \SimpleXMLElement $xml
+     *
      * @return ResponseContract|XmlApiResponse
      */
     public function doRequest(\SimpleXMLElement $xml): ResponseContract
@@ -73,12 +71,12 @@ class XmlApi
             $responseBody = $this->client->doRequest('load=' . urlencode($xml->asXML()));
 
             return new XmlApiResponse(new \SimpleXMLElement($responseBody));
-
         } catch (ClientException $e) {
         } catch (ServerException $e) {
         } catch (BadResponseException $e) {
         } catch (\Exception $e) {
         }
+
         return new ClientErrorResponse($e->getMessage());
     }
 

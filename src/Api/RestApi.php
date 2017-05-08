@@ -1,7 +1,5 @@
 <?php
 
-
-
 namespace ArvPayolutionApi\Api;
 
 /**

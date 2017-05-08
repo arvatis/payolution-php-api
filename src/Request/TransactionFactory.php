@@ -1,7 +1,5 @@
 <?php
 
-
-
 namespace ArvPayolutionApi\Request;
 
 use ArvPayolutionApi\Request\Transaction\Account;

@@ -18,7 +18,7 @@
     </Payment>
     <Customer>
       <Contact>
-        <Email>max.mustermann@example.com</Email>
+        <Email>whitelist-test@payolution.com</Email>
         <Ip>192.168.0.1</Ip>
       </Contact>
       <Address>

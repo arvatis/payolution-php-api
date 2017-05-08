@@ -1,11 +1,9 @@
 <?php
 
-
-
 namespace ArvPayolutionApi\Mocks\Request;
 
-use ArvPayolutionApi\Request\RequestTypes;
 use ArvPayolutionApi\Helpers\Config;
+use ArvPayolutionApi\Request\RequestTypes;
 
 /**
  * Class XmlMock

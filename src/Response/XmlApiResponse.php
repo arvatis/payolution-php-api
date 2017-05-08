@@ -1,7 +1,5 @@
 <?php
 
-
-
 namespace ArvPayolutionApi\Response;
 
 /**
@@ -9,7 +7,6 @@ namespace ArvPayolutionApi\Response;
  */
 class XmlApiResponse extends ResponseAbstract implements ResponseContract
 {
-
     const PROCESSING_STATUS_CODE_SUCCESS = 90;
     const PROCESSING_REASON_CODE_SUCCESS = 0;
     /**
@@ -74,7 +71,7 @@ class XmlApiResponse extends ResponseAbstract implements ResponseContract
      */
     public function getShortId()
     {
-        return (string)$this->xml->Transaction->Identification->ShortID;
+        return (string) $this->xml->Transaction->Identification->ShortID;
     }
 
     /**
@@ -82,7 +79,7 @@ class XmlApiResponse extends ResponseAbstract implements ResponseContract
      */
     public function getUniqueID()
     {
-        return (string)$this->xml->Transaction->Identification->UniqueID;
+        return (string) $this->xml->Transaction->Identification->UniqueID;
     }
 
     /**
@@ -92,8 +89,6 @@ class XmlApiResponse extends ResponseAbstract implements ResponseContract
      */
     public function getTransactionID()
     {
-        return (string)$this->xml->Transaction->Identification->TransactionID;
+        return (string) $this->xml->Transaction->Identification->TransactionID;
     }
-
-
 }

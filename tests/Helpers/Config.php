@@ -1,7 +1,5 @@
 <?php
 
-
-
 namespace ArvPayolutionApi\Helpers;
 
 use ArvPayolutionApi\Request\RequestTypes;
@@ -22,7 +20,7 @@ class Config
     {
         $configFile = 'phpunit.ini';
         if (!file_exists($configFile) || !is_readable($configFile)) {
-            throw new \Exception('Please create a config file "phpunit.ini". See "phpunit.ini.dist" for reference.');
+            throw new \Exception('Please create a config file "phpunit.ini" in "' . getcwd() . '". See "phpunit.ini.dist" for reference.');
         }
 
         $config = parse_ini_file($configFile, true);

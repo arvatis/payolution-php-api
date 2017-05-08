@@ -1,14 +1,12 @@
 <?php
 
-
-
 namespace ArvPayolutionApi\Mocks\Request\Invoice;
 
-use Faker;
+use ArvPayolutionApi\Helpers\Config;
 use ArvPayolutionApi\Mocks\Faker\Providers\CustomerGroup;
 use ArvPayolutionApi\Mocks\Faker\Providers\PayolutionCountryCode;
 use ArvPayolutionApi\Mocks\Request\PreCheckDataContract;
-use ArvPayolutionApi\Helpers\Config;
+use Faker;
 
 /**
  * Class PreCheckData

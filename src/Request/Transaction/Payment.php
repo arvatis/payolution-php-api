@@ -1,7 +1,5 @@
 <?php
 
-
-
 namespace ArvPayolutionApi\Request\Transaction;
 
 use ArvPayolutionApi\Request\Transaction\Payment\Presentation;

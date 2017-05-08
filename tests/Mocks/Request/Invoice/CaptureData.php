@@ -1,12 +1,10 @@
 <?php
 
-
-
 namespace ArvPayolutionApi\Mocks\Request\Invoice;
 
+use ArvPayolutionApi\Helpers\Config;
 use ArvPayolutionApi\Mocks\Request\PreCheckDataAbstract;
 use ArvPayolutionApi\Mocks\Request\PreCheckDataContract;
-use ArvPayolutionApi\Helpers\Config;
 
 /**
  * Class PreCheckData
