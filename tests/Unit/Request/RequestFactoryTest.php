@@ -7,6 +7,7 @@ use ArvPayolutionApi\Mocks\Request\Installment\PreCheckData as InstallmentPreChe
 use ArvPayolutionApi\Mocks\Request\Invoice\CaptureData as InvoiceCaptureData;
 use ArvPayolutionApi\Mocks\Request\Invoice\PreAuthData as InvoicePreAuthData;
 use ArvPayolutionApi\Mocks\Request\Invoice\PreCheckData as InvoicePreCheckData;
+use ArvPayolutionApi\Mocks\Request\InvoiceB2B\PreAuthData;
 use ArvPayolutionApi\Mocks\Request\InvoiceB2B\PreCheckData as InvoiceB2BPreCheckData;
 use ArvPayolutionApi\Mocks\Request\PreCheckDataContract;
 use ArvPayolutionApi\Mocks\Request\PreCheckXmlMockFactory;
@@ -211,6 +212,40 @@ class RequestFactoryTest extends \PHPUnit_Framework_TestCase
                 [
                     '@version' => '1.0',
                     '#' => RequestFactory::create($requestType, $paymentBrand, $data),
+                ],
+                true
+            )
+        );
+    }
+
+    public function testInvoiceB2BPreAuthSameAsMock()
+    {
+        $this->data = new PreAuthData();
+        $data = [
+            'context' => $this->data->getApiContext(),
+            'cartItems' => $this->data->getCartItems(),
+            'systemInfo' => $this->data->getSytemInfo(),
+            'shippingAddress' => $this->data->getShippingAddress(),
+            'billingAddress' => $this->data->getCustomerAddress(),
+            'cart' => $this->data->getCart(),
+            'customer' => $this->data->getCustomer(),
+            'company' => $this->data->getCompany(),
+        ];
+
+        $requestType = RequestTypes::PRE_AUTH;
+        $paymentBrand = RequestPaymentTypes::PAYOLUTION_INVOICE_B2B;
+        $previousRequestId = '53488b162da3e294012db761fd734288';
+
+        $mockXml = PreCheckXmlMockFactory::getRequestXml(
+            $paymentBrand,
+            $requestType
+        )->saveXml();
+        $this->assertSame(
+            $mockXml,
+            $this->xmlSerializer->serialize(
+                [
+                    '@version' => '1.0',
+                    '#' => RequestFactory::create($requestType, $paymentBrand, $data, $previousRequestId),
                 ],
                 true
             )

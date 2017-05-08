@@ -2,21 +2,48 @@
 
 namespace ArvPayolutionApi\Mocks\Request\InvoiceB2B;
 
-use ArvPayolutionApi\Mocks\Request\Invoice\PreCheckData as PreCheckDataInvoice;
+use ArvPayolutionApi\Helpers\Config;
+use ArvPayolutionApi\Mocks\Request\PreCheckDataAbstract;
+use ArvPayolutionApi\Mocks\Request\PreCheckDataContract;
+use ArvPayolutionApi\Request\RequestTypes;
 
 /**
  * Class PreCheckData
  */
-class PreAuthData extends extends PreCheckDataAbstract implements PreCheckDataContract
+class PreAuthData extends PreCheckDataAbstract implements PreCheckDataContract
 {
     /**
      * @return array
      */
     public function getApiContext()
-{
-    return [
-            'mode' => 'CONNECTOR_TEST',
-            'transactionId' => 42,
-        ] + Config::getPaymentConfig('InvoiceB2B', 'PreCheck');
-}
+    {
+        return [
+                'mode' => 'CONNECTOR_TEST',
+                'transactionId' => 42,
+            ] + Config::getPaymentConfig('InvoiceB2B', RequestTypes::PRE_AUTH);
+    }
+
+    /**
+     * @return array
+     */
+    public function getCustomerAddress()
+    {
+        $data = parent::getCustomerAddress();
+        $data['company'] = 'Payolution Company';
+
+        return $data;
+    }
+
+    /**
+     * @return array
+     */
+    public function getCompany()
+    {
+        return [
+            'name' => 'Payolution Company',
+            'type' => 'COMPANY',
+            'registration_no' => '',
+            'vat_id' => 'ATU4514545',
+        ];
+    }
 }

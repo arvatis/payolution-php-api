@@ -49,6 +49,8 @@ class PreCheckXmlMockFactory
     /**
      * @param $xmlString
      *
+     * @param $paymentMethod
+     * @param $requestType
      * @return string
      */
     private static function setApiConfigValues($xmlString, $paymentMethod, $requestType)
