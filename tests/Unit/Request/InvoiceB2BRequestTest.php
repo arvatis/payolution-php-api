@@ -63,4 +63,23 @@ class InvoiceB2BRequestTest extends \PHPUnit_Framework_TestCase
             'Response was' . print_r($response, true)
         );
     }
+
+    /**
+     * @group online
+     */
+    public function testPreAuthSuccessFull()
+    {
+        $client = new XmlApi(new ApiClient());
+        $request = PreCheckXmlMockFactory::getRequestXml(
+            RequestPaymentTypes::PAYOLUTION_INVOICE_B2B,
+            RequestTypes::PRE_AUTH
+        );
+        $response = $client->doRequest($request);
+
+        self::assertTrue(
+            $response->getSuccess(),
+            'Requst was' . print_r($request->saveXML(), true) . PHP_EOL .
+            'Response was' . print_r($response, true)
+        );
+    }
 }
