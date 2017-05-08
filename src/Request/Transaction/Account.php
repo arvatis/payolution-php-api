@@ -27,6 +27,6 @@ class Account
      */
     public function getBrand()
     {
-        return $this->brand;
+        return str_replace('_B2B', '', $this->brand);
     }
 }

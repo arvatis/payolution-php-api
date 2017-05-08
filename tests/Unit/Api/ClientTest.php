@@ -7,6 +7,8 @@ use ArvPayolutionApi\Api\XmlApi;
 use ArvPayolutionApi\Mocks\Request\Invoice\PreCheckDataGenerated;
 use ArvPayolutionApi\Mocks\Request\PreCheckXmlMockFactory;
 use ArvPayolutionApi\Request\RequestFactory;
+use ArvPayolutionApi\Request\RequestPaymentTypes;
+use ArvPayolutionApi\Request\RequestTypes;
 use ArvPayolutionApi\Request\XmlSerializer;
 use ArvPayolutionApi\Request\XmlSerializerFactory;
 use GuzzleHttp\Client;
@@ -53,7 +55,10 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     public function testBasicRequestSuccessfullyPlaced()
     {
         $client = new XmlApi(new ApiClient());
-        $response = $client->doRequest(PreCheckXmlMockFactory::getRequestXml('Invoice', 'PreCheck'));
+        $response = $client->doRequest(PreCheckXmlMockFactory::getRequestXml(
+            RequestPaymentTypes::PAYOLUTION_INVOICE,
+            RequestTypes::PRE_CHECK)
+        );
 
         self::assertTrue($response->getSuccess(), 'Transaction id was: ' . $response->getUniqueID());
     }

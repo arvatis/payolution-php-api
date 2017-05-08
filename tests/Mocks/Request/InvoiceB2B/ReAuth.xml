@@ -18,7 +18,7 @@
       </Presentation>
     </Payment>
     <Account>
-      <Brand>PAYOLUTION_INVOICE_B2B</Brand>
+      <Brand>PAYOLUTION_INVOICE</Brand>
     </Account>
     <Analysis>
       <Criterion name="PAYOLUTION_TAX_AMOUNT">50.98</Criterion>

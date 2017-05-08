@@ -4,7 +4,7 @@ namespace ArvPayolutionApi\Unit\Request;
 
 use ArvPayolutionApi\Api\Client as ApiClient;
 use ArvPayolutionApi\Api\XmlApi;
-use ArvPayolutionApi\Mocks\Request\Invoice\PreCheckDataGenerated;
+use ArvPayolutionApi\Mocks\Request\InvoiceB2B\PreCheckDataGenerated;
 use ArvPayolutionApi\Mocks\Request\PreCheckXmlMockFactory;
 use ArvPayolutionApi\Request\RequestPaymentTypes;
 use ArvPayolutionApi\Request\RequestTypes;
@@ -15,9 +15,9 @@ use GuzzleHttp\Client;
 /**
  * Class InvoiceRequestTest
  *
- * @group Invoice
+ * @group InvoiceB2BRequestTest
  */
-class InvoiceRequestTest extends \PHPUnit_Framework_TestCase
+class InvoiceB2BRequestTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var  PreCheckXmlMockFactory
@@ -51,11 +51,16 @@ class InvoiceRequestTest extends \PHPUnit_Framework_TestCase
     public function testPreCheckSuccessFull()
     {
         $client = new XmlApi(new ApiClient());
-        $response = $client->doRequest(PreCheckXmlMockFactory::getRequestXml(
-            RequestPaymentTypes::PAYOLUTION_INVOICE,
-            RequestTypes::PRE_CHECK)
+        $request = PreCheckXmlMockFactory::getRequestXml(
+            RequestPaymentTypes::PAYOLUTION_INVOICE_B2B,
+            RequestTypes::PRE_CHECK
         );
+        $response = $client->doRequest($request);
 
-        self::assertTrue($response->getSuccess());
+        self::assertTrue(
+            $response->getSuccess(),
+            'Requst was' . print_r($request->saveXML(), true) . PHP_EOL .
+            'Response was' . print_r($response, true)
+        );
     }
 }
