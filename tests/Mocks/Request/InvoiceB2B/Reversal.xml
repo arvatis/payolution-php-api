@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Request version="1.0">
+  <Header>
+    <Security sender="{{sender}}"/>
+  </Header>
+  <Transaction channel="{{channel}}" mode="CONNECTOR_TEST">
+    <User pwd="{{pwd}}" login="{{login}}"/>
+    <Identification>
+      <TransactionID>125</TransactionID>
+      <ReferenceID>40288b162da3e294012db761fd734134</ReferenceID>
+      <ShopperID>customerid123456</ShopperID>
+      <InvoiceID>125</InvoiceID>
+    </Identification>
+    <Payment code="VA.RV">
+      <Presentation>
+        <Usage>Invoice 125</Usage>
+      </Presentation>
+    </Payment>
+    <Analysis>
+      <Criterion name="PAYOLUTION_REQUEST_SYSTEM_VENDOR">CustomSystemName_ProgrammingLanguage_XML</Criterion>
+      <Criterion name="PAYOLUTION_REQUEST_SYSTEM_VERSION">CustomSystemVersion</Criterion>
+      <Criterion name="PAYOLUTION_REQUEST_SYSTEM_TYPE">CronJob</Criterion>
+      <Criterion name="PAYOLUTION_MODULE_NAME">PaymentModuleName</Criterion>
+      <Criterion name="PAYOLUTION_MODULE_VERSION">PaymentModuleVersion</Criterion>
+    </Analysis>
+  </Transaction>
+</Request>
