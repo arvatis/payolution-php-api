@@ -31,7 +31,6 @@
         <Given>Max</Given>
         <Family>Mustermann</Family>
         <Sex>M</Sex>
-        <Birthdate>1970-01-30</Birthdate>
       </Name>
       <Company>Payolution Company</Company>
     </Customer>

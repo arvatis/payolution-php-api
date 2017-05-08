@@ -27,7 +27,9 @@ class CustomerFactory
                 $customer['firstName'],
                 $customer['lastName'],
                 isset($customer['gender']) ? $customer['gender'] : '',
-                $customer['dob'])
+                isset($customer['dob']) ? $customer['dob'] : ''
+            ),
+            isset($address['company']) ? $address['company'] : null
         );
     }
 }

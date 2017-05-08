@@ -4,6 +4,10 @@ namespace ArvPayolutionApi\Request\Transaction;
 
 use ArvPayolutionApi\Request\Transaction\Analysis\Account;
 use ArvPayolutionApi\Request\Transaction\Analysis\Cart;
+use ArvPayolutionApi\Request\Transaction\Analysis\CompanyName;
+use ArvPayolutionApi\Request\Transaction\Analysis\CompanyNo;
+use ArvPayolutionApi\Request\Transaction\Analysis\CompanyType;
+use ArvPayolutionApi\Request\Transaction\Analysis\CompanyUuid;
 use ArvPayolutionApi\Request\Transaction\Analysis\CompositeAnalysis;
 use ArvPayolutionApi\Request\Transaction\Analysis\CustomerGroup;
 use ArvPayolutionApi\Request\Transaction\Analysis\CustomerNumber;
@@ -17,6 +21,7 @@ use ArvPayolutionApi\Request\Transaction\Analysis\PreCheck;
 use ArvPayolutionApi\Request\Transaction\Analysis\PreCheckId;
 use ArvPayolutionApi\Request\Transaction\Analysis\Shipping;
 use ArvPayolutionApi\Request\Transaction\Analysis\SystemInfo;
+use ArvPayolutionApi\Request\Transaction\Analysis\TransactionType;
 
 /**
  * Class AnalysisFactory
@@ -51,6 +56,11 @@ class AnalysisFactory
             ->add(new OrderTracking($requestType, $referenceId, $data))
             ->add(new Order($requestType, $referenceId, $data))
             ->add(new Invoice($requestType, $referenceId, $data))
+            ->add(new TransactionType($requestType, $referenceId, $data))
+            ->add(new CompanyName($requestType, $referenceId, $data))
+            ->add(new CompanyUuid($requestType, $referenceId, $data))
+            ->add(new CompanyType($requestType, $referenceId, $data))
+            ->add(new CompanyNo($requestType, $referenceId, $data))
         ;
 
         $criterionData = $composite->collect();

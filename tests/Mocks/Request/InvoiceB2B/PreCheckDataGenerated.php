@@ -9,5 +9,4 @@ use ArvPayolutionApi\Mocks\Request\Invoice\PreCheckDataGenerated as PreCheckData
  */
 class PreCheckDataGenerated extends PreCheckDataGeneratedInvoice
 {
-
 }

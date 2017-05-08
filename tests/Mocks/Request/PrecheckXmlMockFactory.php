@@ -3,6 +3,7 @@
 namespace ArvPayolutionApi\Mocks\Request;
 
 use ArvPayolutionApi\Helpers\Config;
+use ArvPayolutionApi\Request\RequestPaymentTypes;
 use ArvPayolutionApi\Request\RequestTypes;
 
 /**
@@ -11,9 +12,10 @@ use ArvPayolutionApi\Request\RequestTypes;
 class PreCheckXmlMockFactory
 {
     private static $allowedPayments = [
-        'Invoice',
-        'Elv',
-        'Installment',
+        RequestPaymentTypes::PAYOLUTION_INVOICE => 'Invoice',
+        RequestPaymentTypes::PAYOLUTION_ELV => 'Elv',
+        RequestPaymentTypes::PAYOLUTION_INS => 'Installment',
+        RequestPaymentTypes::PAYOLUTION_INVOICE_B2B => 'InvoiceB2B',
     ];
 
     /**
@@ -26,20 +28,20 @@ class PreCheckXmlMockFactory
      */
     public static function getRequestXml($paymentMethod, $request)
     {
-        if (!in_array($paymentMethod, self::$allowedPayments)) {
+        if (!isset(self::$allowedPayments[$paymentMethod])) {
             throw new \InvalidArgumentException('Unknown payment method "' . $paymentMethod . '"');
         }
         if (!in_array($request, RequestTypes::getRequestTypes())) {
             throw new \InvalidArgumentException('Unknown request type "' . $request . '""');
         }
 
-        $filePath = __DIR__ . DIRECTORY_SEPARATOR . $paymentMethod . DIRECTORY_SEPARATOR . $request . '.xml';
+        $filePath = __DIR__ . DIRECTORY_SEPARATOR . self::$allowedPayments[$paymentMethod] . DIRECTORY_SEPARATOR . $request . '.xml';
 
         if (!file_exists($filePath)) {
             throw new \Exception('Xml Mock "' . $filePath . '" not available.');
         }
         $xmlString = file_get_contents($filePath);
-        $xmlString = self::setApiConfigValues($xmlString, $paymentMethod, $request);
+        $xmlString = self::setApiConfigValues($xmlString, self::$allowedPayments[$paymentMethod], $request);
 
         return new \SimpleXMLElement($xmlString);
     }

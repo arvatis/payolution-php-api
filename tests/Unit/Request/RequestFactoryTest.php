@@ -7,6 +7,7 @@ use ArvPayolutionApi\Mocks\Request\Installment\PreCheckData as InstallmentPreChe
 use ArvPayolutionApi\Mocks\Request\Invoice\CaptureData as InvoiceCaptureData;
 use ArvPayolutionApi\Mocks\Request\Invoice\PreAuthData as InvoicePreAuthData;
 use ArvPayolutionApi\Mocks\Request\Invoice\PreCheckData as InvoicePreCheckData;
+use ArvPayolutionApi\Mocks\Request\InvoiceB2B\PreCheckData as InvoiceB2BPreCheckData;
 use ArvPayolutionApi\Mocks\Request\PreCheckDataContract;
 use ArvPayolutionApi\Mocks\Request\PreCheckXmlMockFactory;
 use ArvPayolutionApi\Request\RequestFactory;
@@ -49,7 +50,7 @@ class RequestFactoryTest extends \PHPUnit_Framework_TestCase
         $paymentBrand = RequestPaymentTypes::PAYOLUTION_INVOICE;
 
         $this->assertSame(
-            PreCheckXmlMockFactory::getRequestXml('Invoice', $requestType)->saveXml(),
+            PreCheckXmlMockFactory::getRequestXml($paymentBrand, $requestType)->saveXml(),
             $this->xmlSerializer->serialize(
                 [
                     '@version' => '1.0',
@@ -78,7 +79,7 @@ class RequestFactoryTest extends \PHPUnit_Framework_TestCase
         $paymentBrand = RequestPaymentTypes::PAYOLUTION_ELV;
 
         self::assertSame(
-            PreCheckXmlMockFactory::getRequestXml('Elv', $requestType)->saveXml(),
+            PreCheckXmlMockFactory::getRequestXml(RequestPaymentTypes::PAYOLUTION_ELV, $requestType)->saveXml(),
             $this->xmlSerializer->serialize(
                 [
                     '@version' => '1.0',
@@ -109,7 +110,7 @@ class RequestFactoryTest extends \PHPUnit_Framework_TestCase
 
         $this->assertSame(
             PreCheckXmlMockFactory::getRequestXml(
-                'Installment',
+                RequestPaymentTypes::PAYOLUTION_INS,
                 $requestType
             )->saveXml(),
             $this->xmlSerializer->serialize(
@@ -142,7 +143,7 @@ class RequestFactoryTest extends \PHPUnit_Framework_TestCase
 
         $this->assertSame(
             PreCheckXmlMockFactory::getRequestXml(
-                'Invoice',
+                RequestPaymentTypes::PAYOLUTION_INVOICE,
                 $requestType
             )->saveXml(),
             $this->xmlSerializer->serialize(
@@ -174,13 +175,42 @@ class RequestFactoryTest extends \PHPUnit_Framework_TestCase
 
         $this->assertSame(
             PreCheckXmlMockFactory::getRequestXml(
-                'Invoice',
+                RequestPaymentTypes::PAYOLUTION_INVOICE,
                 $requestType
             )->saveXml(),
             $this->xmlSerializer->serialize(
                 [
                     '@version' => '1.0',
                     '#' => RequestFactory::create($requestType, $paymentBrand, $data, $previousRequestId),
+                ],
+                true
+            )
+        );
+    }
+
+    public function testB2BInvoicePreCheckSameAsMock()
+    {
+        $this->data = new InvoiceB2BPreCheckData();
+        $data = [
+            'context' => $this->data->getApiContext(),
+            'customer' => $this->data->getCustomer(),
+            'shippingAddress' => $this->data->getShippingAddress(),
+            'billingAddress' => $this->data->getCustomerAddress(),
+            'cart' => $this->data->getCart(),
+            'cartItems' => $this->data->getCartItems(),
+            'systemInfo' => $this->data->getSytemInfo(),
+            'company' => $this->data->getCompany(),
+        ];
+
+        $requestType = RequestTypes::PRE_CHECK;
+        $paymentBrand = RequestPaymentTypes::PAYOLUTION_INVOICE_B2B;
+
+        $this->assertSame(
+            PreCheckXmlMockFactory::getRequestXml($paymentBrand, $requestType)->saveXml(),
+            $this->xmlSerializer->serialize(
+                [
+                    '@version' => '1.0',
+                    '#' => RequestFactory::create($requestType, $paymentBrand, $data),
                 ],
                 true
             )

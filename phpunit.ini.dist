@@ -8,7 +8,7 @@ pwd =
 channel =
 channel_precheck =
 
-[api_context_b2b_invoice]
+[api_context_invoiceb2b]
 channel =
 channel_precheck =
 

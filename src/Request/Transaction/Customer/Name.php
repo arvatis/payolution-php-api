@@ -27,12 +27,12 @@ class Name
     /**
      * Name constructor.
      *
-     * @param string $given
-     * @param string $family
-     * @param string $sex
-     * @param string $birthdate
+     * @param string $given Mandatory
+     * @param string $family Mandatory
+     * @param string $sex One of [M, F] Optional
+     * @param string $birthdate Birthdate in the format yyyy-mm-dd. Mandatory for synchronous and
      */
-    public function __construct($given, $family, $sex = '', $birthdate)
+    public function __construct($given, $family, $sex = '', $birthdate = '')
     {
         $this->given = $given;
         $this->family = $family;

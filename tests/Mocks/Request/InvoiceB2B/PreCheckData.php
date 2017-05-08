@@ -17,8 +17,32 @@ class PreCheckData extends PreCheckDataAbstract implements PreCheckDataContract
     public function getApiContext()
     {
         return [
-            'mode' => 'CONNECTOR_TEST',
-            'transactionId' => 42,
-        ] + Config::getPaymentConfig('Invoice', 'PreCheck');
+                'mode' => 'CONNECTOR_TEST',
+                'transactionId' => 42,
+            ] + Config::getPaymentConfig('InvoiceB2B', 'PreCheck');
+    }
+
+    /**
+     * @return array
+     */
+    public function getCustomerAddress()
+    {
+        $data = parent::getCustomerAddress();
+        $data['company'] = 'Payolution Company';
+
+        return $data;
+    }
+
+    /**
+     * @return array
+     */
+    public function getCompany()
+    {
+        return [
+            'name' => 'Payolution Company',
+            'type' => 'COMPANY',
+            'registration_no' => '',
+            'vat_id' => 'ATU4514545',
+        ];
     }
 }

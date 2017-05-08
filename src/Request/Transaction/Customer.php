@@ -33,17 +33,23 @@ class Customer
     protected $name;
 
     /**
+     * @var string
+     */
+    private $company;
+
+    /**
      * Name constructor.
      *
      * @param Contact $contact
      * @param Address $address
-     * @param Name    $name
+     * @param Name $name
      */
-    public function __construct(Contact $contact, Address $address, Name $name)
+    public function __construct(Contact $contact, Address $address, Name $name, $company = '')
     {
         $this->contact = $contact;
         $this->address = $address;
         $this->name = $name;
+        $this->company = $company;
     }
 
     /**
@@ -68,5 +74,13 @@ class Customer
     public function getName(): Name
     {
         return $this->name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCompany(): string
+    {
+        return (string) $this->company;
     }
 }

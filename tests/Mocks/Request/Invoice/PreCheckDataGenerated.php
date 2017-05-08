@@ -16,12 +16,12 @@ class PreCheckDataGenerated implements PreCheckDataContract
     /**
      * @var string
      */
-    private $gender;
+    protected $gender;
 
     /**
      * @var Faker\Generator|\Faker\Provider\Person|PayolutionCountryCode|CustomerGroup|Faker\Provider\PhoneNumber|Faker\Provider\Internet
      */
-    private $faker;
+    protected $faker;
 
     /**
      * PreCheckData constructor.

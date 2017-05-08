@@ -24,4 +24,16 @@ abstract class CompositeAbstract implements CompositeContract
         $this->previousRequestId = $previousRequestId;
         $this->data = $data;
     }
+
+    /**
+     * @return bool
+     */
+    public function isB2BRequest(): bool
+    {
+        if (!isset($this->data['billingAddress']['company'])) {
+            return false;
+        }
+
+        return (bool) $this->data['billingAddress']['company'];
+    }
 }
