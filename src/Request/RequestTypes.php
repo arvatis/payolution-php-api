@@ -27,6 +27,7 @@ class RequestTypes
 
     /**
      * @param $requestType
+     *
      * @return string
      */
     public static function getRequestPaymentCode($requestType)
@@ -46,5 +47,6 @@ class RequestTypes
         if (!in_array($requestType, self::getRequestTypes())) {
             throw new \InvalidArgumentException('Unknown request type "' . $requestType . '""');
         }
+        return '';
     }
 }

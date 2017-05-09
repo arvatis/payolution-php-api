@@ -2,8 +2,8 @@
 
 namespace ArvPayolutionApi\Unit\Request;
 
-use ArvPayolutionApi\Api\Client as ApiClient;
 use ArvPayolutionApi\Api\ApiFactory;
+use ArvPayolutionApi\Api\Client as ApiClient;
 use ArvPayolutionApi\Api\XmlApi;
 use ArvPayolutionApi\Mocks\Request\Invoice\PreCheckDataGenerated;
 use ArvPayolutionApi\Mocks\Request\PreCheckXmlMockFactory;

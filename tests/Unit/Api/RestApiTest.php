@@ -7,17 +7,9 @@ use ArvPayolutionApi\Api\RestApi;
 use ArvPayolutionApi\Api\XmlApi;
 use ArvPayolutionApi\Mocks\Request\Invoice\PreCheckDataGenerated;
 use ArvPayolutionApi\Mocks\Request\PreCheckXmlMockFactory;
-use ArvPayolutionApi\Request\RequestFactory;
-use ArvPayolutionApi\Request\RequestPaymentTypes;
-use ArvPayolutionApi\Request\RequestTypes;
 use ArvPayolutionApi\Request\XmlSerializer;
 use ArvPayolutionApi\Request\XmlSerializerFactory;
 use GuzzleHttp\Client;
-use GuzzleHttp\Exception\RequestException;
-use GuzzleHttp\Handler\MockHandler;
-use GuzzleHttp\HandlerStack;
-use GuzzleHttp\Psr7\Request;
-use GuzzleHttp\Psr7\Response;
 
 /**
  * Class RestApiTest

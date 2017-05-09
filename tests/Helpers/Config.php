@@ -44,6 +44,7 @@ class Config
                 'channel' => self::getChannel($paymentMethod, $requestType, $conf),
             ];
         unset($requestConf['channel_precheck']);
+
         return $requestConf;
     }
 
@@ -68,6 +69,7 @@ class Config
 
     /**
      * @param $conf
+     *
      * @return mixed
      */
     private static function getDefaultApiContext($conf)
@@ -78,6 +80,7 @@ class Config
     /**
      * @param $paymentMethod
      * @param $conf
+     *
      * @return mixed
      */
     private static function getPaymentApiContext($paymentMethod, $conf)
