@@ -3,6 +3,7 @@
 namespace ArvPayolutionApi\Unit\Request;
 
 use ArvPayolutionApi\Api\Client as ApiClient;
+use ArvPayolutionApi\Api\ApiFactory;
 use ArvPayolutionApi\Api\XmlApi;
 use ArvPayolutionApi\Mocks\Request\InvoiceB2B\PreCheckDataGenerated;
 use ArvPayolutionApi\Mocks\Request\PreCheckXmlMockFactory;
@@ -50,7 +51,7 @@ class InvoiceB2BRequestTest extends \PHPUnit_Framework_TestCase
      */
     public function testPreCheckSuccessFull()
     {
-        $client = new XmlApi(new ApiClient());
+        $client = ApiFactory::createXmlApi();
         $request = PreCheckXmlMockFactory::getRequestXml(
             RequestPaymentTypes::PAYOLUTION_INVOICE_B2B,
             RequestTypes::PRE_CHECK
@@ -69,7 +70,7 @@ class InvoiceB2BRequestTest extends \PHPUnit_Framework_TestCase
      */
     public function testPreAuthSuccessFull()
     {
-        $client = new XmlApi(new ApiClient());
+        $client = ApiFactory::createXmlApi();
         $request = PreCheckXmlMockFactory::getRequestXml(
             RequestPaymentTypes::PAYOLUTION_INVOICE_B2B,
             RequestTypes::PRE_AUTH

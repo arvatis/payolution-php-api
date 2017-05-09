@@ -39,6 +39,9 @@ class XmlApiResponse extends ResponseAbstract implements ResponseContract
      */
     public function getSuccess()
     {
+        if (!property_exists($this->xml,'Transaction')) {
+            return false;
+        }
         $processingInfo = $this->xml->Transaction->Processing;
         if ($processingInfo->Status->attributes() . '' != self::PROCESSING_STATUS_CODE_SUCCESS
             || $processingInfo->Reason->attributes() . '' != self::PROCESSING_REASON_CODE_SUCCESS
@@ -71,7 +74,7 @@ class XmlApiResponse extends ResponseAbstract implements ResponseContract
      */
     public function getShortId()
     {
-        return (string) $this->xml->Transaction->Identification->ShortID;
+        return (string)$this->xml->Transaction->Identification->ShortID;
     }
 
     /**
@@ -79,7 +82,7 @@ class XmlApiResponse extends ResponseAbstract implements ResponseContract
      */
     public function getUniqueID()
     {
-        return (string) $this->xml->Transaction->Identification->UniqueID;
+        return (string)$this->xml->Transaction->Identification->UniqueID;
     }
 
     /**
@@ -89,6 +92,6 @@ class XmlApiResponse extends ResponseAbstract implements ResponseContract
      */
     public function getTransactionID()
     {
-        return (string) $this->xml->Transaction->Identification->TransactionID;
+        return (string)$this->xml->Transaction->Identification->TransactionID;
     }
 }

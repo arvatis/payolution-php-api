@@ -3,6 +3,7 @@
 namespace ArvPayolutionApi\Unit\Api;
 
 use ArvPayolutionApi\Api\Client as ApiClient;
+use ArvPayolutionApi\Api\ApiFactory;
 use ArvPayolutionApi\Api\XmlApi;
 use ArvPayolutionApi\Mocks\Request\Invoice\PreCheckDataGenerated;
 use ArvPayolutionApi\Mocks\Request\PreCheckXmlMockFactory;
@@ -54,7 +55,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
      */
     public function testBasicRequestSuccessfullyPlaced()
     {
-        $client = new XmlApi(new ApiClient());
+        $client = ApiFactory::createXmlApi();
         $response = $client->doRequest(PreCheckXmlMockFactory::getRequestXml(
             RequestPaymentTypes::PAYOLUTION_INVOICE,
             RequestTypes::PRE_CHECK)

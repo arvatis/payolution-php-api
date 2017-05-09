@@ -3,7 +3,7 @@
 namespace ArvPayolutionApi\Request;
 
 /**
- * Class Types
+ * Class RequestTypes
  */
 class RequestTypes
 {
@@ -13,6 +13,7 @@ class RequestTypes
     const CAPTURE = 'Capture';
     const REVERSAL = 'Reversal';
     const REFUND = 'Refund';
+    const CALCULATION = 'Calculation';
 
     /**
      * @return mixed
@@ -24,6 +25,10 @@ class RequestTypes
         return $oClass->getConstants();
     }
 
+    /**
+     * @param $requestType
+     * @return string
+     */
     public static function getRequestPaymentCode($requestType)
     {
         switch ($requestType) {

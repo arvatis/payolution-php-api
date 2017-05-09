@@ -36,14 +36,14 @@ class Config
      */
     public static function getPaymentConfig($paymentMethod, $requestType)
     {
+        $paymentMethod = strtolower($paymentMethod);
         $conf = self::getConfig();
-        $requestConf = [
-            'sender' => $conf['api_context']['sender'],
-            'channel' => self::getChannel($paymentMethod, $requestType, $conf),
-            'pwd' => $conf['api_context']['pwd'],
-            'login' => $conf['api_context']['login'],
-        ];
-
+        $requestConf = self::getDefaultApiContext($conf) +
+            self::getPaymentApiContext($paymentMethod, $conf) +
+            [
+                'channel' => self::getChannel($paymentMethod, $requestType, $conf),
+            ];
+        unset($requestConf['channel_precheck']);
         return $requestConf;
     }
 
@@ -56,13 +56,32 @@ class Config
      */
     private static function getChannel($paymentMethod, $requestType, $conf)
     {
-        $channel = $conf['api_context_' . strtolower($paymentMethod)]['channel'];
+        $channel = self::getPaymentApiContext($paymentMethod, $conf)['channel'];
         if ($requestType == RequestTypes::PRE_CHECK) {
-            $channel = $conf['api_context_' . strtolower($paymentMethod)]['channel_precheck'];
+            $channel = self::getPaymentApiContext($paymentMethod, $conf)['channel_precheck'];
 
             return $channel;
         }
 
         return $channel;
+    }
+
+    /**
+     * @param $conf
+     * @return mixed
+     */
+    private static function getDefaultApiContext($conf)
+    {
+        return $conf['api_context'];
+    }
+
+    /**
+     * @param $paymentMethod
+     * @param $conf
+     * @return mixed
+     */
+    private static function getPaymentApiContext($paymentMethod, $conf)
+    {
+        return $conf['api_context_' . $paymentMethod];
     }
 }
