@@ -4,6 +4,7 @@ namespace ArvPayolutionApi\Api;
 
 use ArvPayolutionApi\Response\ClientErrorResponse;
 use ArvPayolutionApi\Response\ResponseContract;
+use ArvPayolutionApi\Response\RestApiResponse;
 use ArvPayolutionApi\Response\XmlApiResponse;
 use GuzzleHttp\Exception\BadResponseException;
 use GuzzleHttp\Exception\ClientException;
@@ -16,7 +17,6 @@ class RestApi
 {
     const URL_PRODUCTION = 'https://payment.payolution.com/payolution-payment/rest/request/v2';
     const URL_SANDBOX = 'https://test-payment.payolution.com/payolution-payment/rest/request/v2';
-
 
     /**
      * @var  ClientContract
@@ -71,7 +71,7 @@ class RestApi
         try {
             $responseBody = $this->client->doRequest(urlencode($xml->asXML()));
 
-            return new XmlApiResponse(new \SimpleXMLElement($responseBody));
+            return new RestApiResponse(new \SimpleXMLElement($responseBody));
         } catch (ClientException $e) {
         } catch (ServerException $e) {
         } catch (BadResponseException $e) {
@@ -79,6 +79,13 @@ class RestApi
         }
 
         return new ClientErrorResponse($e->getMessage());
+    }
+
+    public function setBasicAuthCredentials($basicAuthUser, $basicAuthPassword)
+    {
+        $this->getClient()->addHeader(
+            'Authorization', 'Basic ' . base64_encode($basicAuthUser . ':' . $basicAuthPassword)
+        );
     }
 
     /**
@@ -102,12 +109,4 @@ class RestApi
         $client->setMethod('POST');
         $client->addHeader('Content-Type', 'text/xml; charset=UTF8');
     }
-
-    public function setBasicAuthCredentials($basicAuthUser, $basicAuthPassword)
-    {
-        $this->getClient()->addHeader(
-            'Authorization', 'Basic ' . base64_encode($basicAuthUser . ':' . $basicAuthPassword)
-        );
-    }
-
 }

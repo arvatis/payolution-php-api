@@ -2,8 +2,8 @@
 
 namespace ArvPayolutionApi\Unit\Request;
 
-use ArvPayolutionApi\Api\Client as ApiClient;
 use ArvPayolutionApi\Api\ApiFactory;
+use ArvPayolutionApi\Api\Client as ApiClient;
 use ArvPayolutionApi\Api\XmlApi;
 use ArvPayolutionApi\Mocks\Request\InvoiceB2B\PreCheckDataGenerated;
 use ArvPayolutionApi\Mocks\Request\PreCheckXmlMockFactory;
@@ -18,7 +18,7 @@ use GuzzleHttp\Client;
  *
  * @group InvoiceB2BRequestTest
  */
-class InstallmentRequestTest extends \PHPUnit_Framework_TestCase
+class ElvRequestTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var  PreCheckXmlMockFactory
@@ -70,7 +70,7 @@ class InstallmentRequestTest extends \PHPUnit_Framework_TestCase
      */
     public function testPreAuthSuccessFull()
     {
-        $this->markTestSkipped();//TODO: implement
+        $this->markTestSkipped(); //TODO: implement
         $client = ApiFactory::createXmlApi();
         $request = PreCheckXmlMockFactory::getRequestXml(
             RequestPaymentTypes::PAYOLUTION_ELV,
