@@ -58,7 +58,7 @@ class RestApiResponse extends ResponseAbstract implements ResponseContract
             return '';
         }
 
-        return $this->StatusCode . ' ' . $this->Status . ' ' . $this->Reason;
+        return $this->xml->StatusCode . ' ' . $this->xml->Status . ' ' . $this->xml->Reason;
     }
 
     /**
