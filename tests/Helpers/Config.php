@@ -38,11 +38,11 @@ class Config
     {
         $paymentMethod = strtolower($paymentMethod);
         $conf = self::getConfig();
-        $requestConf = self::getDefaultApiContext($conf) +
-            self::getPaymentApiContext($paymentMethod, $conf) +
-            [
+        $requestConf = [
                 'channel' => self::getChannel($paymentMethod, $requestType, $conf),
-            ];
+            ] +
+            self::getPaymentApiContext($paymentMethod, $conf) +
+            self::getDefaultApiContext($conf);
         unset($requestConf['channel_precheck']);
 
         return $requestConf;
@@ -57,14 +57,15 @@ class Config
      */
     private static function getChannel($paymentMethod, $requestType, $conf)
     {
-        $channel = self::getPaymentApiContext($paymentMethod, $conf)['channel'];
         if ($requestType == RequestTypes::PRE_CHECK) {
-            $channel = self::getPaymentApiContext($paymentMethod, $conf)['channel_precheck'];
-
-            return $channel;
+            return self::getPaymentApiContext($paymentMethod, $conf)['channel_precheck'];
         }
 
-        return $channel;
+        if ($requestType == RequestTypes::CALCULATION) {
+            return self::getPaymentApiContext($paymentMethod, $conf)['user'];
+        }
+
+        return self::getPaymentApiContext($paymentMethod, $conf)['channel'];
     }
 
     /**

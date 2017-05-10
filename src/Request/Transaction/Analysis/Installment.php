@@ -2,6 +2,8 @@
 
 namespace ArvPayolutionApi\Request\Transaction\Analysis;
 
+use ArvPayolutionApi\Request\RequestTypes;
+
 /**
  * Class Installment
  */
@@ -12,7 +14,7 @@ class Installment extends CompositeAbstract implements CompositeContract
      */
     public function isAvailable()
     {
-        return isset($this->data['installment']);
+        return isset($this->data['installment']) && $this->requestType != RequestTypes::CALCULATION;
     }
 
     /**

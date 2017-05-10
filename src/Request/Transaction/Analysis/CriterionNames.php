@@ -65,6 +65,7 @@ class CriterionNames
 
     const PAYOLUTION_PRE_CHECK_ID = 'PAYOLUTION_PRE_CHECK_ID';
 
+    const PAYOLUTION_CALCULATION_TARGET_COUNTRY = 'PAYOLUTION_CALCULATION_TARGET_COUNTRY';
     /**
      * B2B relevant fields
      */

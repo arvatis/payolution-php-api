@@ -6,13 +6,16 @@ use ArvPayolutionApi\Api\ApiFactory;
 use ArvPayolutionApi\Api\Client as ApiClient;
 use ArvPayolutionApi\Api\XmlApi;
 use ArvPayolutionApi\Helpers\Config;
+use ArvPayolutionApi\Mocks\Request\Installment\CalculationData;
 use ArvPayolutionApi\Mocks\Request\InvoiceB2B\PreCheckDataGenerated;
 use ArvPayolutionApi\Mocks\Request\PreCheckXmlMockFactory;
+use ArvPayolutionApi\Request\RequestFactory;
 use ArvPayolutionApi\Request\RequestPaymentTypes;
 use ArvPayolutionApi\Request\RequestTypes;
 use ArvPayolutionApi\Request\XmlSerializer;
 use ArvPayolutionApi\Request\XmlSerializerFactory;
 use GuzzleHttp\Client;
+use ArvPayolutionApi\Mocks\Request\Installment\PreCheckData as InstallmentPreCheckData;
 
 /**
  * Class InstallmentRequestTest
@@ -100,6 +103,39 @@ class InstallmentRequestTest extends \PHPUnit_Framework_TestCase
             $response->getSuccess(),
             'Request was' . print_r($request->saveXML(), true) . PHP_EOL .
             'Response was' . print_r($response, true)
+        );
+    }
+
+    public function testCalculationSameAsMock()
+    {
+        $this->data = new CalculationData();
+        $data = [
+            'context' => $this->data->getApiContext(),
+            'customer' => '',
+            'shippingAddress' => $this->data->getShippingAddress(),
+            'billingAddress' => $this->data->getCustomerAddress(),
+            'cart' => $this->data->getCart(),
+            'cartItems' => $this->data->getCartItems(),
+            'systemInfo' => $this->data->getSytemInfo(),
+            'account' => $this->data->getAccountData(),
+            'installment' => $this->data->getInstallmentData(),
+        ];
+
+        $requestType = RequestTypes::CALCULATION; // for Pre-Check, Pre- & Re-Authorization,
+        $paymentBrand = RequestPaymentTypes::PAYOLUTION_INS;
+
+        $this->assertSame(
+            PreCheckXmlMockFactory::getRequestXml(
+                RequestPaymentTypes::PAYOLUTION_INS,
+                $requestType
+            )->saveXml(),
+            $this->xmlSerializer->serialize(
+                [
+                    '@version' => '2.0',
+                    '#' => RequestFactory::create($requestType, $paymentBrand, $data),
+                ],
+                true
+            )
         );
     }
 

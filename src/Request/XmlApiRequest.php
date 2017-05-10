@@ -5,7 +5,7 @@ namespace ArvPayolutionApi\Request;
 /**
  * Class Request
  */
-class Request
+class XmlApiRequest
 {
     /**
      * @var  Header

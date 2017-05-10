@@ -2,6 +2,7 @@
 
 namespace ArvPayolutionApi\Request\Transaction;
 
+use ArvPayolutionApi\Request\RequestTypes;
 use ArvPayolutionApi\Request\Transaction\Payment\Presentation;
 
 /**
@@ -9,6 +10,10 @@ use ArvPayolutionApi\Request\Transaction\Payment\Presentation;
  */
 class Payment
 {
+    const REST_API_OPERATION_TYPE = 'CALCULATION';
+    const REST_API_PAYMENT_TYPE = 'INSTALLMENT';
+    private $restApiPaymentType;
+    private $restApiOperationType;
     /**
      * @var string
      */
@@ -22,21 +27,44 @@ class Payment
     /**
      * Payment constructor.
      *
-     * @param $code
      * @param Presentation $presentation
+     * @param $requestType
+     * @param $code
      */
-    public function __construct($code, Presentation $presentation)
+    public function __construct(Presentation $presentation, $requestType, $code = null)
     {
         $this->code = $code;
         $this->presentation = $presentation;
+        if ($requestType == RequestTypes::CALCULATION) {
+
+            $this->restApiPaymentType = self::REST_API_PAYMENT_TYPE;
+            $this->restApiOperationType = self::REST_API_OPERATION_TYPE;
+        }
+
     }
 
     /**
-     * @return mixed
+     * @return string|null
      */
     public function _getCode()
     {
         return $this->code;
+    }
+
+    /**
+     * @return string
+     */
+    public function getOperationType()
+    {
+        return $this->restApiOperationType;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPaymentType()
+    {
+        return $this->restApiPaymentType;
     }
 
     /**

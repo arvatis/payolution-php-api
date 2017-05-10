@@ -2,6 +2,8 @@
 
 namespace ArvPayolutionApi\Request\Transaction\Analysis;
 
+use ArvPayolutionApi\Request\RequestTypes;
+
 /**
  * Class Account
  */
@@ -12,7 +14,7 @@ class Account extends CompositeAbstract implements CompositeContract
      */
     public function isAvailable()
     {
-        return isset($this->data['account']);
+        return isset($this->data['account']) && $this->requestType != RequestTypes::CALCULATION;
     }
 
     /**

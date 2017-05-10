@@ -3,6 +3,7 @@
 namespace ArvPayolutionApi\Request\Transaction;
 
 use ArvPayolutionApi\Request\Transaction\Analysis\Account;
+use ArvPayolutionApi\Request\Transaction\Analysis\CalculationCountry;
 use ArvPayolutionApi\Request\Transaction\Analysis\Cart;
 use ArvPayolutionApi\Request\Transaction\Analysis\CompanyName;
 use ArvPayolutionApi\Request\Transaction\Analysis\CompanyNo;
@@ -38,7 +39,7 @@ class AnalysisFactory
     public static function createRequest($requestType, $referenceId, $data = []): Analysis
     {
         $customer = $data['customer'];
-        $language = $customer['language'];
+        $language = isset($customer['language']) ? $customer['language'] : '';
 
         $composite = new CompositeAnalysis($requestType, $referenceId, $data);
         $composite
@@ -61,7 +62,7 @@ class AnalysisFactory
             ->add(new CompanyUuid($requestType, $referenceId, $data))
             ->add(new CompanyType($requestType, $referenceId, $data))
             ->add(new CompanyNo($requestType, $referenceId, $data))
-        ;
+            ->add(new CalculationCountry($requestType, $referenceId, $data));
 
         $criterionData = $composite->collect();
         $analysis = new Analysis();

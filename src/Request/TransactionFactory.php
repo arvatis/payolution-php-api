@@ -7,6 +7,7 @@ use ArvPayolutionApi\Request\Transaction\AnalysisFactory;
 use ArvPayolutionApi\Request\Transaction\CustomerFactory;
 use ArvPayolutionApi\Request\Transaction\Identification;
 use ArvPayolutionApi\Request\Transaction\Payment;
+use ArvPayolutionApi\Request\Transaction\Payment\Presentation;
 use ArvPayolutionApi\Request\Transaction\User;
 
 class TransactionFactory
@@ -34,6 +35,30 @@ class TransactionFactory
         $account = new Account($paymentBrand);
 
         switch ($requestType) {
+            case RequestTypes::CALCULATION:
+                return CalculationRequestFactory::create(
+                    $context['channel'],
+                    $context['mode'],
+                    new Payment(
+                        new Presentation(
+                            $cart['grandTotal'],
+                            self::getUsage($data),
+                            $cart['currency'],
+                            self::getTotalTaxAmount($data['cartItems'])
+                        ),
+                        $requestType
+                    ),
+                    $account,
+                    AnalysisFactory::createRequest(
+                        $requestType,
+                        $referenceId,
+                        $data
+                    ),
+                    new Identification(
+                        $context['transactionId'],
+                        ''
+                    )
+                );
             case RequestTypes::PRE_CHECK:
                 $billingAddress = $data['billingAddress'];
                 $customer = CustomerFactory::create($customerData, $billingAddress);
@@ -43,8 +68,8 @@ class TransactionFactory
                     $context['mode'],
                     new User($context['pwd'], $context['login']),
                     new Payment(
-                        RequestTypes::getRequestPaymentCode($requestType),
-                        new Payment\Presentation($cart['grandTotal'], self::getUsage($data), $cart['currency'])
+                        new Presentation($cart['grandTotal'], self::getUsage($data), $cart['currency']),
+                        RequestTypes::getRequestPaymentCode($requestType)
                     ),
                     $customer,
                     $account,
@@ -71,8 +96,8 @@ class TransactionFactory
                     $context['mode'],
                     new User($context['pwd'], $context['login']),
                     new Payment(
-                        RequestTypes::getRequestPaymentCode($requestType),
-                        new Payment\Presentation($cart['grandTotal'], self::getUsage($data), $cart['currency'])
+                        new Presentation($cart['grandTotal'], self::getUsage($data), $cart['currency']),
+                        RequestTypes::getRequestPaymentCode($requestType)
                     ),
                     $customer,
                     $account,
@@ -98,8 +123,8 @@ class TransactionFactory
                     $context['mode'],
                     new User($context['pwd'], $context['login']),
                     new Payment(
-                        RequestTypes::getRequestPaymentCode($requestType),
-                        new Payment\Presentation($cart['grandTotal'], self::getUsage($data), $cart['currency'])
+                        new Presentation($cart['grandTotal'], self::getUsage($data), $cart['currency']),
+                        RequestTypes::getRequestPaymentCode($requestType)
                     ),
                     AnalysisFactory::createRequest(
                         $requestType,
@@ -133,5 +158,14 @@ class TransactionFactory
         }
 
         return '';
+    }
+
+    /**
+     * @param array $cartItems
+     * @return string
+     */
+    private static function getTotalTaxAmount($cartItems)
+    {
+        return sprintf('%0.2f', array_sum(array_column($cartItems, 'tax')));
     }
 }

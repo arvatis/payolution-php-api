@@ -55,8 +55,8 @@ class XmlSerializer
         $xml = new \DOMDocument();
         $xml->loadXML($serializedXml);
 
-        $this->removeEmptyTags($xml);
         $this->removeEmptyAttributes($xml);
+        $this->removeEmptyTags($xml);
 
         if ($addXmlVersionNode) {
             return $this->removeBlankLines($xml->saveXML($xml));

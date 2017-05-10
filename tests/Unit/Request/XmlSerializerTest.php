@@ -48,7 +48,7 @@ XML;
   </Presentation>
 </Payment>
 XML;
-        $payment = new Payment('VA.PA', $this->presentation);
+        $payment = new Payment($this->presentation, , 'VA.PA');
         $this->assertSame(
             $xml,
             $this->xmlSerializer->serialize(

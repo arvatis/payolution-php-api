@@ -13,14 +13,18 @@ class RequestFactory
      * @param array $data
      * @param string|bool $referenceId unique id from previous PC or PA request
      *
-     * @return Request
+     * @return XmlApiRequest
      */
-    public static function create($requestType, $paymentBrand, $data = [], $referenceId = null): Request
+    public static function create($requestType, $paymentBrand, $data = [], $referenceId = null)
     {
         $context = $data['context'];
 
         $transaction = TransactionFactory::create($requestType, $paymentBrand, $data, $referenceId);
 
-        return new Request(new Header($context['sender']), $transaction);
+        if ($requestType != RequestTypes::CALCULATION) {
+            $header = new Header($context['sender']);
+            return new XmlApiRequest($header, $transaction);
+        }
+        return new RestApiRequest($transaction, 'PSP Name');
     }
 }

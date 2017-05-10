@@ -1,20 +1,19 @@
 <?php
 
+
 namespace ArvPayolutionApi\Request\Transaction\Analysis;
+
 
 use ArvPayolutionApi\Request\RequestTypes;
 
-/**
- * Class CustomerNumber
- */
-class CustomerNumber extends CompositeAbstract implements CompositeContract
+class CalculationCountry extends CompositeAbstract implements CompositeContract
 {
     /**
      * @return bool
      */
     public function isAvailable()
     {
-        return $this->requestType != RequestTypes::CALCULATION;
+        return $this->requestType == RequestTypes::CALCULATION;
     }
 
     /**
@@ -22,6 +21,6 @@ class CustomerNumber extends CompositeAbstract implements CompositeContract
      */
     public function collect()
     {
-        return [CriterionNames::PAYOLUTION_CUSTOMER_NUMBER => $this->data['customer']['customerId']];
+        return [CriterionNames::PAYOLUTION_CALCULATION_TARGET_COUNTRY => $this->data['billingAddress']['countryCode']];
     }
 }

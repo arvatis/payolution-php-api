@@ -2,6 +2,8 @@
 
 namespace ArvPayolutionApi\Request\Transaction\Analysis;
 
+use ArvPayolutionApi\Request\RequestTypes;
+
 /**
  * Class SystemInfo
  */
@@ -12,7 +14,7 @@ class SystemInfo extends CompositeAbstract implements CompositeContract
      */
     public function isAvailable()
     {
-        return true;
+        return $this->requestType != RequestTypes::CALCULATION;
     }
 
     /**
