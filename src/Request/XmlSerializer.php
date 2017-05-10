@@ -56,6 +56,7 @@ class XmlSerializer
         $xml->loadXML($serializedXml);
 
         $this->removeEmptyTags($xml);
+        $this->removeEmptyAttributes($xml);
 
         if ($addXmlVersionNode) {
             return $this->removeBlankLines($xml->saveXML($xml));
@@ -81,6 +82,20 @@ class XmlSerializer
         }
     }
 
+    /**
+     * @param \DOMDocument $xml
+     */
+    private function removeEmptyAttributes(\DOMDocument $xml)
+    {
+        $xpath = new \DOMXPath($xml);
+            $attributeList = $xpath->query('//@*');
+            /** @var \DOMAttr $attribute */
+            foreach ($attributeList as $attribute) {
+               if(!$attribute->nodeValue){//TODO: narrow down using using xpath
+                   $attribute->parentNode->removeAttribute($attribute->name);
+               }
+            }
+    }
     /**
      * @param $xmlString
      *
