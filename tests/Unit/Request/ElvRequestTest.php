@@ -2,11 +2,12 @@
 
 namespace ArvPayolutionApi\Unit\Request;
 
-use ArvPayolutionApi\Api\ApiFactory;
 use ArvPayolutionApi\Api\Client as ApiClient;
 use ArvPayolutionApi\Api\XmlApi;
+use ArvPayolutionApi\Mocks\Request\Elv\PreCheckData as ElvPreCheckData;
 use ArvPayolutionApi\Mocks\Request\InvoiceB2B\PreCheckDataGenerated;
 use ArvPayolutionApi\Mocks\Request\RequestXmlMockFactory;
+use ArvPayolutionApi\Request\RequestFactory;
 use ArvPayolutionApi\Request\RequestPaymentTypes;
 use ArvPayolutionApi\Request\RequestTypes;
 use ArvPayolutionApi\Request\XmlSerializer;
@@ -46,42 +47,17 @@ class ElvRequestTest extends \PHPUnit_Framework_TestCase
         $this->xmlApi = new XmlApi(new ApiClient(new Client()));
     }
 
-    /**
-     * @group online
-     */
-    public function testPreCheckSuccessFull()
+    public function testElvPreCheckSameAsMock()
     {
-        $client = ApiFactory::createXmlApi();
-        $request = RequestXmlMockFactory::getRequestXml(
-            RequestPaymentTypes::PAYOLUTION_ELV,
-            RequestTypes::PRE_CHECK
-        );
-        $response = $client->doRequest($request);
+        $this->data = new ElvPreCheckData();
+        $data = $this->data->jsonSerialize();
 
-        self::assertTrue(
-            $response->getSuccess(),
-            'Request was' . print_r($request->saveXML(), true) . PHP_EOL .
-            'Response was' . print_r($response, true)
-        );
-    }
+        $requestType = RequestTypes::PRE_CHECK;
+        $paymentBrand = RequestPaymentTypes::PAYOLUTION_ELV;
 
-    /**
-     * @group online
-     */
-    public function testPreAuthSuccessFull()
-    {
-        $this->markTestSkipped(); //TODO: implement
-        $client = ApiFactory::createXmlApi();
-        $request = RequestXmlMockFactory::getRequestXml(
-            RequestPaymentTypes::PAYOLUTION_ELV,
-            RequestTypes::PRE_AUTH
-        );
-        $response = $client->doRequest($request);
-
-        self::assertTrue(
-            $response->getSuccess(),
-            'Request was' . print_r($request->saveXML(), true) . PHP_EOL .
-            'Response was' . print_r($response, true)
+        self::assertSame(
+            RequestXmlMockFactory::getRequestXml(RequestPaymentTypes::PAYOLUTION_ELV, $requestType)->saveXml(),
+            RequestFactory::create($requestType, $paymentBrand, $data)->saveXml()
         );
     }
 }

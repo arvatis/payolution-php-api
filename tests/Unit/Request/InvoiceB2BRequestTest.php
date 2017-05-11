@@ -2,11 +2,13 @@
 
 namespace ArvPayolutionApi\Unit\Request;
 
-use ArvPayolutionApi\Api\ApiFactory;
 use ArvPayolutionApi\Api\Client as ApiClient;
 use ArvPayolutionApi\Api\XmlApi;
+use ArvPayolutionApi\Mocks\Request\InvoiceB2B\PreAuthData;
+use ArvPayolutionApi\Mocks\Request\InvoiceB2B\PreCheckData as InvoiceB2BPreCheckData;
 use ArvPayolutionApi\Mocks\Request\InvoiceB2B\PreCheckDataGenerated;
 use ArvPayolutionApi\Mocks\Request\RequestXmlMockFactory;
+use ArvPayolutionApi\Request\RequestFactory;
 use ArvPayolutionApi\Request\RequestPaymentTypes;
 use ArvPayolutionApi\Request\RequestTypes;
 use ArvPayolutionApi\Request\XmlSerializer;
@@ -46,41 +48,36 @@ class InvoiceB2BRequestTest extends \PHPUnit_Framework_TestCase
         $this->xmlApi = new XmlApi(new ApiClient(new Client()));
     }
 
-    /**
-     * @group online
-     */
-    public function testPreCheckSuccessFull()
+    public function testB2BInvoicePreCheckSameAsMock()
     {
-        $client = ApiFactory::createXmlApi();
-        $request = RequestXmlMockFactory::getRequestXml(
-            RequestPaymentTypes::PAYOLUTION_INVOICE_B2B,
-            RequestTypes::PRE_CHECK
-        );
-        $response = $client->doRequest($request);
+        $this->data = new InvoiceB2BPreCheckData();
+        $data = $this->data->jsonSerialize();
 
-        self::assertTrue(
-            $response->getSuccess(),
-            'Requst was' . print_r($request->saveXML(), true) . PHP_EOL .
-            'Response was' . print_r($response, true)
+        $requestType = RequestTypes::PRE_CHECK;
+        $paymentBrand = RequestPaymentTypes::PAYOLUTION_INVOICE_B2B;
+
+        $this->assertSame(
+            RequestXmlMockFactory::getRequestXml($paymentBrand, $requestType)->saveXml(),
+            RequestFactory::create($requestType, $paymentBrand, $data)->saveXml()
         );
     }
 
-    /**
-     * @group online
-     */
-    public function testPreAuthSuccessFull()
+    public function testInvoiceB2BPreAuthSameAsMock()
     {
-        $client = ApiFactory::createXmlApi();
-        $request = RequestXmlMockFactory::getRequestXml(
-            RequestPaymentTypes::PAYOLUTION_INVOICE_B2B,
-            RequestTypes::PRE_AUTH
-        );
-        $response = $client->doRequest($request);
+        $this->data = new PreAuthData();
+        $data = $this->data->jsonSerialize();
 
-        self::assertTrue(
-            $response->getSuccess(),
-            'Requst was' . print_r($request->saveXML(), true) . PHP_EOL .
-            'Response was' . print_r($response, true)
+        $requestType = RequestTypes::PRE_AUTH;
+        $paymentBrand = RequestPaymentTypes::PAYOLUTION_INVOICE_B2B;
+        $previousRequestId = '53488b162da3e294012db761fd734288';
+
+        $mockXml = RequestXmlMockFactory::getRequestXml(
+            $paymentBrand,
+            $requestType
+        )->saveXml();
+        $this->assertSame(
+            $mockXml,
+            RequestFactory::create($requestType, $paymentBrand, $data, $previousRequestId)->saveXml()
         );
     }
 }

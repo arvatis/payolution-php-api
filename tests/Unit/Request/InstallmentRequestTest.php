@@ -3,6 +3,7 @@
 namespace ArvPayolutionApi\Unit\Request;
 
 use ArvPayolutionApi\Mocks\Request\Installment\CalculationData;
+use ArvPayolutionApi\Mocks\Request\Installment\PreCheckData as InstallmentPreCheckData;
 use ArvPayolutionApi\Mocks\Request\InvoiceB2B\PreCheckDataGenerated;
 use ArvPayolutionApi\Mocks\Request\RequestXmlMockFactory;
 use ArvPayolutionApi\Request\RequestFactory;
@@ -28,6 +29,23 @@ class InstallmentRequestTest extends \PHPUnit_Framework_TestCase
     {
         $this->data = new PreCheckDataGenerated();
         $this->xmlMock = new RequestXmlMockFactory();
+    }
+
+    public function testInstallmentPreCheckSameAsMock()
+    {
+        $this->data = new InstallmentPreCheckData();
+        $data = $this->data->jsonSerialize();
+
+        $requestType = RequestTypes::PRE_CHECK;
+        $paymentBrand = RequestPaymentTypes::PAYOLUTION_INS;
+
+        $this->assertSame(
+            RequestXmlMockFactory::getRequestXml(
+                RequestPaymentTypes::PAYOLUTION_INS,
+                $requestType
+            )->saveXml(),
+            RequestFactory::create($requestType, $paymentBrand, $data)->saveXml()
+        );
     }
 
     public function testCalculationSameAsMock()

@@ -71,8 +71,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     {
         $response = $this->xmlApi->doRequest(new \SimpleXMLElement('<xml></xml>'));
 
-        //print_r($response);
-        self::assertSame(' NOK REJECTED_VALIDATION  Format Error', $response->getErrorMessage());
+        self::assertSame('NOK REJECTED_VALIDATION  Format Error', $response->getErrorMessage());
     }
 
     /**

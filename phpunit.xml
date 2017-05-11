@@ -11,7 +11,7 @@
          failOnRisky="true"
          failOnWarning="true"
          processIsolation="false"
-         stopOnError="true"
+         stopOnError="false"
          stopOnFailure="false"
          syntaxCheck="true"
          verbose="false"
