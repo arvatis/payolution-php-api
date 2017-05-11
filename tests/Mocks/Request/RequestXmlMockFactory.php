@@ -7,9 +7,9 @@ use ArvPayolutionApi\Request\RequestPaymentTypes;
 use ArvPayolutionApi\Request\RequestTypes;
 
 /**
- * Class XmlMock
+ * Class RequestXmlMockFactory
  */
-class PreCheckXmlMockFactory
+class RequestXmlMockFactory
 {
     private static $allowedPayments = [
         RequestPaymentTypes::PAYOLUTION_INVOICE => 'Invoice',

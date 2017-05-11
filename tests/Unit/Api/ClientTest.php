@@ -6,7 +6,7 @@ use ArvPayolutionApi\Api\ApiFactory;
 use ArvPayolutionApi\Api\Client as ApiClient;
 use ArvPayolutionApi\Api\XmlApi;
 use ArvPayolutionApi\Mocks\Request\Invoice\PreCheckDataGenerated;
-use ArvPayolutionApi\Mocks\Request\PreCheckXmlMockFactory;
+use ArvPayolutionApi\Mocks\Request\RequestXmlMockFactory;
 use ArvPayolutionApi\Request\RequestFactory;
 use ArvPayolutionApi\Request\RequestPaymentTypes;
 use ArvPayolutionApi\Request\RequestTypes;
@@ -25,7 +25,7 @@ use GuzzleHttp\Psr7\Response;
 class ClientTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var  PreCheckXmlMockFactory
+     * @var  RequestXmlMockFactory
      */
     protected $xmlMock;
 
@@ -45,7 +45,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     {
         $this->data = new PreCheckDataGenerated();
         $this->xmlSerializer = XmlSerializerFactory::create();
-        $this->xmlMock = new PreCheckXmlMockFactory();
+        $this->xmlMock = new RequestXmlMockFactory();
         $this->xmlApi = new XmlApi(new ApiClient(new Client()));
     }
 
@@ -56,7 +56,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     public function testBasicRequestSuccessfullyPlaced()
     {
         $client = ApiFactory::createXmlApi();
-        $response = $client->doRequest(PreCheckXmlMockFactory::getRequestXml(
+        $response = $client->doRequest(RequestXmlMockFactory::getRequestXml(
             RequestPaymentTypes::PAYOLUTION_INVOICE,
             RequestTypes::PRE_CHECK)
         );
@@ -95,13 +95,8 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $isPreCheck = true;
 
         $response = $this->xmlApi->doRequest(
-            new \SimpleXMLElement($this->xmlSerializer->serialize(
-                [
-                    '@version' => '1.0',
-                    '#' => RequestFactory::create($requestType, $paymentBrand, $data, $isPreCheck),
-                ],
-                true
-            )));
+            RequestFactory::create($requestType, $paymentBrand, $data, $isPreCheck)
+        );
         self::assertSame('VA.PA.60.95 NOK REJECTED_BANK  Authorization Error', $response->getErrorMessage());
     }
 
@@ -131,9 +126,9 @@ class ClientTest extends \PHPUnit_Framework_TestCase
                 'status' => '',
                 'transactionID' => '',
             ],
-            $response->toArray(),
+            $response->jsonSerialize(),
             true,
-            'response was: ' . print_r($response->toArray(), true)
+            'response was: ' . print_r($response->jsonSerialize(), true)
         );
 
         $response = $this->xmlApi->doRequest($requestData);
@@ -146,9 +141,9 @@ class ClientTest extends \PHPUnit_Framework_TestCase
                 'status' => '',
                 'transactionID' => '',
             ],
-            $response->toArray(),
+            $response->jsonSerialize(),
             true,
-            'response was: ' . print_r($response->toArray(), true)
+            'response was: ' . print_r($response->jsonSerialize(), true)
         );
 
         $response = $this->xmlApi->doRequest($requestData);
@@ -160,9 +155,9 @@ class ClientTest extends \PHPUnit_Framework_TestCase
                 'status' => '',
                 'transactionID' => '',
             ],
-            $response->toArray(),
+            $response->jsonSerialize(),
             true,
-            'response was: ' . print_r($response->toArray(), true)
+            'response was: ' . print_r($response->jsonSerialize(), true)
         );
     }
 }

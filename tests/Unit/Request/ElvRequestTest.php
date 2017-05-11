@@ -6,7 +6,7 @@ use ArvPayolutionApi\Api\ApiFactory;
 use ArvPayolutionApi\Api\Client as ApiClient;
 use ArvPayolutionApi\Api\XmlApi;
 use ArvPayolutionApi\Mocks\Request\InvoiceB2B\PreCheckDataGenerated;
-use ArvPayolutionApi\Mocks\Request\PreCheckXmlMockFactory;
+use ArvPayolutionApi\Mocks\Request\RequestXmlMockFactory;
 use ArvPayolutionApi\Request\RequestPaymentTypes;
 use ArvPayolutionApi\Request\RequestTypes;
 use ArvPayolutionApi\Request\XmlSerializer;
@@ -21,7 +21,7 @@ use GuzzleHttp\Client;
 class ElvRequestTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var  PreCheckXmlMockFactory
+     * @var  RequestXmlMockFactory
      */
     protected $xmlMock;
 
@@ -42,7 +42,7 @@ class ElvRequestTest extends \PHPUnit_Framework_TestCase
     {
         $this->data = new PreCheckDataGenerated();
         $this->xmlSerializer = XmlSerializerFactory::create();
-        $this->xmlMock = new PreCheckXmlMockFactory();
+        $this->xmlMock = new RequestXmlMockFactory();
         $this->xmlApi = new XmlApi(new ApiClient(new Client()));
     }
 
@@ -52,7 +52,7 @@ class ElvRequestTest extends \PHPUnit_Framework_TestCase
     public function testPreCheckSuccessFull()
     {
         $client = ApiFactory::createXmlApi();
-        $request = PreCheckXmlMockFactory::getRequestXml(
+        $request = RequestXmlMockFactory::getRequestXml(
             RequestPaymentTypes::PAYOLUTION_ELV,
             RequestTypes::PRE_CHECK
         );
@@ -72,7 +72,7 @@ class ElvRequestTest extends \PHPUnit_Framework_TestCase
     {
         $this->markTestSkipped(); //TODO: implement
         $client = ApiFactory::createXmlApi();
-        $request = PreCheckXmlMockFactory::getRequestXml(
+        $request = RequestXmlMockFactory::getRequestXml(
             RequestPaymentTypes::PAYOLUTION_ELV,
             RequestTypes::PRE_AUTH
         );

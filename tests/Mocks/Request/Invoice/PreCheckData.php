@@ -21,4 +21,20 @@ class PreCheckData extends PreCheckDataAbstract implements PreCheckDataContract
             'transactionId' => 42,
         ] + Config::getPaymentConfig('Invoice', 'PreCheck');
     }
+
+    /**
+     * @return array
+     */
+    public function jsonSerialize()
+    {
+        return [
+            'context' => $this->getApiContext(),
+            'customer' => $this->getCustomer(),
+            'shippingAddress' => $this->getShippingAddress(),
+            'billingAddress' => $this->getCustomerAddress(),
+            'cart' => $this->getCart(),
+            'cartItems' => $this->getCartItems(),
+            'systemInfo' => $this->getSytemInfo(),
+        ];
+    }
 }

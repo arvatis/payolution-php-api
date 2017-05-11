@@ -13,9 +13,33 @@ class RequestFactory
      * @param array $data
      * @param string|bool $referenceId unique id from previous PC or PA request
      *
-     * @return XmlApiRequest
+     * @return \SimpleXMLElement
      */
     public static function create($requestType, $paymentBrand, $data = [], $referenceId = null)
+    {
+        $xmlSerializer = XmlSerializerFactory::create();
+
+        return new \SimpleXMLElement(
+            $xmlSerializer->serialize(
+                [
+                    '@version' => self::getRequestVersion($requestType),
+                    '#' => self::createRequestObject($requestType, $paymentBrand, $data, $referenceId),
+                ],
+                true,
+                ($requestType == RequestTypes::CALCULATION)
+            )
+        );
+    }
+
+    /**
+     * @param $requestType
+     * @param $paymentBrand
+     * @param $data
+     * @param $referenceId
+     *
+     * @return RestApiRequest|XmlApiRequest
+     */
+    private static function createRequestObject($requestType, $paymentBrand, $data, $referenceId)
     {
         $context = $data['context'];
 
@@ -23,8 +47,20 @@ class RequestFactory
 
         if ($requestType != RequestTypes::CALCULATION) {
             $header = new Header($context['sender']);
+
             return new XmlApiRequest($header, $transaction);
         }
+
         return new RestApiRequest($transaction, 'PSP Name');
+    }
+
+    /**
+     * @param $requestType
+     *
+     * @return string
+     */
+    private static function getRequestVersion($requestType): string
+    {
+        return $requestType != RequestTypes::CALCULATION ? '1.0' : '2.0';
     }
 }

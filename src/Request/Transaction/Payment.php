@@ -12,8 +12,6 @@ class Payment
 {
     const REST_API_OPERATION_TYPE = 'CALCULATION';
     const REST_API_PAYMENT_TYPE = 'INSTALLMENT';
-    private $restApiPaymentType;
-    private $restApiOperationType;
     /**
      * @var string
      */
@@ -23,24 +21,23 @@ class Payment
      * @var  Presentation
      */
     protected $presentation;
+    private $restApiPaymentType;
+    private $restApiOperationType;
 
     /**
      * Payment constructor.
      *
      * @param Presentation $presentation
      * @param $requestType
-     * @param $code
      */
-    public function __construct(Presentation $presentation, $requestType, $code = null)
+    public function __construct(Presentation $presentation, $requestType)
     {
-        $this->code = $code;
+        $this->code = RequestTypes::getRequestPaymentCode($requestType);
         $this->presentation = $presentation;
         if ($requestType == RequestTypes::CALCULATION) {
-
             $this->restApiPaymentType = self::REST_API_PAYMENT_TYPE;
             $this->restApiOperationType = self::REST_API_OPERATION_TYPE;
         }
-
     }
 
     /**

@@ -1,8 +1,6 @@
 <?php
 
-
 namespace ArvPayolutionApi\Request;
-
 
 use ArvPayolutionApi\Request\Transaction\Account;
 use ArvPayolutionApi\Request\Transaction\Analysis;
@@ -11,8 +9,6 @@ use ArvPayolutionApi\Request\Transaction\Payment;
 
 class CalculationRequestFactory
 {
-
-
     public static function create(
         $channel,
         $mode,

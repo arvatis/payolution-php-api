@@ -37,9 +37,4 @@ interface ResponseContract
      * @return string
      */
     public function getTransactionID();
-
-    /**
-     * @return array
-     */
-    public function toArray();
 }

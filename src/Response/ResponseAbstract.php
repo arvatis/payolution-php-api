@@ -3,14 +3,14 @@
 namespace ArvPayolutionApi\Response;
 
 /**
- * Class ResponseAbstract
- */
-abstract class ResponseAbstract
-{
-    /**
+  * Class ResponseAbstract
+  */
+ class ResponseAbstract implements \JsonSerializable
+ {
+     /**
      * @return array
      */
-    public function toArray()
+    public function jsonSerialize()
     {
         $result = [];
 
@@ -25,4 +25,4 @@ abstract class ResponseAbstract
 
         return $result;
     }
-}
+ }

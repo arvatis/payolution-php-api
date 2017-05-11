@@ -46,4 +46,21 @@ class PreAuthData extends PreCheckDataAbstract implements PreCheckDataContract
             'vat_id' => 'ATU4514545',
         ];
     }
+
+    /**
+     * @return array
+     */
+    public function jsonSerialize()
+    {
+        return [
+            'context' => $this->getApiContext(),
+            'cartItems' => $this->getCartItems(),
+            'systemInfo' => $this->getSytemInfo(),
+            'shippingAddress' => $this->getShippingAddress(),
+            'billingAddress' => $this->getCustomerAddress(),
+            'cart' => $this->getCart(),
+            'customer' => $this->getCustomer(),
+            'company' => $this->getCompany(),
+        ];
+    }
 }

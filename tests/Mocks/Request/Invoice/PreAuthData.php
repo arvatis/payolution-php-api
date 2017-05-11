@@ -21,4 +21,27 @@ class PreAuthData extends PreCheckDataAbstract implements PreCheckDataContract
             'transactionId' => 42,
         ] + Config::getPaymentConfig('Invoice', 'PreAuth');
     }
+
+    /**
+     * Specify data which should be serialized to JSON
+     *
+     * @see http://php.net/manual/en/jsonserializable.jsonserialize.php
+     *
+     * @return mixed data which can be serialized by <b>json_encode</b>,
+     * which is a value of any type other than a resource
+     *
+     * @since 5.4.0
+     */
+    public function jsonSerialize()
+    {
+        return [
+            'context' => $this->getApiContext(),
+            'cartItems' => $this->getCartItems(),
+            'systemInfo' => $this->getSytemInfo(),
+            'shippingAddress' => $this->getShippingAddress(),
+            'billingAddress' => $this->getCustomerAddress(),
+            'cart' => $this->getCart(),
+            'customer' => $this->getCustomer(),
+        ];
+    }
 }

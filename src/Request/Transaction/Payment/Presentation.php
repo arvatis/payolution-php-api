@@ -35,6 +35,7 @@ class Presentation
         $this->currency = $currency;
         $this->vat = $vat;
     }
+
     /**
      * @return string
      */
@@ -59,9 +60,9 @@ class Presentation
         return (string) $this->currency;
     }
 
-
     /**
      * Getter for Vat
+     *
      * @return mixed
      */
     public function getVAT()

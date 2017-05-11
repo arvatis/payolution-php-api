@@ -65,8 +65,10 @@ class XmlApiResponse extends ResponseAbstract implements ResponseContract
         /** @var \SimpleXMLElement $processingInfo */
         $processingInfo = $this->xml->Transaction->Processing;
 
-        return $processingInfo->attributes() . ' ' . $processingInfo->Result . ' ' . $processingInfo->Status . ' '
-            . $processingInfo->Result->attributes() . ' ' . $processingInfo->Reason;
+        return trim(
+            $processingInfo->attributes() . ' ' . $processingInfo->Result . ' ' . $processingInfo->Status . ' '
+            . $processingInfo->Result->attributes() . ' ' . $processingInfo->Reason
+        );
     }
 
     /**

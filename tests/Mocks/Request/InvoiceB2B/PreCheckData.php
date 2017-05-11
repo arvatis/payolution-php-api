@@ -45,4 +45,28 @@ class PreCheckData extends PreCheckDataAbstract implements PreCheckDataContract
             'vat_id' => 'ATU4514545',
         ];
     }
+
+    /**
+     * Specify data which should be serialized to JSON
+     *
+     * @see http://php.net/manual/en/jsonserializable.jsonserialize.php
+     *
+     * @return mixed data which can be serialized by <b>json_encode</b>,
+     * which is a value of any type other than a resource
+     *
+     * @since 5.4.0
+     */
+    public function jsonSerialize()
+    {
+        return [
+            'context' => $this->getApiContext(),
+            'customer' => $this->getCustomer(),
+            'shippingAddress' => $this->getShippingAddress(),
+            'billingAddress' => $this->getCustomerAddress(),
+            'cart' => $this->getCart(),
+            'cartItems' => $this->getCartItems(),
+            'systemInfo' => $this->getSytemInfo(),
+            'company' => $this->getCompany(),
+        ];
+    }
 }

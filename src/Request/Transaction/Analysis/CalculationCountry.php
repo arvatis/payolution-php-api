@@ -1,8 +1,6 @@
 <?php
 
-
 namespace ArvPayolutionApi\Request\Transaction\Analysis;
-
 
 use ArvPayolutionApi\Request\RequestTypes;
 

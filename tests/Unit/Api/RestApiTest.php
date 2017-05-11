@@ -2,14 +2,21 @@
 
 namespace ArvPayolutionApi\Unit\Api;
 
+use ArvPayolutionApi\Api\ApiFactory;
 use ArvPayolutionApi\Api\Client as ApiClient;
 use ArvPayolutionApi\Api\RestApi;
-use ArvPayolutionApi\Api\XmlApi;
+use ArvPayolutionApi\Helpers\Config;
 use ArvPayolutionApi\Mocks\Request\Invoice\PreCheckDataGenerated;
-use ArvPayolutionApi\Mocks\Request\PreCheckXmlMockFactory;
+use ArvPayolutionApi\Mocks\Request\RequestXmlMockFactory;
+use ArvPayolutionApi\Request\RequestTypes;
 use ArvPayolutionApi\Request\XmlSerializer;
 use ArvPayolutionApi\Request\XmlSerializerFactory;
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Handler\MockHandler;
+use GuzzleHttp\HandlerStack;
+use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Psr7\Response;
 
 /**
  * Class RestApiTest
@@ -17,7 +24,7 @@ use GuzzleHttp\Client;
 class RestApiTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var  PreCheckXmlMockFactory
+     * @var  RequestXmlMockFactory
      */
     protected $xmlMock;
 
@@ -26,7 +33,7 @@ class RestApiTest extends \PHPUnit_Framework_TestCase
      */
     protected $xmlSerializer;
     /**
-     * @var XmlApi
+     * @var RestApi
      */
     private $restApi;
 
@@ -37,7 +44,80 @@ class RestApiTest extends \PHPUnit_Framework_TestCase
     {
         $this->data = new PreCheckDataGenerated();
         $this->xmlSerializer = XmlSerializerFactory::create();
-        $this->xmlMock = new PreCheckXmlMockFactory();
-        $this->restApi = new RestApi(new ApiClient(new Client()));
+        $this->xmlMock = new RequestXmlMockFactory();
+        $config = Config::getPaymentConfig('Installment', RequestTypes::CALCULATION);
+        $this->restApi = ApiFactory::createRestApi($config['user'], $config['password']);
+    }
+
+    /**
+     * @group online
+     */
+    public function testInvalidRequest()
+    {
+        $response = $this->restApi->doRequest(new \SimpleXMLElement('<xml></xml>'));
+
+        //print_r($response);
+        self::assertSame('1.8.0 ERROR', $response->getErrorMessage());
+    }
+
+    /**
+     * @expectedException
+     */
+    public function testClientErrorResponses()
+    {
+        $mock = new MockHandler([
+            new Response(404, []),
+            new Response(500, []),
+            new RequestException('Error Communicating with Server', new Request('POST', 'test')),
+        ]);
+
+        $handler = HandlerStack::create($mock);
+        $clientMock = new Client(['handler' => $handler]);
+        $this->restApi->setClient(new ApiClient($clientMock));
+
+        $requestData = new \SimpleXMLElement('<xml></xml>');
+        $response = $this->restApi->doRequest($requestData);
+
+        self::assertArraySubset(
+            [
+                'success' => false,
+                'errorMessage' => 'Client error: `POST ' . $this->restApi::URL_SANDBOX . '` resulted in a `404 Not Found` response:'
+                    . PHP_EOL . PHP_EOL,
+                'status' => '',
+                'transactionID' => '',
+            ],
+            $response->jsonSerialize(),
+            true,
+            'response was: ' . print_r($response->jsonSerialize(), true)
+        );
+
+        $response = $this->restApi->doRequest($requestData);
+
+        self::assertArraySubset(
+            [
+                'success' => false,
+                'errorMessage' => 'Server error: `POST ' . $this->restApi::URL_SANDBOX . '` resulted in a `500 Internal Server Error` response:'
+                    . PHP_EOL . PHP_EOL,
+                'status' => '',
+                'transactionID' => '',
+            ],
+            $response->jsonSerialize(),
+            true,
+            'response was: ' . print_r($response->jsonSerialize(), true)
+        );
+
+        $response = $this->restApi->doRequest($requestData);
+
+        self::assertArraySubset(
+            [
+                'success' => false,
+                'errorMessage' => 'Error Communicating with Server',
+                'status' => '',
+                'transactionID' => '',
+            ],
+            $response->jsonSerialize(),
+            true,
+            'response was: ' . print_r($response->jsonSerialize(), true)
+        );
     }
 }

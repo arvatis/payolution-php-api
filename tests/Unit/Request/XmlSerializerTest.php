@@ -3,6 +3,7 @@
 namespace ArvPayolutionApi\Unit\Request;
 
 use ArvPayolutionApi\Request\Header;
+use ArvPayolutionApi\Request\RequestTypes;
 use ArvPayolutionApi\Request\Transaction\Analysis;
 use ArvPayolutionApi\Request\Transaction\Payment;
 use ArvPayolutionApi\Request\Transaction\Payment\Presentation;
@@ -48,7 +49,7 @@ XML;
   </Presentation>
 </Payment>
 XML;
-        $payment = new Payment($this->presentation, , 'VA.PA');
+        $payment = new Payment($this->presentation, RequestTypes::PRE_AUTH);
         $this->assertSame(
             $xml,
             $this->xmlSerializer->serialize(

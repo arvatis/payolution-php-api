@@ -36,10 +36,11 @@ class XmlSerializer
     /**
      * @param object|array $object
      * @param bool $addXmlVersionNode
+     * @param bool $standalone
      *
      * @return string
      */
-    public function serialize($object, $addXmlVersionNode = false)
+    public function serialize($object, $addXmlVersionNode = false, $standalone = false)
     {
         $serializedXml = $this->serializer->serialize(
             $object,
@@ -58,11 +59,14 @@ class XmlSerializer
         $this->removeEmptyAttributes($xml);
         $this->removeEmptyTags($xml);
 
-        if ($addXmlVersionNode) {
-            return $this->removeBlankLines($xml->saveXML($xml));
+        if (!$addXmlVersionNode) {
+            return $this->removeBlankLines($xml->saveXML($xml->documentElement));
+        }
+        if ($standalone) {
+            $xml->xmlStandalone = true;
         }
 
-        return $this->removeBlankLines($xml->saveXML($xml->documentElement));
+        return $this->removeBlankLines($xml->saveXML($xml));
     }
 
     /**
@@ -88,14 +92,15 @@ class XmlSerializer
     private function removeEmptyAttributes(\DOMDocument $xml)
     {
         $xpath = new \DOMXPath($xml);
-            $attributeList = $xpath->query('//@*');
+        $attributeList = $xpath->query('//@*');
             /** @var \DOMAttr $attribute */
             foreach ($attributeList as $attribute) {
-               if(!$attribute->nodeValue){//TODO: narrow down using using xpath
+                if (!$attribute->textContent) {//TODO: narrow down using using xpath
                    $attribute->parentNode->removeAttribute($attribute->name);
-               }
+                }
             }
     }
+
     /**
      * @param $xmlString
      *

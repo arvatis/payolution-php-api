@@ -5,7 +5,7 @@ namespace ArvPayolutionApi\Mocks\Request;
 /**
  * Class PreCheckData
  */
-abstract class PreCheckDataAbstract implements PreCheckDataContract
+abstract class PreCheckDataAbstract implements PreCheckDataContract, \JsonSerializable
 {
     /**
       * Request specific credentials

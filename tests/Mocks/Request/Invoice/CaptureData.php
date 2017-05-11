@@ -69,4 +69,28 @@ class CaptureData extends PreCheckDataAbstract implements PreCheckDataContract
             'module_version' => 'PaymentModuleVersion',
         ];
     }
+
+    /**
+     * Specify data which should be serialized to JSON
+     *
+     * @see http://php.net/manual/en/jsonserializable.jsonserialize.php
+     *
+     * @return mixed data which can be serialized by <b>json_encode</b>,
+     * which is a value of any type other than a resource
+     *
+     * @since 5.4.0
+     */
+    public function jsonSerialize()
+    {
+        return [
+            'context' => $this->getApiContext(),
+            'cartItems' => $this->getCartItems(),
+            'systemInfo' => $this->getSytemInfo(),
+            'invoice' => $this->getInvoice(),
+            'order' => $this->getOrder(),
+            'tracking' => $this->getTracking(),
+            'cart' => $this->getCart(),
+            'customer' => $this->getCustomer(),
+        ];
+    }
 }

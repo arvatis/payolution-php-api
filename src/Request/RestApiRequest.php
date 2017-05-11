@@ -7,7 +7,6 @@ namespace ArvPayolutionApi\Request;
  */
 class RestApiRequest
 {
-
     /**
      * @var  PreCheckTransaction
      */
@@ -16,6 +15,7 @@ class RestApiRequest
 
     /**
      * XmlApiRequest constructor.
+     *
      * @param AbstractTransaction $transaction
      */
     public function __construct(AbstractTransaction $transaction, $sender)
@@ -31,7 +31,6 @@ class RestApiRequest
     {
         return $this->sender;
     }
-
 
     /**
      * @return array
