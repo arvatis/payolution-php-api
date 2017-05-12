@@ -34,7 +34,7 @@ class ElvTest extends \PHPUnit_Framework_TestCase
     /**
      * @group online
      */
-    public function testPreCheckSuccessFull()
+    public function testPreCheckSuccessful()
     {
         $client = ApiFactory::createXmlApi();
         $request = RequestXmlMockFactory::getRequestXml(
@@ -53,7 +53,7 @@ class ElvTest extends \PHPUnit_Framework_TestCase
     /**
      * @group online
      */
-    public function testPreAuthSuccessFull()
+    public function testPreAuthSuccessful()
     {
         $this->markTestSkipped(); //TODO: implement
         $client = ApiFactory::createXmlApi();

@@ -9,7 +9,7 @@
       <OperationType>CALCULATION</OperationType>
       <PaymentType>INSTALLMENT</PaymentType>
       <Presentation>
-        <Amount>249.99</Amount>
+        <Amount>359.98</Amount>
         <Usage>Cart Trx 42</Usage>
         <Currency>EUR</Currency>
         <VAT>50.98</VAT>

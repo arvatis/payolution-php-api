@@ -7,7 +7,7 @@ use ArvPayolutionApi\Api\Client as ApiClient;
 use ArvPayolutionApi\Api\XmlApi;
 use ArvPayolutionApi\Mocks\Request\Invoice\PreCheckDataGenerated;
 use ArvPayolutionApi\Mocks\Request\RequestXmlMockFactory;
-use ArvPayolutionApi\Request\RequestFactory;
+use ArvPayolutionApi\Request\PreAuthRequestFactory;
 use ArvPayolutionApi\Request\RequestPaymentTypes;
 use ArvPayolutionApi\Request\RequestTypes;
 use ArvPayolutionApi\Request\XmlSerializer;
@@ -79,22 +79,13 @@ class ClientTest extends \PHPUnit_Framework_TestCase
      */
     public function testDoPreCheckWithRandomData()
     {
-        $data = [
-            'context' => $this->data->getApiContext(),
-            'customer' => $this->data->getCustomer(),
-            'shippingAddress' => $this->data->getShippingAddress(),
-            'billingAddress' => $this->data->getCustomerAddress(),
-            'cart' => $this->data->getCart(),
-            'cartItems' => $this->data->getCartItems(),
-            'systemInfo' => $this->data->getSytemInfo(),
-        ];
+        $data = $this->data->jsonSerialize();
 
-        $requestType = 'PreCheck';
-        $paymentBrand = 'PAYOLUTION_INVOICE';
-        $isPreCheck = true;
+        $requestType = RequestPaymentTypes::PAYOLUTION_INVOICE;
+        $paymentBrand = RequestTypes::PRE_CHECK;
 
         $response = $this->xmlApi->doRequest(
-            RequestFactory::create($requestType, $paymentBrand, $data, $isPreCheck)
+            PreAuthRequestFactory::create($requestType, $paymentBrand, $data)
         );
         self::assertSame('VA.PA.60.95 NOK REJECTED_BANK  Authorization Error', $response->getErrorMessage());
     }

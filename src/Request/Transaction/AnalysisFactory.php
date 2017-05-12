@@ -22,6 +22,7 @@ use ArvPayolutionApi\Request\Transaction\Analysis\PreCheck;
 use ArvPayolutionApi\Request\Transaction\Analysis\PreCheckId;
 use ArvPayolutionApi\Request\Transaction\Analysis\Shipping;
 use ArvPayolutionApi\Request\Transaction\Analysis\SystemInfo;
+use ArvPayolutionApi\Request\Transaction\Analysis\TaxAmount;
 use ArvPayolutionApi\Request\Transaction\Analysis\TransactionType;
 
 /**
@@ -49,6 +50,7 @@ class AnalysisFactory
             ->add(new PreCheckId($requestType, $referenceId, $data))
             ->add(new Language($requestType, $referenceId, $language))
             ->add(new CustomerRegistration($requestType, $referenceId, $data))
+            ->add(new TaxAmount($requestType, $referenceId, $data))
             ->add(new SystemInfo($requestType, $referenceId, $data))
             ->add(new Cart($requestType, $referenceId, $data))
             ->add(new CustomerNumber($requestType, $referenceId, $data))

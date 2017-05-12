@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <Request version="1.0">
   <Header>
     <Security sender="{{sender}}"/>
@@ -6,10 +6,10 @@
   <Transaction channel="{{channel}}" mode="CONNECTOR_TEST">
     <User pwd="{{pwd}}" login="{{login}}"/>
     <Identification>
-      <TransactionID>125</TransactionID><!-- = INVOICE ID, used for billing -->
-      <ReferenceID>40288b162da3e294012db761fd734134</ReferenceID> <!-- unique id from PA_response.xml -->
-      <ShopperID>customerid123456</ShopperID>
+      <TransactionID>125</TransactionID>
+      <ReferenceID>40288b162da3e294012db761fd734134</ReferenceID>
       <InvoiceID>125</InvoiceID>
+      <ShopperID>customerid123456</ShopperID>
     </Identification>
     <Payment code="VA.RV">
       <Presentation>
@@ -19,7 +19,7 @@
     <Analysis>
       <Criterion name="PAYOLUTION_REQUEST_SYSTEM_VENDOR">CustomSystemName_ProgrammingLanguage_XML</Criterion>
       <Criterion name="PAYOLUTION_REQUEST_SYSTEM_VERSION">CustomSystemVersion</Criterion>
-      <Criterion name="PAYOLUTION_REQUEST_SYSTEM_TYPE">CronJob</Criterion><!-- CronJob, ERPClient -->
+      <Criterion name="PAYOLUTION_REQUEST_SYSTEM_TYPE">CronJob</Criterion>
       <Criterion name="PAYOLUTION_MODULE_NAME">PaymentModuleName</Criterion>
       <Criterion name="PAYOLUTION_MODULE_VERSION">PaymentModuleVersion</Criterion>
     </Analysis>

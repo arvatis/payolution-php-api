@@ -34,7 +34,7 @@ class InvoiceB2BTest extends \PHPUnit_Framework_TestCase
     /**
      * @group online
      */
-    public function testPreCheckSuccessFull()
+    public function testPreCheckSuccessful()
     {
         $request = RequestXmlMockFactory::getRequestXml(
             RequestPaymentTypes::PAYOLUTION_INVOICE_B2B,
@@ -44,7 +44,7 @@ class InvoiceB2BTest extends \PHPUnit_Framework_TestCase
 
         self::assertTrue(
             $response->getSuccess(),
-            'Requst was' . $request->saveXML() . PHP_EOL .
+            'Reqeust was' . $request->saveXML() . PHP_EOL .
             'Response was' . print_r($response, true)
         );
     }
@@ -52,7 +52,7 @@ class InvoiceB2BTest extends \PHPUnit_Framework_TestCase
     /**
      * @group online
      */
-    public function testPreAuthSuccessFull()
+    public function testPreAuthSuccessful()
     {
         $request = RequestXmlMockFactory::getRequestXml(
             RequestPaymentTypes::PAYOLUTION_INVOICE_B2B,
@@ -62,7 +62,7 @@ class InvoiceB2BTest extends \PHPUnit_Framework_TestCase
 
         self::assertTrue(
             $response->getSuccess(),
-            'Requst was' . $request->saveXML() . PHP_EOL .
+            'Reqeust was' . $request->saveXML() . PHP_EOL .
             'Response was' . print_r($response, true)
         );
     }

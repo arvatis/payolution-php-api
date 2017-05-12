@@ -33,7 +33,7 @@ class Identification
      * @param string $referenceId
      * @param string $invoiceId
      */
-    public function __construct($transactionId, $shopperId, $referenceId = '', $invoiceId = '')
+    public function __construct($transactionId, $shopperId = '', $referenceId = '', $invoiceId = '')
     {
         $this->transactionId = $transactionId;
         $this->shopperId = $shopperId;

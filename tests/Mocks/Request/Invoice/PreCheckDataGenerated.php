@@ -5,13 +5,14 @@ namespace ArvPayolutionApi\Mocks\Request\Invoice;
 use ArvPayolutionApi\Helpers\Config;
 use ArvPayolutionApi\Mocks\Faker\Providers\CustomerGroup;
 use ArvPayolutionApi\Mocks\Faker\Providers\PayolutionCountryCode;
+use ArvPayolutionApi\Mocks\Request\PreCheckDataAbstract;
 use ArvPayolutionApi\Mocks\Request\PreCheckDataContract;
 use Faker;
 
 /**
  * Class PreCheckData
  */
-class PreCheckDataGenerated implements PreCheckDataContract
+class PreCheckDataGenerated extends PreCheckDataAbstract implements PreCheckDataContract
 {
     /**
      * @var string
@@ -19,7 +20,7 @@ class PreCheckDataGenerated implements PreCheckDataContract
     protected $gender;
 
     /**
-     * @var Faker\Generator|\Faker\Provider\Person|PayolutionCountryCode|CustomerGroup|Faker\Provider\PhoneNumber|Faker\Provider\Internet
+     * @var Faker\Generator|\Faker\Provider\Person|PayolutionCountryCode|CustomerGroup|Faker\Provider\PhoneNumber|Faker\Provider\Internet|\Faker\Provider\de_DE\Person
      */
     protected $faker;
 
@@ -40,9 +41,9 @@ class PreCheckDataGenerated implements PreCheckDataContract
     public function getApiContext()
     {
         return [
-            'mode' => 'CONNECTOR_TEST',
-            'transactionId' => 42,
-        ] + Config::getPaymentConfig('Invoice', 'PreCheck');
+                'mode' => 'CONNECTOR_TEST',
+                'transactionId' => 42,
+            ] + Config::getPaymentConfig('Invoice', 'PreCheck');
     }
 
     /**
@@ -136,6 +137,29 @@ class PreCheckDataGenerated implements PreCheckDataContract
             'url' => 'arvatis.plentymarkets-cloud01.com',
             'module' => 'plentymarkets Payolution',
             'module_version' => '0.0.1',
+        ];
+    }
+
+    /**
+     * Specify data which should be serialized to JSON
+     *
+     * @see http://php.net/manual/en/jsonserializable.jsonserialize.php
+     *
+     * @return mixed data which can be serialized by <b>json_encode</b>,
+     * which is a value of any type other than a resource
+     *
+     * @since 5.4.0
+     */
+    public function jsonSerialize()
+    {
+        return [
+            'context' => $this->getApiContext(),
+            'customer' => $this->getCustomer(),
+            'shippingAddress' => $this->getShippingAddress(),
+            'billingAddress' => $this->getCustomerAddress(),
+            'cart' => $this->getCart(),
+            'cartItems' => $this->getCartItems(),
+            'systemInfo' => $this->getSytemInfo(),
         ];
     }
 }

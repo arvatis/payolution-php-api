@@ -8,7 +8,8 @@ use ArvPayolutionApi\Mocks\Request\InvoiceB2B\PreAuthData;
 use ArvPayolutionApi\Mocks\Request\InvoiceB2B\PreCheckData as InvoiceB2BPreCheckData;
 use ArvPayolutionApi\Mocks\Request\InvoiceB2B\PreCheckDataGenerated;
 use ArvPayolutionApi\Mocks\Request\RequestXmlMockFactory;
-use ArvPayolutionApi\Request\RequestFactory;
+use ArvPayolutionApi\Request\PreAuthRequestFactory;
+use ArvPayolutionApi\Request\PreCheckRequestFactory;
 use ArvPayolutionApi\Request\RequestPaymentTypes;
 use ArvPayolutionApi\Request\RequestTypes;
 use ArvPayolutionApi\Request\XmlSerializer;
@@ -58,7 +59,7 @@ class InvoiceB2BRequestTest extends \PHPUnit_Framework_TestCase
 
         $this->assertSame(
             RequestXmlMockFactory::getRequestXml($paymentBrand, $requestType)->saveXml(),
-            RequestFactory::create($requestType, $paymentBrand, $data)->saveXml()
+            PreCheckRequestFactory::create($requestType, $paymentBrand, $data)->saveXml()
         );
     }
 
@@ -77,7 +78,7 @@ class InvoiceB2BRequestTest extends \PHPUnit_Framework_TestCase
         )->saveXml();
         $this->assertSame(
             $mockXml,
-            RequestFactory::create($requestType, $paymentBrand, $data, $previousRequestId)->saveXml()
+            PreAuthRequestFactory::create($requestType, $paymentBrand, $data, $previousRequestId)->saveXml()
         );
     }
 }

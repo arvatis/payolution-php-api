@@ -8,11 +8,11 @@ namespace ArvPayolutionApi\Mocks\Request;
 abstract class PreCheckDataAbstract implements PreCheckDataContract, \JsonSerializable
 {
     /**
-      * Request specific credentials
-      *
-      * @return array
-      */
-     abstract public function getApiContext();
+     * Request specific credentials
+     *
+     * @return array
+     */
+    abstract public function getApiContext();
 
     /**
      * @return array
@@ -22,7 +22,7 @@ abstract class PreCheckDataAbstract implements PreCheckDataContract, \JsonSerial
         return [
             'cartId' => 'Trx 42',
             'currency' => 'EUR',
-            'grandTotal' => 249.99,
+            'grandTotal' => sprintf('%0.2f', array_sum(array_column($this->getCartItems(), 'price'))),
         ];
     }
 

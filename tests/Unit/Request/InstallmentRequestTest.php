@@ -6,7 +6,8 @@ use ArvPayolutionApi\Mocks\Request\Installment\CalculationData;
 use ArvPayolutionApi\Mocks\Request\Installment\PreCheckData as InstallmentPreCheckData;
 use ArvPayolutionApi\Mocks\Request\InvoiceB2B\PreCheckDataGenerated;
 use ArvPayolutionApi\Mocks\Request\RequestXmlMockFactory;
-use ArvPayolutionApi\Request\RequestFactory;
+use ArvPayolutionApi\Request\CalculationRequestFactory;
+use ArvPayolutionApi\Request\PreCheckRequestFactory;
 use ArvPayolutionApi\Request\RequestPaymentTypes;
 use ArvPayolutionApi\Request\RequestTypes;
 
@@ -44,7 +45,7 @@ class InstallmentRequestTest extends \PHPUnit_Framework_TestCase
                 RequestPaymentTypes::PAYOLUTION_INS,
                 $requestType
             )->saveXml(),
-            RequestFactory::create($requestType, $paymentBrand, $data)->saveXml()
+            PreCheckRequestFactory::create($requestType, $paymentBrand, $data)->saveXml()
         );
     }
 
@@ -61,7 +62,7 @@ class InstallmentRequestTest extends \PHPUnit_Framework_TestCase
                 RequestPaymentTypes::PAYOLUTION_INS,
                 $requestType
             )->saveXml(),
-            RequestFactory::create($requestType, $paymentBrand, $data)->saveXml()
+            CalculationRequestFactory::create($requestType, $paymentBrand, $data)->saveXml()
         );
     }
 }

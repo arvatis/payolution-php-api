@@ -8,9 +8,9 @@ use ArvPayolutionApi\Request\Transaction\Payment;
 use ArvPayolutionApi\Request\Transaction\User;
 
 /**
- * Class CaptureTransaction
+ * Class RefundTransaction
  */
-class CaptureTransaction extends TransactionAbstract
+class RefundTransaction extends TransactionAbstract
 {
     /**
      * Transaction constructor.

@@ -14,7 +14,12 @@ class SystemInfo extends CompositeAbstract implements CompositeContract
      */
     public function isAvailable()
     {
-        return $this->requestType != RequestTypes::CALCULATION;
+        return !in_array(
+            $this->requestType,
+            [
+                RequestTypes::CALCULATION,
+            ]
+        );
     }
 
     /**
@@ -24,7 +29,6 @@ class SystemInfo extends CompositeAbstract implements CompositeContract
     {
         $systemInfo = $this->data['systemInfo'];
         $data = [
-            CriterionNames::PAYOLUTION_TAX_AMOUNT => $this->getTotalTaxAmount(),
             CriterionNames::PAYOLUTION_REQUEST_SYSTEM_VENDOR => $systemInfo['vendor'],
             CriterionNames::PAYOLUTION_REQUEST_SYSTEM_VERSION => $systemInfo['version'],
             CriterionNames::PAYOLUTION_REQUEST_SYSTEM_TYPE => $systemInfo['type'],
@@ -39,11 +43,4 @@ class SystemInfo extends CompositeAbstract implements CompositeContract
         return $data;
     }
 
-    /**
-     * @return string
-     */
-    private function getTotalTaxAmount()
-    {
-        return sprintf('%0.2f', array_sum(array_column($this->data['cartItems'], 'tax')));
-    }
 }

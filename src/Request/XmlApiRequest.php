@@ -20,9 +20,9 @@ class XmlApiRequest
      * Request constructor.
      *
      * @param Header $header
-     * @param AbstractTransaction|PreCheckTransaction $transaction
+     * @param TransactionAbstract|PreCheckTransaction $transaction
      */
-    public function __construct(Header $header, AbstractTransaction $transaction)
+    public function __construct(Header $header, TransactionAbstract $transaction)
     {
         $this->header = $header;
         $this->transaction = $transaction;

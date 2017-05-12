@@ -16,9 +16,9 @@ class RestApiRequest
     /**
      * XmlApiRequest constructor.
      *
-     * @param AbstractTransaction $transaction
+     * @param TransactionAbstract $transaction
      */
-    public function __construct(AbstractTransaction $transaction, $sender)
+    public function __construct(TransactionAbstract $transaction, $sender)
     {
         $this->transaction = $transaction;
         $this->sender = $sender;

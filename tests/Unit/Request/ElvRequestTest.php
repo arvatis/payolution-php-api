@@ -7,7 +7,7 @@ use ArvPayolutionApi\Api\XmlApi;
 use ArvPayolutionApi\Mocks\Request\Elv\PreCheckData as ElvPreCheckData;
 use ArvPayolutionApi\Mocks\Request\InvoiceB2B\PreCheckDataGenerated;
 use ArvPayolutionApi\Mocks\Request\RequestXmlMockFactory;
-use ArvPayolutionApi\Request\RequestFactory;
+use ArvPayolutionApi\Request\PreCheckRequestFactory;
 use ArvPayolutionApi\Request\RequestPaymentTypes;
 use ArvPayolutionApi\Request\RequestTypes;
 use ArvPayolutionApi\Request\XmlSerializer;
@@ -57,7 +57,7 @@ class ElvRequestTest extends \PHPUnit_Framework_TestCase
 
         self::assertSame(
             RequestXmlMockFactory::getRequestXml(RequestPaymentTypes::PAYOLUTION_ELV, $requestType)->saveXml(),
-            RequestFactory::create($requestType, $paymentBrand, $data)->saveXml()
+            PreCheckRequestFactory::create($requestType, $paymentBrand, $data)->saveXml()
         );
     }
 }

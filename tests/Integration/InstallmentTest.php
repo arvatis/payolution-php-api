@@ -8,7 +8,7 @@ use ArvPayolutionApi\Api\XmlApi;
 use ArvPayolutionApi\Helpers\Config;
 use ArvPayolutionApi\Mocks\Request\Installment\PreAuthData;
 use ArvPayolutionApi\Mocks\Request\RequestXmlMockFactory;
-use ArvPayolutionApi\Request\RequestFactory;
+use ArvPayolutionApi\Request\PreAuthRequestFactory;
 use ArvPayolutionApi\Request\RequestPaymentTypes;
 use ArvPayolutionApi\Request\RequestTypes;
 
@@ -48,7 +48,7 @@ class InstallmentTest extends \PHPUnit_Framework_TestCase
      *
      * @return string
      */
-    public function testPreCheckSuccessFull()
+    public function testPreCheckSuccessful()
     {
         $request = RequestXmlMockFactory::getRequestXml(
             RequestPaymentTypes::PAYOLUTION_INS,
@@ -70,7 +70,7 @@ class InstallmentTest extends \PHPUnit_Framework_TestCase
      *
      * @return string
      */
-    public function testCalculationSuccessFull()
+    public function testCalculationSuccessful()
     {
         $request = RequestXmlMockFactory::getRequestXml(RequestPaymentTypes::PAYOLUTION_INS, RequestTypes::CALCULATION);
         $response = $this->restApi->doRequest($request);
@@ -86,13 +86,13 @@ class InstallmentTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @group online
-     * @depends testPreCheckSuccessFull
-     * @depends testCalculationSuccessFull
+     * @depends testPreCheckSuccessful
+     * @depends testCalculationSuccessful
      *
      * @param $uniqueIdPreCheck
      * @param $uniqueIdCalculation
      */
-    public function testPreAuthSuccessFull($uniqueIdPreCheck, $uniqueIdCalculation)
+    public function testPreAuthSuccessful($uniqueIdPreCheck, $uniqueIdCalculation)
     {
         $data = new PreAuthData();
         $data = $data->jsonSerialize();
@@ -101,7 +101,7 @@ class InstallmentTest extends \PHPUnit_Framework_TestCase
         $requestType = RequestTypes::PRE_AUTH;
         $paymentBrand = RequestPaymentTypes::PAYOLUTION_INS;
 
-        $request = RequestFactory::create($requestType, $paymentBrand, $data, $uniqueIdPreCheck);
+        $request = PreAuthRequestFactory::create($requestType, $paymentBrand, $data, $uniqueIdPreCheck);
 
         $response = $this->xmlApi->doRequest($request);
 

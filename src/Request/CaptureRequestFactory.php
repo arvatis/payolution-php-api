@@ -2,17 +2,14 @@
 
 namespace ArvPayolutionApi\Request;
 
-/**
- * Class CalculationRequestFactory
- */
-class CalculationRequestFactory extends RequestFactoryAbstract
+class CaptureRequestFactory extends RequestFactoryAbstract
 {
     /**
      * @return string
      */
     public static function getRequestVersion(): string
     {
-        return self::API_VERSION_NUMBER_TWO;
+        return self::API_VERSION_NUMBER_ONE;
     }
 
     /**
@@ -23,7 +20,9 @@ class CalculationRequestFactory extends RequestFactoryAbstract
      */
     public static function createRequest($context, TransactionAbstract $transaction)
     {
-        return new RestApiRequest($transaction, 'PSP Name');
+        $header = new Header($context['sender']);
+
+        return new XmlApiRequest($header, $transaction);
     }
 
     /**
@@ -36,6 +35,6 @@ class CalculationRequestFactory extends RequestFactoryAbstract
      */
     public static function createTransaction($requestType, $paymentBrand, $data, $referenceId)
     {
-        return CalculationTransactionFactory::create($requestType, $paymentBrand, $data, $referenceId);
+        return CaptureTransactionFactory::create($requestType, $paymentBrand, $data, $referenceId);
     }
 }

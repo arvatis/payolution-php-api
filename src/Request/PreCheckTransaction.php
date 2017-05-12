@@ -12,7 +12,7 @@ use ArvPayolutionApi\Request\Transaction\User;
 /**
  * Class Transaction
  */
-class PreCheckTransaction extends AbstractTransaction
+class PreCheckTransaction extends TransactionAbstract
 {
     /**
      * @var  string
