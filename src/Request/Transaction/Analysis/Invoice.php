@@ -14,7 +14,7 @@ class Invoice extends CompositeAbstract implements CompositeContract
      */
     public function isAvailable()
     {
-        return $this->requestType == RequestTypes::CAPTURE;
+        return in_array($this->requestType, [RequestTypes::CAPTURE, RequestTypes::RE_AUTH]);
     }
 
     /**

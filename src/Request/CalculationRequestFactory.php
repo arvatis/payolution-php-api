@@ -27,15 +27,21 @@ class CalculationRequestFactory extends RequestFactoryAbstract
     }
 
     /**
-     * @param $requestType
      * @param $paymentBrand
      * @param $data
      * @param $referenceId
      *
-     * @return TransactionAbstract|PreCheckTransaction
+     * @return PreCheckTransaction|TransactionAbstract
+     *
+     * @internal param $requestType
      */
-    public static function createTransaction($requestType, $paymentBrand, $data, $referenceId)
+    public static function createTransaction($paymentBrand, $data, $referenceId)
     {
-        return CalculationTransactionFactory::create($requestType, $paymentBrand, $data, $referenceId);
+        return CalculationTransactionFactory::create(static::getRequestType(), $paymentBrand, $data, $referenceId);
+    }
+
+    public static function getRequestType(): string
+    {
+        return RequestTypes::CALCULATION;
     }
 }

@@ -14,7 +14,7 @@ class Cart extends CompositeAbstract implements CompositeContract
      */
     public function isAvailable()
     {
-        return ($this->requestType == RequestTypes::PRE_CHECK || $this->requestType == RequestTypes::PRE_AUTH)
+        return in_array($this->requestType, [RequestTypes::PRE_CHECK, RequestTypes::PRE_AUTH, RequestTypes::RE_AUTH])
             && isset($this->data['cartItems']);
     }
 

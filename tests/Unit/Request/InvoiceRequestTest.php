@@ -8,12 +8,14 @@ use ArvPayolutionApi\Mocks\Request\Invoice\CaptureData as InvoiceCaptureData;
 use ArvPayolutionApi\Mocks\Request\Invoice\PreAuthData as InvoicePreAuthData;
 use ArvPayolutionApi\Mocks\Request\Invoice\PreCheckData as InvoicePreCheckData;
 use ArvPayolutionApi\Mocks\Request\Invoice\PreCheckDataGenerated;
+use ArvPayolutionApi\Mocks\Request\Invoice\ReAuthData;
 use ArvPayolutionApi\Mocks\Request\Invoice\RefundData;
 use ArvPayolutionApi\Mocks\Request\Invoice\ReversalData;
 use ArvPayolutionApi\Mocks\Request\RequestXmlMockFactory;
 use ArvPayolutionApi\Request\CaptureRequestFactory;
 use ArvPayolutionApi\Request\PreAuthRequestFactory;
 use ArvPayolutionApi\Request\PreCheckRequestFactory;
+use ArvPayolutionApi\Request\ReAuthRequestFactory;
 use ArvPayolutionApi\Request\RefundRequestFactory;
 use ArvPayolutionApi\Request\RequestPaymentTypes;
 use ArvPayolutionApi\Request\RequestTypes;
@@ -135,6 +137,23 @@ class InvoiceRequestTest extends \PHPUnit_Framework_TestCase
                 $requestType
             )->saveXml(),
             ReversalRequestFactory::create($requestType, $this->paymentMethod, $data, $previousRequestId)->saveXml()
+        );
+    }
+
+    public function testReAuthSameAsMock()
+    {
+        $this->data = new ReAuthData();
+        $data = $this->data->jsonSerialize();
+
+        $requestType = RequestTypes::RE_AUTH;
+        $previousRequestId = '40288b162da3e294012db761fd734134';
+
+        $this->assertSame(
+            RequestXmlMockFactory::getRequestXml(
+                $this->paymentMethod,
+                $requestType
+            )->saveXml(),
+            ReAuthRequestFactory::create($requestType, $this->paymentMethod, $data, $previousRequestId)->saveXml()
         );
     }
 }

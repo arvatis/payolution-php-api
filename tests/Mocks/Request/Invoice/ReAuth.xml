@@ -7,13 +7,13 @@
     <User pwd="{{pwd}}" login="{{login}}"/>
     <Identification>
       <TransactionID>42</TransactionID>
-      <ReferenceID>40288b162da3e294012db761fd734134</ReferenceID> <!-- unique id from PA_response.xml -->
+      <ReferenceID>40288b162da3e294012db761fd734134</ReferenceID>
       <ShopperID>customerid123456</ShopperID>
     </Identification>
     <Payment code="VA.PA">
       <Presentation>
         <Amount>359.98</Amount>
-        <Usage>Trx 42</Usage>
+        <Usage>Invoice 125</Usage>
         <Currency>EUR</Currency>
       </Presentation>
     </Payment>
@@ -28,13 +28,13 @@
       <Criterion name="PAYOLUTION_WEBSHOP_URL">www.shop.example.com</Criterion>
       <Criterion name="PAYOLUTION_MODULE_NAME">PaymentModuleName</Criterion>
       <Criterion name="PAYOLUTION_MODULE_VERSION">PaymentModuleVersion</Criterion>
-      <Criterion name="PAYOLUTION_INVOICE_ID">125</Criterion>
       <Criterion name="PAYOLUTION_ITEM_DESCR_1">Phone</Criterion>
       <Criterion name="PAYOLUTION_ITEM_PRICE_1">349.99</Criterion>
       <Criterion name="PAYOLUTION_ITEM_TAX_1">49.99</Criterion>
       <Criterion name="PAYOLUTION_ITEM_DESCR_2">Cover</Criterion>
       <Criterion name="PAYOLUTION_ITEM_PRICE_2">9.99</Criterion>
       <Criterion name="PAYOLUTION_ITEM_TAX_2">0.99</Criterion>
+      <Criterion name="PAYOLUTION_INVOICE_ID">125</Criterion>
     </Analysis>
   </Transaction>
 </Request>

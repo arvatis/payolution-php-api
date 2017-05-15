@@ -49,7 +49,7 @@ abstract class TransactionFactoryAbstract
             $context['transactionId'],
             $shopperId,
             !in_array($requestType, [RequestTypes::PRE_AUTH, RequestTypes::PRE_CHECK]) ? $referenceId : null,
-            $invoiceId
+            !in_array($requestType, [RequestTypes::RE_AUTH]) ? $invoiceId : null
         );
 
         return static::createTransaction(

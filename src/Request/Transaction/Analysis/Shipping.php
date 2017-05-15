@@ -16,7 +16,7 @@ class Shipping extends CompositeAbstract implements CompositeContract
     {
         return $this->requestType == RequestTypes::PRE_CHECK
             || $this->requestType == RequestTypes::PRE_AUTH
-            || $this->requestType == RequestTypes::RE_AUTH;
+            ;
     }
 
     /**

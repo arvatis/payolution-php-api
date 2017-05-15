@@ -2,7 +2,7 @@
 
 namespace ArvPayolutionApi\Request;
 
-class PreCheckRequestFactory extends RequestFactoryAbstract
+class ReAuthRequestFactory extends RequestFactoryAbstract
 {
     /**
      * @param $paymentBrand
@@ -15,7 +15,7 @@ class PreCheckRequestFactory extends RequestFactoryAbstract
      */
     public static function createTransaction($paymentBrand, $data, $referenceId)
     {
-        return PreCheckTransactionFactory::create(static::getRequestType(), $paymentBrand, $data, $referenceId);
+        return ReAuthTransactionFactory::create(static::getRequestType(), $paymentBrand, $data, $referenceId);
     }
 
     /**
@@ -41,6 +41,6 @@ class PreCheckRequestFactory extends RequestFactoryAbstract
 
     public static function getRequestType(): string
     {
-        return RequestTypes::PRE_CHECK;
+        return RequestTypes::RE_AUTH;
     }
 }

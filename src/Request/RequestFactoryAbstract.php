@@ -23,10 +23,10 @@ abstract class RequestFactoryAbstract
             $xmlSerializer->serialize(
                 [
                     '@version' => static::getRequestVersion(),
-                    '#' => static::createRequestObject($requestType, $paymentBrand, $data, $referenceId),
+                    '#' => static::createRequestObject($paymentBrand, $data, $referenceId),
                 ],
                 true,
-                ($requestType == RequestTypes::CALCULATION)
+                $requestType == RequestTypes::CALCULATION
             )
         );
     }
@@ -44,19 +44,22 @@ abstract class RequestFactoryAbstract
      */
     abstract public static function getRequestVersion(): string;
 
-    abstract public static function createTransaction($requestType, $paymentBrand, $data, $referenceId);
+    abstract public static function createTransaction($paymentBrand, $data, $referenceId);
+
+    abstract public static function getRequestType(): string;
 
     /**
-     * @param $requestType
      * @param $paymentBrand
      * @param $data
      * @param $referenceId
      *
      * @return RestApiRequest|XmlApiRequest
+     *
+     * @internal param $requestType
      */
-    private static function createRequestObject($requestType, $paymentBrand, $data, $referenceId)
+    private static function createRequestObject($paymentBrand, $data, $referenceId)
     {
-        $transaction = static::createTransaction($requestType, $paymentBrand, $data, $referenceId);
+        $transaction = static::createTransaction($paymentBrand, $data, $referenceId);
 
         return static::createRequest($data['context'], $transaction);
     }

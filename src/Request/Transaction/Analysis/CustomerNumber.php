@@ -14,7 +14,10 @@ class CustomerNumber extends CompositeAbstract implements CompositeContract
      */
     public function isAvailable()
     {
-        return !in_array($this->requestType, [RequestTypes::CALCULATION, RequestTypes::REFUND, RequestTypes::REVERSAL]);
+        return !in_array(
+            $this->requestType,
+            [RequestTypes::CALCULATION, RequestTypes::REFUND, RequestTypes::REVERSAL, RequestTypes::RE_AUTH]
+        );
     }
 
     /**

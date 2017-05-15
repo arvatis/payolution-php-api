@@ -2,17 +2,19 @@
 
 namespace ArvPayolutionApi\Request;
 
+use ArvPayolutionApi\Request\Transaction\Account;
 use ArvPayolutionApi\Request\Transaction\Analysis;
-use ArvPayolutionApi\Request\Transaction\Analysis\Account;
 use ArvPayolutionApi\Request\Transaction\Identification;
 use ArvPayolutionApi\Request\Transaction\Payment;
 use ArvPayolutionApi\Request\Transaction\User;
-use ArvPayolutionApi\Request\Transaction\Account;
 
-class ReAuthTransaction extends TransactionAbstract
+/**
+ * Class ReAuthTransaction
+ */
+class ReAuthTransaction extends PreCheckTransaction
 {
     /**
-     * ReAuthTransaction constructor.
+     * Transaction constructor.
      *
      * @param string $channel
      * @param string $mode
@@ -22,7 +24,21 @@ class ReAuthTransaction extends TransactionAbstract
      * @param Analysis $analysis
      * @param Identification $identification
      */
-    public function __construct($channel, $mode, $user, $payment, $account, $analysis, $identification)
-    {
+    public function __construct(
+        $channel,
+        $mode,
+        User $user,
+        Payment $payment,
+        Account $account,
+        Analysis $analysis,
+        Identification $identification
+    ) {
+        $this->channel = $channel;
+        $this->mode = $mode;
+        $this->user = $user;
+        $this->payment = $payment;
+        $this->account = $account;
+        $this->analysis = $analysis;
+        $this->identification = $identification;
     }
 }

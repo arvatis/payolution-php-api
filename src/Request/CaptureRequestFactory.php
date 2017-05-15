@@ -4,6 +4,11 @@ namespace ArvPayolutionApi\Request;
 
 class CaptureRequestFactory extends RequestFactoryAbstract
 {
+    public static function getRequestType(): string
+    {
+        return RequestTypes::CAPTURE;
+    }
+
     /**
      * @return string
      */
@@ -26,15 +31,16 @@ class CaptureRequestFactory extends RequestFactoryAbstract
     }
 
     /**
-     * @param $requestType
      * @param $paymentBrand
      * @param $data
      * @param $referenceId
      *
-     * @return TransactionAbstract|PreCheckTransaction
+     * @return PreCheckTransaction|TransactionAbstract
+     *
+     * @internal param $requestType
      */
-    public static function createTransaction($requestType, $paymentBrand, $data, $referenceId)
+    public static function createTransaction($paymentBrand, $data, $referenceId)
     {
-        return CaptureTransactionFactory::create($requestType, $paymentBrand, $data, $referenceId);
+        return CaptureTransactionFactory::create(static::getRequestType(), $paymentBrand, $data, $referenceId);
     }
 }

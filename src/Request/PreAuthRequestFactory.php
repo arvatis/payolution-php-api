@@ -5,16 +5,17 @@ namespace ArvPayolutionApi\Request;
 class PreAuthRequestFactory extends RequestFactoryAbstract
 {
     /**
-     * @param $requestType
      * @param $paymentBrand
      * @param $data
      * @param $referenceId
      *
-     * @return TransactionAbstract|PreCheckTransaction
+     * @return PreCheckTransaction|TransactionAbstract
+     *
+     * @internal param $requestType
      */
-    public static function createTransaction($requestType, $paymentBrand, $data, $referenceId)
+    public static function createTransaction($paymentBrand, $data, $referenceId)
     {
-        return PreAuthTransactionFactory::create($requestType, $paymentBrand, $data, $referenceId);
+        return PreAuthTransactionFactory::create(static::getRequestType(), $paymentBrand, $data, $referenceId);
     }
 
     /**
@@ -36,5 +37,10 @@ class PreAuthRequestFactory extends RequestFactoryAbstract
         $header = new Header($context['sender']);
 
         return new XmlApiRequest($header, $transaction);
+    }
+
+    public static function getRequestType(): string
+    {
+        return RequestTypes::PRE_AUTH;
     }
 }
