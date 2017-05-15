@@ -102,12 +102,7 @@ class InvoiceTest extends \PHPUnit_Framework_TestCase
         $data = new ReversalData();
         $data = $data->jsonSerialize();
 
-        $request = ReversalRequestFactory::create(
-            RequestTypes::REVERSAL,
-            $this->paymentMethod,
-            $data,
-            $preAuth->getUniqueID()
-        );
+        $request = ReversalRequestFactory::create($this->paymentMethod, $data, $preAuth->getUniqueID());
         $response = $this->xmlApi->doRequest($request);
         self::assertTrue($response->getSuccess(),
             'PreAuthId was ' . $preAuth->getUniqueID() . PHP_EOL .
@@ -153,7 +148,7 @@ class InvoiceTest extends \PHPUnit_Framework_TestCase
 
         $requestType = RequestTypes::REFUND;
 
-        $request = RefundRequestFactory::create($requestType, $this->paymentMethod, $data, $preAuth);
+        $request = RefundRequestFactory::create($this->paymentMethod, $data, $preAuth);
         $response = $this->xmlApi->doRequest(
             $request
         );
@@ -182,7 +177,7 @@ class InvoiceTest extends \PHPUnit_Framework_TestCase
 
         $requestType = RequestTypes::RE_AUTH;
 
-        $request = ReAuthRequestFactory::create($requestType, $this->paymentMethod, $data, $preAuth->getUniqueID());
+        $request = ReAuthRequestFactory::create($this->paymentMethod, $data, $preAuth->getUniqueID());
         $response = $this->xmlApi->doRequest(
             $request
         );
@@ -206,7 +201,7 @@ class InvoiceTest extends \PHPUnit_Framework_TestCase
 
         $requestType = RequestTypes::PRE_AUTH;
 
-        $request = PreAuthRequestFactory::create($requestType, $this->paymentMethod, $data, $preCheckId);
+        $request = PreAuthRequestFactory::create($this->paymentMethod, $data, $preCheckId);
         $response = $this->xmlApi->doRequest(
             $request
         );
@@ -226,7 +221,7 @@ class InvoiceTest extends \PHPUnit_Framework_TestCase
 
         $requestType = RequestTypes::CAPTURE;
 
-        $request = CaptureRequestFactory::create($requestType, $this->paymentMethod, $data, $preAuthUniqueId);
+        $request = CaptureRequestFactory::create($this->paymentMethod, $data, $preAuthUniqueId);
         $response = $this->xmlApi->doRequest(
             $request
         );

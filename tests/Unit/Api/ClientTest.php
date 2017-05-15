@@ -81,11 +81,8 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     {
         $data = $this->data->jsonSerialize();
 
-        $requestType = RequestPaymentTypes::PAYOLUTION_INVOICE;
-        $paymentBrand = RequestTypes::PRE_CHECK;
-
         $response = $this->xmlApi->doRequest(
-            PreAuthRequestFactory::create($requestType, $paymentBrand, $data)
+            PreAuthRequestFactory::create(RequestPaymentTypes::PAYOLUTION_INVOICE, $data)
         );
         self::assertSame('VA.PA.60.95 NOK REJECTED_BANK  Authorization Error', $response->getErrorMessage());
     }

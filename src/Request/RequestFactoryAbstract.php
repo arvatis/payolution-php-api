@@ -8,14 +8,13 @@ abstract class RequestFactoryAbstract
     const API_VERSION_NUMBER_TWO = '2.0';
 
     /**
-     * @param string $requestType type of request
      * @param string $paymentBrand payment method
      * @param array $data
      * @param string|bool $referenceId unique id from previous PC or PA request
      *
      * @return \SimpleXMLElement
      */
-    public static function create($requestType, $paymentBrand, $data = [], $referenceId = null)
+    public static function create($paymentBrand, $data = [], $referenceId = null)
     {
         $xmlSerializer = XmlSerializerFactory::create();
 
@@ -26,7 +25,7 @@ abstract class RequestFactoryAbstract
                     '#' => static::createRequestObject($paymentBrand, $data, $referenceId),
                 ],
                 true,
-                $requestType == RequestTypes::CALCULATION
+                static::getRequestType() == RequestTypes::CALCULATION
             )
         );
     }

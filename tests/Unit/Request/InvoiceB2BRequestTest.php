@@ -50,7 +50,7 @@ class InvoiceB2BRequestTest extends \PHPUnit_Framework_TestCase
 
         $this->assertSame(
             RequestXmlMockFactory::getRequestXml($this->paymentMethod, $requestType)->saveXml(),
-            PreCheckRequestFactory::create($requestType, $this->paymentMethod, $data)->saveXml()
+            PreCheckRequestFactory::create($this->paymentMethod, $data)->saveXml()
         );
     }
 
@@ -68,7 +68,7 @@ class InvoiceB2BRequestTest extends \PHPUnit_Framework_TestCase
         )->saveXml();
         $this->assertSame(
             $mockXml,
-            PreAuthRequestFactory::create($requestType, $this->paymentMethod, $data, $previousRequestId)->saveXml()
+            PreAuthRequestFactory::create($this->paymentMethod, $data, $previousRequestId)->saveXml()
         );
     }
 
@@ -85,7 +85,7 @@ class InvoiceB2BRequestTest extends \PHPUnit_Framework_TestCase
                 $this->paymentMethod,
                 $requestType
             )->saveXml(),
-            CaptureRequestFactory::create($requestType, $this->paymentMethod, $data, $previousRequestId)->saveXml()
+            CaptureRequestFactory::create($this->paymentMethod, $data, $previousRequestId)->saveXml()
         );
     }
 
@@ -102,7 +102,7 @@ class InvoiceB2BRequestTest extends \PHPUnit_Framework_TestCase
                 $this->paymentMethod,
                 $requestType
             )->saveXml(),
-            RefundRequestFactory::create($requestType, $this->paymentMethod, $data, $previousRequestId)->saveXml()
+            RefundRequestFactory::create($this->paymentMethod, $data, $previousRequestId)->saveXml()
         );
     }
 
@@ -119,7 +119,7 @@ class InvoiceB2BRequestTest extends \PHPUnit_Framework_TestCase
                 $this->paymentMethod,
                 $requestType
             )->saveXml(),
-            ReversalRequestFactory::create($requestType, $this->paymentMethod, $data, $previousRequestId)->saveXml()
+            ReversalRequestFactory::create($this->paymentMethod, $data, $previousRequestId)->saveXml()
         );
     }
 
@@ -136,7 +136,7 @@ class InvoiceB2BRequestTest extends \PHPUnit_Framework_TestCase
                 $this->paymentMethod,
                 $requestType
             )->saveXml(),
-            ReAuthRequestFactory::create($requestType, $this->paymentMethod, $data, $previousRequestId)->saveXml()
+            ReAuthRequestFactory::create($this->paymentMethod, $data, $previousRequestId)->saveXml()
         );
     }
 }

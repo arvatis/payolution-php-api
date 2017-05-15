@@ -34,6 +34,7 @@ class CaptureData extends RequestDataAbstract
             'durationInMonth' => 6,
         ];
     }
+
     /**
      * @return array
      */
@@ -43,6 +44,7 @@ class CaptureData extends RequestDataAbstract
             'invoiceId' => '125',
         ];
     }
+
     /**
      * @return array
      */

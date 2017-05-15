@@ -98,10 +98,9 @@ class InstallmentTest extends \PHPUnit_Framework_TestCase
         $data = $data->jsonSerialize();
         $data['installment']['calculationId'] = $uniqueIdCalculation;
 
-        $requestType = RequestTypes::PRE_AUTH;
         $paymentBrand = RequestPaymentTypes::PAYOLUTION_INS;
 
-        $request = PreAuthRequestFactory::create($requestType, $paymentBrand, $data, $uniqueIdPreCheck);
+        $request = PreAuthRequestFactory::create($paymentBrand, $data, $uniqueIdPreCheck);
 
         $response = $this->xmlApi->doRequest($request);
 
