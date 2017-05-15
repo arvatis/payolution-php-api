@@ -17,9 +17,9 @@ class ReAuthData extends PreCheckDataAbstract implements PreCheckDataContract
     public function getApiContext()
     {
         return [
-            'mode' => 'CONNECTOR_TEST',
-            'transactionId' => 42,
-        ] + Config::getPaymentConfig('Invoice', 'PreAuth');
+                'mode' => 'CONNECTOR_TEST',
+                'transactionId' => 42,
+            ] + Config::getPaymentConfig('Invoice', 'PreAuth');
     }
 
     /**
@@ -30,6 +30,21 @@ class ReAuthData extends PreCheckDataAbstract implements PreCheckDataContract
         return [
             'invoiceId' => '125',
         ];
+    }
+
+    /**
+     * @return array
+     */
+    public function getCartItems()
+    {
+        $data = parent::getCartItems();
+        $data[] = [
+            'name' => 'Battery',
+            'price' => 20.99,
+            'tax' => 2.75,
+        ];
+
+        return $data;
     }
 
     /**
