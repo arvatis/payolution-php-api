@@ -7,12 +7,14 @@ use ArvPayolutionApi\Api\XmlApi;
 use ArvPayolutionApi\Mocks\Request\Invoice\CaptureData;
 use ArvPayolutionApi\Mocks\Request\Invoice\PreAuthData;
 use ArvPayolutionApi\Mocks\Request\Invoice\PreCheckData;
+use ArvPayolutionApi\Mocks\Request\Invoice\ReAuthData;
 use ArvPayolutionApi\Mocks\Request\Invoice\RefundData;
 use ArvPayolutionApi\Mocks\Request\Invoice\ReversalData;
 use ArvPayolutionApi\Mocks\Request\RequestXmlMockFactory;
 use ArvPayolutionApi\Request\CaptureRequestFactory;
 use ArvPayolutionApi\Request\PreAuthRequestFactory;
 use ArvPayolutionApi\Request\PreCheckRequestFactory;
+use ArvPayolutionApi\Request\ReAuthRequestFactory;
 use ArvPayolutionApi\Request\RefundRequestFactory;
 use ArvPayolutionApi\Request\RequestPaymentTypes;
 use ArvPayolutionApi\Request\RequestTypes;
@@ -163,6 +165,7 @@ class InvoiceTest extends \PHPUnit_Framework_TestCase
         return $response->getUniqueID();
     }
 
+
     /**
      * @param null $preCheckId
      *
@@ -184,21 +187,49 @@ class InvoiceTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @param $preAuth
+     * @param $preAuthUniqueId
      *
      * @return \ArvPayolutionApi\Response\ResponseContract|\ArvPayolutionApi\Response\XmlApiResponse
      */
-    private function doCapture($preAuth)
+    private function doCapture($preAuthUniqueId)
     {
         $data = new CaptureData();
         $data = $data->jsonSerialize();
 
         $requestType = RequestTypes::CAPTURE;
 
-        $request = CaptureRequestFactory::create($requestType, $this->paymentMethod, $data, $preAuth);
+        $request = CaptureRequestFactory::create($requestType, $this->paymentMethod, $data, $preAuthUniqueId);
         $response = $this->xmlApi->doRequest(
             $request
         );
+
+        return $response;
+    }
+
+    /**
+     * @group online
+     * @return \ArvPayolutionApi\Response\ResponseContract|\ArvPayolutionApi\Response\XmlApiResponse
+     */
+    public function testReAuthSuccessful()
+    {
+        $preAuth = $this->doPreAuth();
+        self::assertTrue($preAuth->getSuccess(),
+            'PreAuth failed. Response was ' . $preAuth->getXml()->saveXML()
+        );
+
+        $data = new ReAuthData();
+        $data = $data->jsonSerialize();
+
+        $requestType = RequestTypes::RE_AUTH;
+
+        $request = ReAuthRequestFactory::create($requestType, $this->paymentMethod, $data, $preAuth->getUniqueID());
+        $response = $this->xmlApi->doRequest(
+            $request
+        );
+        self::assertTrue(
+            $response->getSuccess(),
+            'Request was ' . $request->saveXML() . PHP_EOL .
+            'Response was ' . print_r($response, true));
 
         return $response;
     }
