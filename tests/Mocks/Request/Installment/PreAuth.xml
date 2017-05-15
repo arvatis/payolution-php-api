@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <Request version="1.0">
   <Header>
     <Security sender="{{sender}}"/>
@@ -12,7 +12,7 @@
     <Payment code="VA.PA">
       <Presentation>
         <Amount>359.98</Amount>
-        <Usage>Trx 42</Usage>
+        <Usage>Cart Trx 42</Usage>
         <Currency>EUR</Currency>
       </Presentation>
     </Payment>
@@ -38,17 +38,16 @@
       <Brand>PAYOLUTION_INS</Brand>
     </Account>
     <Analysis>
-      <Criterion name="PAYOLUTION_CUSTOMER_LANGUAGE">de</Criterion>
-      <Criterion name="PAYOLUTION_CUSTOMER_REGISTRATION_LEVEL">0</Criterion>
-      <Criterion name="PAYOLUTION_CUSTOMER_REGISTRATION_DATE">[yyyymmdd]</Criterion>
-      <Criterion name="PAYOLUTION_CALCULATION_ID">Tx-....</Criterion>
-      <Criterion name="PAYOLUTION_INSTALLMENT_AMOUNT">359.98</Criterion>
-      <Criterion name="PAYOLUTION_TAX_AMOUNT">50.98</Criterion>
-      <Criterion name="PAYOLUTION_DURATION">6</Criterion>
       <Criterion name="PAYOLUTION_ACCOUNT_HOLDER">Max Mustermann</Criterion>
       <Criterion name="PAYOLUTION_ACCOUNT_COUNTRY">AT</Criterion>
       <Criterion name="PAYOLUTION_ACCOUNT_BIC">GIBAATWW</Criterion>
       <Criterion name="PAYOLUTION_ACCOUNT_IBAN">AT622011198765432123</Criterion>
+      <Criterion name="PAYOLUTION_CALCULATION_ID">Tx-....</Criterion>
+      <Criterion name="PAYOLUTION_INSTALLMENT_AMOUNT">359.98</Criterion>
+      <Criterion name="PAYOLUTION_DURATION">6</Criterion>
+      <Criterion name="PAYOLUTION_CUSTOMER_LANGUAGE">de</Criterion>
+      <Criterion name="PAYOLUTION_CUSTOMER_REGISTRATION_LEVEL">0</Criterion>
+      <Criterion name="PAYOLUTION_TAX_AMOUNT">50.98</Criterion>
       <Criterion name="PAYOLUTION_REQUEST_SYSTEM_VENDOR">CustomSystemName_ProgrammingLanguage_XML</Criterion>
       <Criterion name="PAYOLUTION_REQUEST_SYSTEM_VERSION">CustomSystemVersion</Criterion>
       <Criterion name="PAYOLUTION_REQUEST_SYSTEM_TYPE">Webshop</Criterion>
@@ -70,7 +69,7 @@
       <Criterion name="PAYOLUTION_SHIPPING_ZIP">1060</Criterion>
       <Criterion name="PAYOLUTION_SHIPPING_STREET">Spengergasse 38</Criterion>
       <Criterion name="PAYOLUTION_SHIPPING_COMPANY">Payolution Company</Criterion>
-      <Criterion name="PAYOLUTION_SHIPPING_TYPE">EQUALS_BILLING_ADDRESS</Criterion>
+      <Criterion name="PAYOLUTION_SHIPPING_TYPE">ALTERNATIVE_SHIPPING_ADDRESS</Criterion>
     </Analysis>
   </Transaction>
 </Request>

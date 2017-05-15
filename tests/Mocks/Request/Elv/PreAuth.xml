@@ -63,10 +63,9 @@
       <Criterion name="PAYOLUTION_SHIPPING_GIVEN">Max</Criterion>
       <Criterion name="PAYOLUTION_SHIPPING_FAMILY">Mustermann</Criterion>
       <Criterion name="PAYOLUTION_SHIPPING_COUNTRY">AT</Criterion>
-      <Criterion name="PAYOLUTION_SHIPPING_CITY">Graz</Criterion>
-      <Criterion name="PAYOLUTION_SHIPPING_ZIP">1060</Criterion>
-      <Criterion name="PAYOLUTION_SHIPPING_STREET">Spengergasse 38</Criterion>
-      <Criterion name="PAYOLUTION_SHIPPING_COMPANY">Payolution Company</Criterion>
+      <Criterion name="PAYOLUTION_SHIPPING_CITY">Wien</Criterion>
+      <Criterion name="PAYOLUTION_SHIPPING_ZIP">1050</Criterion>
+      <Criterion name="PAYOLUTION_SHIPPING_STREET">Spengergasse 37</Criterion>
       <Criterion name="PAYOLUTION_SHIPPING_TYPE">EQUALS_BILLING_ADDRESS</Criterion>
     </Analysis>
   </Transaction>

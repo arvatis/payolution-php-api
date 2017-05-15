@@ -25,9 +25,9 @@ class CaptureTransactionFactory extends TransactionFactoryAbstract
             $mode,
             $user,
             $payment,
+            $account,
             $analysis,
-            $identification,
-            $account
+            $identification
         );
     }
 }

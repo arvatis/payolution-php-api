@@ -2,6 +2,7 @@
 
 namespace ArvPayolutionApi\Request;
 
+use ArvPayolutionApi\Request\Transaction\Account;
 use ArvPayolutionApi\Request\Transaction\Analysis;
 use ArvPayolutionApi\Request\Transaction\Identification;
 use ArvPayolutionApi\Request\Transaction\Payment;
@@ -19,6 +20,7 @@ class CaptureTransaction extends TransactionAbstract
      * @param string $mode
      * @param User $user
      * @param Payment $payment
+     * @param Account $account
      * @param Analysis $analysis
      * @param Identification $identification
      */
@@ -27,6 +29,7 @@ class CaptureTransaction extends TransactionAbstract
         $mode,
         User $user,
         Payment $payment,
+        Account $account,
         Analysis $analysis,
         Identification $identification
     ) {
@@ -36,5 +39,6 @@ class CaptureTransaction extends TransactionAbstract
         $this->payment = $payment;
         $this->analysis = $analysis;
         $this->identification = $identification;
+        $this->account = $account;
     }
 }

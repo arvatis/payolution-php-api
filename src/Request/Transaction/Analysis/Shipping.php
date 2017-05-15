@@ -15,8 +15,7 @@ class Shipping extends CompositeAbstract implements CompositeContract
     public function isAvailable()
     {
         return $this->requestType == RequestTypes::PRE_CHECK
-            || $this->requestType == RequestTypes::PRE_AUTH
-            ;
+            || $this->requestType == RequestTypes::PRE_AUTH;
     }
 
     /**
@@ -28,7 +27,7 @@ class Shipping extends CompositeAbstract implements CompositeContract
         $billingAddress = $this->data['billingAddress'];
         $shippingType = $this->getShippingType($shippingAddress, $billingAddress);
 
-        return [
+        $data = [
             CriterionNames::PAYOLUTION_SHIPPING_GIVEN => $shippingAddress['firstName'],
             CriterionNames::PAYOLUTION_SHIPPING_FAMILY => $shippingAddress['lastName'],
             CriterionNames::PAYOLUTION_SHIPPING_COUNTRY => $shippingAddress['countryCode'],
@@ -36,9 +35,14 @@ class Shipping extends CompositeAbstract implements CompositeContract
             CriterionNames::PAYOLUTION_SHIPPING_ZIP => $shippingAddress['postCode'],
             CriterionNames::PAYOLUTION_SHIPPING_STREET => $shippingAddress['street'] . ' '
                 . $shippingAddress['houseNumber'],
-            CriterionNames::PAYOLUTION_SHIPPING_COMPANY => $shippingAddress['company'],
-            CriterionNames::PAYOLUTION_SHIPPING_TYPE => $shippingType,
         ];
+
+        if (!empty($shippingAddress['company'])) {
+            $data[CriterionNames::PAYOLUTION_SHIPPING_COMPANY] = $shippingAddress['company'];
+        }
+        $data[CriterionNames::PAYOLUTION_SHIPPING_TYPE] = $shippingType;
+
+        return $data;
     }
 
     /**

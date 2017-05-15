@@ -4,7 +4,7 @@ namespace   ArvPayolutionApi\Mocks\Request\Installment;
 
 use ArvPayolutionApi\Helpers\Config;
 
-class CalculationData extends \ArvPayolutionApi\Mocks\Request\Installment\RequestData
+class CalculationData extends PreCheckData
 {
     /**
      * @return array

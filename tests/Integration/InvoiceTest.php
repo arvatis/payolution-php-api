@@ -165,6 +165,34 @@ class InvoiceTest extends \PHPUnit_Framework_TestCase
         return $response->getUniqueID();
     }
 
+    /**
+     * @group online
+     *
+     * @return \ArvPayolutionApi\Response\ResponseContract|\ArvPayolutionApi\Response\XmlApiResponse
+     */
+    public function testReAuthSuccessful()
+    {
+        $preAuth = $this->doPreAuth();
+        self::assertTrue($preAuth->getSuccess(),
+            'PreAuth failed. Response was ' . $preAuth->getXml()->saveXML()
+        );
+
+        $data = new ReAuthData();
+        $data = $data->jsonSerialize();
+
+        $requestType = RequestTypes::RE_AUTH;
+
+        $request = ReAuthRequestFactory::create($requestType, $this->paymentMethod, $data, $preAuth->getUniqueID());
+        $response = $this->xmlApi->doRequest(
+            $request
+        );
+        self::assertTrue(
+            $response->getSuccess(),
+            'Request was ' . $request->saveXML() . PHP_EOL .
+            'Response was ' . print_r($response, true));
+
+        return $response;
+    }
 
     /**
      * @param null $preCheckId
@@ -202,34 +230,6 @@ class InvoiceTest extends \PHPUnit_Framework_TestCase
         $response = $this->xmlApi->doRequest(
             $request
         );
-
-        return $response;
-    }
-
-    /**
-     * @group online
-     * @return \ArvPayolutionApi\Response\ResponseContract|\ArvPayolutionApi\Response\XmlApiResponse
-     */
-    public function testReAuthSuccessful()
-    {
-        $preAuth = $this->doPreAuth();
-        self::assertTrue($preAuth->getSuccess(),
-            'PreAuth failed. Response was ' . $preAuth->getXml()->saveXML()
-        );
-
-        $data = new ReAuthData();
-        $data = $data->jsonSerialize();
-
-        $requestType = RequestTypes::RE_AUTH;
-
-        $request = ReAuthRequestFactory::create($requestType, $this->paymentMethod, $data, $preAuth->getUniqueID());
-        $response = $this->xmlApi->doRequest(
-            $request
-        );
-        self::assertTrue(
-            $response->getSuccess(),
-            'Request was ' . $request->saveXML() . PHP_EOL .
-            'Response was ' . print_r($response, true));
 
         return $response;
     }

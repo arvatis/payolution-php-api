@@ -14,7 +14,7 @@ class PreCheckId extends CompositeAbstract implements CompositeContract
      */
     public function isAvailable()
     {
-        return $this->requestType == RequestTypes::PRE_AUTH;
+        return $this->requestType == RequestTypes::PRE_AUTH && !isset($this->data['installment']);
     }
 
     /**

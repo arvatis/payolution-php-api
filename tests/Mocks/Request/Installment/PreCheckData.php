@@ -9,7 +9,7 @@ use ArvPayolutionApi\Mocks\Request\RequestDataContract;
 /**
  * Class PreCheckData
  */
-class RequestData extends RequestDataAbstract implements RequestDataContract
+class PreCheckData extends RequestDataAbstract implements RequestDataContract
 {
     /**
      * @return array
@@ -48,14 +48,7 @@ class RequestData extends RequestDataAbstract implements RequestDataContract
     }
 
     /**
-     * Specify data which should be serialized to JSON
-     *
-     * @see http://php.net/manual/en/jsonserializable.jsonserialize.php
-     *
-     * @return mixed data which can be serialized by <b>json_encode</b>,
-     * which is a value of any type other than a resource
-     *
-     * @since 5.4.0
+     * @return array
      */
     public function jsonSerialize()
     {
