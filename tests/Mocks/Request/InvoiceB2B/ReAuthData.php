@@ -1,6 +1,6 @@
 <?php
 
-namespace ArvPayolutionApi\Mocks\Request\Invoice;
+namespace ArvPayolutionApi\Mocks\Request\InvoiceB2B;
 
 use ArvPayolutionApi\Helpers\Config;
 use ArvPayolutionApi\Mocks\Request\PreCheckDataAbstract;
@@ -19,7 +19,7 @@ class ReAuthData extends PreCheckDataAbstract implements PreCheckDataContract
         return [
                 'mode' => 'CONNECTOR_TEST',
                 'transactionId' => 42,
-            ] + Config::getPaymentConfig('Invoice', 'ReAuth');
+            ] + Config::getPaymentConfig('InvoiceB2B', 'ReAuth');
     }
 
     /**

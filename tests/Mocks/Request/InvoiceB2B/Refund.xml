@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <Request version="1.0">
   <Header>
     <Security sender="{{sender}}"/>
@@ -12,8 +12,8 @@
     </Identification>
     <Payment code="VA.RF">
       <Presentation>
-        <Amount>149.99</Amount>
-        <Usage>Trx 42</Usage>
+        <Amount>359.98</Amount>
+        <Usage>Invoice 125</Usage>
         <Currency>EUR</Currency>
       </Presentation>
     </Payment>
@@ -21,7 +21,7 @@
       <Criterion name="PAYOLUTION_TAX_AMOUNT">50.98</Criterion>
       <Criterion name="PAYOLUTION_REQUEST_SYSTEM_VENDOR">CustomSystemName_ProgrammingLanguage_XML</Criterion>
       <Criterion name="PAYOLUTION_REQUEST_SYSTEM_VERSION">CustomSystemVersion</Criterion>
-      <Criterion name="PAYOLUTION_REQUEST_SYSTEM_TYPE">CronJob</Criterion><!-- CronJob, ERPClient -->
+      <Criterion name="PAYOLUTION_REQUEST_SYSTEM_TYPE">CronJob</Criterion>
       <Criterion name="PAYOLUTION_MODULE_NAME">PaymentModuleName</Criterion>
       <Criterion name="PAYOLUTION_MODULE_VERSION">PaymentModuleVersion</Criterion>
     </Analysis>

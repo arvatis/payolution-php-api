@@ -56,7 +56,7 @@ class InvoiceRequestTest extends \PHPUnit_Framework_TestCase
         $this->xmlSerializer = XmlSerializerFactory::create();
         $this->xmlMock = new RequestXmlMockFactory();
         $this->xmlApi = new XmlApi(new ApiClient(new Client()));
-        $this->paymentMethod = $this->paymentMethod = RequestPaymentTypes::PAYOLUTION_INVOICE;
+        $this->paymentMethod = RequestPaymentTypes::PAYOLUTION_INVOICE;
     }
 
     public function testInvoicePreCheckSameAsMock()
