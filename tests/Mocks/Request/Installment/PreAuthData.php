@@ -5,7 +5,7 @@ namespace ArvPayolutionApi\Mocks\Request\Installment;
 use ArvPayolutionApi\Helpers\Config;
 use ArvPayolutionApi\Request\RequestTypes;
 
-class PreAuthData extends \ArvPayolutionApi\Mocks\Request\Installment\PreCheckData
+class PreAuthData extends \ArvPayolutionApi\Mocks\Request\Installment\RequestData
 {
     /**
      * @return array

@@ -2,22 +2,26 @@
 
 namespace ArvPayolutionApi\Unit\Request;
 
-use ArvPayolutionApi\Api\Client as ApiClient;
-use ArvPayolutionApi\Api\XmlApi;
-use ArvPayolutionApi\Mocks\Request\Elv\PreCheckData as ElvPreCheckData;
-use ArvPayolutionApi\Mocks\Request\InvoiceB2B\PreCheckDataGenerated;
+use ArvPayolutionApi\Mocks\Request\Elv\CaptureData;
+use ArvPayolutionApi\Mocks\Request\Elv\PreAuthData;
+use ArvPayolutionApi\Mocks\Request\Elv\PreCheckData;
+use ArvPayolutionApi\Mocks\Request\Elv\ReAuthData;
+use ArvPayolutionApi\Mocks\Request\Elv\RefundData;
+use ArvPayolutionApi\Mocks\Request\Elv\ReversalData;
 use ArvPayolutionApi\Mocks\Request\RequestXmlMockFactory;
+use ArvPayolutionApi\Request\CaptureRequestFactory;
+use ArvPayolutionApi\Request\PreAuthRequestFactory;
 use ArvPayolutionApi\Request\PreCheckRequestFactory;
+use ArvPayolutionApi\Request\ReAuthRequestFactory;
+use ArvPayolutionApi\Request\RefundRequestFactory;
 use ArvPayolutionApi\Request\RequestPaymentTypes;
 use ArvPayolutionApi\Request\RequestTypes;
-use ArvPayolutionApi\Request\XmlSerializer;
-use ArvPayolutionApi\Request\XmlSerializerFactory;
-use GuzzleHttp\Client;
+use ArvPayolutionApi\Request\ReversalRequestFactory;
 
 /**
- * Class InvoiceRequestTest
+ * Class ElvRequestTest
  *
- * @group InvoiceB2BRequestTest
+ * @group RequestTest
  */
 class ElvRequestTest extends \PHPUnit_Framework_TestCase
 {
@@ -27,37 +31,116 @@ class ElvRequestTest extends \PHPUnit_Framework_TestCase
     protected $xmlMock;
 
     /**
-     * @var XmlSerializer
+     * @var string
      */
-    protected $xmlSerializer;
-
-    /**
-     * @var XmlApi
-     */
-    private $xmlApi;
-
-    /** @var PreCheckDataGenerated $data */
-    private $data;
+    private $paymentMethod;
 
     public function setUp()
     {
-        $this->data = new PreCheckDataGenerated();
-        $this->xmlSerializer = XmlSerializerFactory::create();
         $this->xmlMock = new RequestXmlMockFactory();
-        $this->xmlApi = new XmlApi(new ApiClient(new Client()));
+        $this->paymentMethod = RequestPaymentTypes::PAYOLUTION_ELV;
     }
 
-    public function testElvPreCheckSameAsMock()
+    public function testPreCheckSameAsMock()
     {
-        $this->data = new ElvPreCheckData();
-        $data = $this->data->jsonSerialize();
+        $data = new PreCheckData();
+        $data = $data->jsonSerialize();
 
         $requestType = RequestTypes::PRE_CHECK;
-        $paymentBrand = RequestPaymentTypes::PAYOLUTION_ELV;
 
-        self::assertSame(
-            RequestXmlMockFactory::getRequestXml(RequestPaymentTypes::PAYOLUTION_ELV, $requestType)->saveXml(),
-            PreCheckRequestFactory::create($requestType, $paymentBrand, $data)->saveXml()
+        $this->assertSame(
+            RequestXmlMockFactory::getRequestXml($this->paymentMethod, $requestType)->saveXml(),
+            PreCheckRequestFactory::create($requestType, $this->paymentMethod, $data)->saveXml()
+        );
+    }
+
+    public function testPreAuthSameAsMock()
+    {
+        $data = new PreAuthData();
+        $data = $data->jsonSerialize();
+
+        $requestType = RequestTypes::PRE_AUTH;
+        $previousRequestId = '53488b162da3e294012db761fd734288';
+
+        $mockXml = RequestXmlMockFactory::getRequestXml(
+            $this->paymentMethod,
+            $requestType
+        )->saveXml();
+        $this->assertSame(
+            $mockXml,
+            PreAuthRequestFactory::create($requestType, $this->paymentMethod, $data, $previousRequestId)->saveXml()
+        );
+    }
+
+    public function testInvoiceCaptureSameAsMock()
+    {
+        self::markTestSkipped('No test data provided by payolution.');
+        $data = new CaptureData();
+        $data = $data->jsonSerialize();
+
+        $requestType = RequestTypes::CAPTURE;
+        $previousRequestId = '40288b162da3e294012db761fd734134';
+
+        $this->assertSame(
+            RequestXmlMockFactory::getRequestXml(
+                $this->paymentMethod,
+                $requestType
+            )->saveXml(),
+            CaptureRequestFactory::create($requestType, $this->paymentMethod, $data, $previousRequestId)->saveXml()
+        );
+    }
+
+    public function testRefundSameAsMock()
+    {
+        self::markTestSkipped('No test data provided by payolution.');
+        $data = new RefundData();
+        $data = $data->jsonSerialize();
+
+        $requestType = RequestTypes::REFUND;
+        $previousRequestId = '40288b162da3e294012db761fd734134';
+
+        $this->assertSame(
+            RequestXmlMockFactory::getRequestXml(
+                $this->paymentMethod,
+                $requestType
+            )->saveXml(),
+            RefundRequestFactory::create($requestType, $this->paymentMethod, $data, $previousRequestId)->saveXml()
+        );
+    }
+
+    public function testReversalSameAsMock()
+    {
+        self::markTestSkipped('No test data provided by payolution.');
+        $data = new ReversalData();
+        $data = $data->jsonSerialize();
+
+        $requestType = RequestTypes::REVERSAL;
+        $previousRequestId = '40288b162da3e294012db761fd734134';
+
+        $this->assertSame(
+            RequestXmlMockFactory::getRequestXml(
+                $this->paymentMethod,
+                $requestType
+            )->saveXml(),
+            ReversalRequestFactory::create($requestType, $this->paymentMethod, $data, $previousRequestId)->saveXml()
+        );
+    }
+
+    public function testReAuthSameAsMock()
+    {
+        self::markTestSkipped('No test data provided by payolution.');
+        $data = new ReAuthData();
+        $data = $data->jsonSerialize();
+
+        $requestType = RequestTypes::RE_AUTH;
+        $previousRequestId = '40288b162da3e294012db761fd734134';
+
+        $this->assertSame(
+            RequestXmlMockFactory::getRequestXml(
+                $this->paymentMethod,
+                $requestType
+            )->saveXml(),
+            ReAuthRequestFactory::create($requestType, $this->paymentMethod, $data, $previousRequestId)->saveXml()
         );
     }
 }

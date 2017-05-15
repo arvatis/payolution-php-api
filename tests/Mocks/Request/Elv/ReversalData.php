@@ -1,6 +1,6 @@
 <?php
 
-namespace ArvPayolutionApi\Mocks\Request\InvoiceB2B;
+namespace ArvPayolutionApi\Mocks\Request\Elv;
 
 use ArvPayolutionApi\Helpers\Config;
 use ArvPayolutionApi\Mocks\Request\RequestDataAbstract;
@@ -20,7 +20,7 @@ class ReversalData extends RequestDataAbstract implements RequestDataContract
         return [
                 'mode' => 'CONNECTOR_TEST',
                 'transactionId' => 125,
-            ] + Config::getPaymentConfig('InvoiceB2B', RequestTypes::REVERSAL);
+            ] + Config::getPaymentConfig('Elv', RequestTypes::REVERSAL);
     }
 
     /**

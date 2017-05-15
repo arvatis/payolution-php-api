@@ -3,13 +3,13 @@
 namespace ArvPayolutionApi\Mocks\Request\InvoiceB2B;
 
 use ArvPayolutionApi\Helpers\Config;
-use ArvPayolutionApi\Mocks\Request\PreCheckDataAbstract;
-use ArvPayolutionApi\Mocks\Request\PreCheckDataContract;
+use ArvPayolutionApi\Mocks\Request\RequestDataAbstract;
+use ArvPayolutionApi\Mocks\Request\RequestDataContract;
 
 /**
  * Class PreCheckData
  */
-class ReAuthData extends PreCheckDataAbstract implements PreCheckDataContract
+class ReAuthData extends RequestDataAbstract implements RequestDataContract
 {
     /**
      * @return array

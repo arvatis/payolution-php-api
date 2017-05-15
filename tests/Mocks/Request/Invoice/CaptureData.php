@@ -3,13 +3,13 @@
 namespace ArvPayolutionApi\Mocks\Request\Invoice;
 
 use ArvPayolutionApi\Helpers\Config;
-use ArvPayolutionApi\Mocks\Request\PreCheckDataAbstract;
-use ArvPayolutionApi\Mocks\Request\PreCheckDataContract;
+use ArvPayolutionApi\Mocks\Request\RequestDataAbstract;
+use ArvPayolutionApi\Mocks\Request\RequestDataContract;
 
 /**
  * Class PreCheckData
  */
-class CaptureData extends PreCheckDataAbstract implements PreCheckDataContract
+class CaptureData extends RequestDataAbstract implements RequestDataContract
 {
     /**
      * @return array

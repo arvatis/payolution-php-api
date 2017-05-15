@@ -42,5 +42,4 @@ class SystemInfo extends CompositeAbstract implements CompositeContract
 
         return $data;
     }
-
 }

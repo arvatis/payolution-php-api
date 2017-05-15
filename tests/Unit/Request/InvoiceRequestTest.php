@@ -2,14 +2,12 @@
 
 namespace ArvPayolutionApi\Unit\Request;
 
-use ArvPayolutionApi\Api\Client as ApiClient;
-use ArvPayolutionApi\Api\XmlApi;
 use ArvPayolutionApi\Mocks\Request\Invoice\CaptureData as InvoiceCaptureData;
 use ArvPayolutionApi\Mocks\Request\Invoice\PreAuthData as InvoicePreAuthData;
-use ArvPayolutionApi\Mocks\Request\Invoice\PreCheckData as InvoicePreCheckData;
-use ArvPayolutionApi\Mocks\Request\Invoice\PreCheckDataGenerated;
+use ArvPayolutionApi\Mocks\Request\Invoice\PreCheckData;
 use ArvPayolutionApi\Mocks\Request\Invoice\ReAuthData;
 use ArvPayolutionApi\Mocks\Request\Invoice\RefundData;
+use ArvPayolutionApi\Mocks\Request\Invoice\RequestDataGenerated;
 use ArvPayolutionApi\Mocks\Request\Invoice\ReversalData;
 use ArvPayolutionApi\Mocks\Request\RequestXmlMockFactory;
 use ArvPayolutionApi\Request\CaptureRequestFactory;
@@ -20,9 +18,6 @@ use ArvPayolutionApi\Request\RefundRequestFactory;
 use ArvPayolutionApi\Request\RequestPaymentTypes;
 use ArvPayolutionApi\Request\RequestTypes;
 use ArvPayolutionApi\Request\ReversalRequestFactory;
-use ArvPayolutionApi\Request\XmlSerializer;
-use ArvPayolutionApi\Request\XmlSerializerFactory;
-use GuzzleHttp\Client;
 
 /**
  * Class InvoiceRequestTest
@@ -35,34 +30,24 @@ class InvoiceRequestTest extends \PHPUnit_Framework_TestCase
      * @var  RequestXmlMockFactory
      */
     protected $xmlMock;
-
     /**
-     * @var XmlSerializer
+     * @var string
      */
-    protected $xmlSerializer;
     private $paymentMethod;
 
-    /**
-     * @var XmlApi
-     */
-    private $xmlApi;
-
-    /** @var PreCheckDataGenerated $data */
+    /** @var RequestDataGenerated $data */
     private $data;
 
     public function setUp()
     {
-        $this->data = new PreCheckDataGenerated();
-        $this->xmlSerializer = XmlSerializerFactory::create();
         $this->xmlMock = new RequestXmlMockFactory();
-        $this->xmlApi = new XmlApi(new ApiClient(new Client()));
         $this->paymentMethod = RequestPaymentTypes::PAYOLUTION_INVOICE;
     }
 
     public function testInvoicePreCheckSameAsMock()
     {
-        $this->data = new InvoicePreCheckData();
-        $data = $this->data->jsonSerialize();
+        $data = new PreCheckData();
+        $data = $data->jsonSerialize();
 
         $requestType = RequestTypes::PRE_CHECK;
 
@@ -74,8 +59,8 @@ class InvoiceRequestTest extends \PHPUnit_Framework_TestCase
 
     public function testInvoicePreAuthSameAsMock()
     {
-        $this->data = new InvoicePreAuthData();
-        $data = $this->data->jsonSerialize();
+        $data = new InvoicePreAuthData();
+        $data = $data->jsonSerialize();
 
         $requestType = RequestTypes::PRE_AUTH;
         $previousRequestId = '53488b162da3e294012db761fd734288';
@@ -91,8 +76,8 @@ class InvoiceRequestTest extends \PHPUnit_Framework_TestCase
 
     public function testInvoiceCaptureSameAsMock()
     {
-        $this->data = new InvoiceCaptureData();
-        $data = $this->data->jsonSerialize();
+        $data = new InvoiceCaptureData();
+        $data = $data->jsonSerialize();
 
         $requestType = RequestTypes::CAPTURE;
         $previousRequestId = '40288b162da3e294012db761fd734134';
@@ -108,8 +93,8 @@ class InvoiceRequestTest extends \PHPUnit_Framework_TestCase
 
     public function testRefundSameAsMock()
     {
-        $this->data = new RefundData();
-        $data = $this->data->jsonSerialize();
+        $data = new RefundData();
+        $data = $data->jsonSerialize();
 
         $requestType = RequestTypes::REFUND;
         $previousRequestId = '40288b162da3e294012db761fd734134';
@@ -125,8 +110,8 @@ class InvoiceRequestTest extends \PHPUnit_Framework_TestCase
 
     public function testReversalSameAsMock()
     {
-        $this->data = new ReversalData();
-        $data = $this->data->jsonSerialize();
+        $data = new ReversalData();
+        $data = $data->jsonSerialize();
 
         $requestType = RequestTypes::REVERSAL;
         $previousRequestId = '40288b162da3e294012db761fd734134';
@@ -142,8 +127,8 @@ class InvoiceRequestTest extends \PHPUnit_Framework_TestCase
 
     public function testReAuthSameAsMock()
     {
-        $this->data = new ReAuthData();
-        $data = $this->data->jsonSerialize();
+        $data = new ReAuthData();
+        $data = $data->jsonSerialize();
 
         $requestType = RequestTypes::RE_AUTH;
         $previousRequestId = '40288b162da3e294012db761fd734134';

@@ -5,7 +5,7 @@ namespace ArvPayolutionApi\Unit\Api;
 use ArvPayolutionApi\Api\ApiFactory;
 use ArvPayolutionApi\Api\Client as ApiClient;
 use ArvPayolutionApi\Api\XmlApi;
-use ArvPayolutionApi\Mocks\Request\Invoice\PreCheckDataGenerated;
+use ArvPayolutionApi\Mocks\Request\Invoice\RequestDataGenerated;
 use ArvPayolutionApi\Mocks\Request\RequestXmlMockFactory;
 use ArvPayolutionApi\Request\PreAuthRequestFactory;
 use ArvPayolutionApi\Request\RequestPaymentTypes;
@@ -38,12 +38,12 @@ class ClientTest extends \PHPUnit_Framework_TestCase
      */
     private $xmlApi;
 
-    /** @var PreCheckDataGenerated $data */
+    /** @var RequestDataGenerated $data */
     private $data;
 
     public function setUp()
     {
-        $this->data = new PreCheckDataGenerated();
+        $this->data = new RequestDataGenerated();
         $this->xmlSerializer = XmlSerializerFactory::create();
         $this->xmlMock = new RequestXmlMockFactory();
         $this->xmlApi = new XmlApi(new ApiClient(new Client()));

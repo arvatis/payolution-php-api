@@ -5,7 +5,7 @@ namespace ArvPayolutionApi\Mocks\Request;
 /**
  * Class PreCheckData
  */
-interface PreCheckDataContract
+interface RequestDataContract
 {
     /**
      * Request specific credentials

@@ -5,14 +5,14 @@ namespace ArvPayolutionApi\Mocks\Request\Invoice;
 use ArvPayolutionApi\Helpers\Config;
 use ArvPayolutionApi\Mocks\Faker\Providers\CustomerGroup;
 use ArvPayolutionApi\Mocks\Faker\Providers\PayolutionCountryCode;
-use ArvPayolutionApi\Mocks\Request\PreCheckDataAbstract;
-use ArvPayolutionApi\Mocks\Request\PreCheckDataContract;
+use ArvPayolutionApi\Mocks\Request\RequestDataAbstract;
+use ArvPayolutionApi\Mocks\Request\RequestDataContract;
 use Faker;
 
 /**
  * Class PreCheckData
  */
-class PreCheckDataGenerated extends PreCheckDataAbstract implements PreCheckDataContract
+class RequestDataGenerated extends RequestDataAbstract implements RequestDataContract
 {
     /**
      * @var string

@@ -2,12 +2,9 @@
 
 namespace ArvPayolutionApi\Unit\Request;
 
-use ArvPayolutionApi\Api\Client as ApiClient;
-use ArvPayolutionApi\Api\XmlApi;
 use ArvPayolutionApi\Mocks\Request\InvoiceB2B\CaptureData;
 use ArvPayolutionApi\Mocks\Request\InvoiceB2B\PreAuthData;
 use ArvPayolutionApi\Mocks\Request\InvoiceB2B\PreCheckData as InvoiceB2BPreCheckData;
-use ArvPayolutionApi\Mocks\Request\InvoiceB2B\PreCheckDataGenerated;
 use ArvPayolutionApi\Mocks\Request\InvoiceB2B\ReAuthData;
 use ArvPayolutionApi\Mocks\Request\InvoiceB2B\RefundData;
 use ArvPayolutionApi\Mocks\Request\InvoiceB2B\ReversalData;
@@ -20,9 +17,6 @@ use ArvPayolutionApi\Request\RefundRequestFactory;
 use ArvPayolutionApi\Request\RequestPaymentTypes;
 use ArvPayolutionApi\Request\RequestTypes;
 use ArvPayolutionApi\Request\ReversalRequestFactory;
-use ArvPayolutionApi\Request\XmlSerializer;
-use ArvPayolutionApi\Request\XmlSerializerFactory;
-use GuzzleHttp\Client;
 
 /**
  * Class InvoiceRequestTest
@@ -66,7 +60,6 @@ class InvoiceB2BRequestTest extends \PHPUnit_Framework_TestCase
         $data = $data->jsonSerialize();
 
         $requestType = RequestTypes::PRE_AUTH;
-        $this->paymentMethod = RequestPaymentTypes::PAYOLUTION_INVOICE_B2B;
         $previousRequestId = '53488b162da3e294012db761fd734288';
 
         $mockXml = RequestXmlMockFactory::getRequestXml(

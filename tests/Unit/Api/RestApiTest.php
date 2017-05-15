@@ -6,7 +6,7 @@ use ArvPayolutionApi\Api\ApiFactory;
 use ArvPayolutionApi\Api\Client as ApiClient;
 use ArvPayolutionApi\Api\RestApi;
 use ArvPayolutionApi\Helpers\Config;
-use ArvPayolutionApi\Mocks\Request\Invoice\PreCheckDataGenerated;
+use ArvPayolutionApi\Mocks\Request\Invoice\RequestDataGenerated;
 use ArvPayolutionApi\Mocks\Request\RequestXmlMockFactory;
 use ArvPayolutionApi\Request\RequestTypes;
 use ArvPayolutionApi\Request\XmlSerializer;
@@ -37,12 +37,12 @@ class RestApiTest extends \PHPUnit_Framework_TestCase
      */
     private $restApi;
 
-    /** @var PreCheckDataGenerated $data */
+    /** @var RequestDataGenerated $data */
     private $data;
 
     public function setUp()
     {
-        $this->data = new PreCheckDataGenerated();
+        $this->data = new RequestDataGenerated();
         $this->xmlSerializer = XmlSerializerFactory::create();
         $this->xmlMock = new RequestXmlMockFactory();
         $config = Config::getPaymentConfig('Installment', RequestTypes::CALCULATION);
