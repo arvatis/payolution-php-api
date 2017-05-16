@@ -28,7 +28,7 @@ abstract class CompositeAbstract implements CompositeContract
     /**
      * @return bool
      */
-    public function isB2BRequest(): bool
+    public function isB2BRequest()
     {
         if (!isset($this->data['billingAddress']['company'])) {
             return false;

@@ -23,7 +23,7 @@ class ClientErrorResponse extends ResponseAbstract implements ResponseContract
     /**
      * @return bool
      */
-    public function getSuccess(): bool
+    public function getSuccess()
     {
         return false;
     }
