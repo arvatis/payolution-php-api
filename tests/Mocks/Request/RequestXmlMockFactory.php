@@ -2,7 +2,7 @@
 
 namespace ArvPayolutionApi\Mocks\Request;
 
-use ArvPayolutionApi\Helpers\Config;
+use ArvPayolutionApi\Mocks\Config;
 use ArvPayolutionApi\Request\RequestPaymentTypes;
 use ArvPayolutionApi\Request\RequestTypes;
 
@@ -38,7 +38,7 @@ class RequestXmlMockFactory
         $filePath = __DIR__ . DIRECTORY_SEPARATOR . self::$allowedPayments[$paymentMethod] . DIRECTORY_SEPARATOR . $request . '.xml';
 
         if (!file_exists($filePath)) {
-            throw new \Exception('Xml Mock "' . $filePath . '" not available.');
+            throw new \Exception('Xml Mocks "' . $filePath . '" not available.');
         }
         $xmlString = file_get_contents($filePath);
         $xmlString = self::setApiConfigValues($xmlString, self::$allowedPayments[$paymentMethod], $request);

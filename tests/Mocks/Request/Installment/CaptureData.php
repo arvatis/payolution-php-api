@@ -2,7 +2,7 @@
 
 namespace ArvPayolutionApi\Mocks\Request\Installment;
 
-use ArvPayolutionApi\Helpers\Config;
+use ArvPayolutionApi\Mocks\Config;
 use ArvPayolutionApi\Mocks\Request\RequestDataAbstract;
 use ArvPayolutionApi\Request\RequestTypes;
 

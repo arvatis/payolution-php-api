@@ -5,7 +5,7 @@ namespace ArvPayolutionApi\Unit\Api;
 use ArvPayolutionApi\Api\ApiFactory;
 use ArvPayolutionApi\Api\Client as ApiClient;
 use ArvPayolutionApi\Api\RestApi;
-use ArvPayolutionApi\Helpers\Config;
+use ArvPayolutionApi\Mocks\Config;
 use ArvPayolutionApi\Mocks\Request\Invoice\RequestDataGenerated;
 use ArvPayolutionApi\Mocks\Request\RequestXmlMockFactory;
 use ArvPayolutionApi\Request\RequestTypes;

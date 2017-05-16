@@ -4,21 +4,21 @@ namespace ArvPayolutionApi\Integration;
 
 use ArvPayolutionApi\Api\ApiFactory;
 use ArvPayolutionApi\Api\XmlApi;
+use ArvPayolutionApi\Helpers\TransactionHelper;
 use ArvPayolutionApi\Mocks\Request\Invoice\CaptureData;
 use ArvPayolutionApi\Mocks\Request\Invoice\PreAuthData;
 use ArvPayolutionApi\Mocks\Request\Invoice\PreCheckData;
 use ArvPayolutionApi\Mocks\Request\Invoice\ReAuthData;
 use ArvPayolutionApi\Mocks\Request\Invoice\RefundData;
 use ArvPayolutionApi\Mocks\Request\Invoice\ReversalData;
-use ArvPayolutionApi\Mocks\Request\RequestXmlMockFactory;
 use ArvPayolutionApi\Request\CaptureRequestFactory;
 use ArvPayolutionApi\Request\PreAuthRequestFactory;
 use ArvPayolutionApi\Request\PreCheckRequestFactory;
 use ArvPayolutionApi\Request\ReAuthRequestFactory;
 use ArvPayolutionApi\Request\RefundRequestFactory;
 use ArvPayolutionApi\Request\RequestPaymentTypes;
-use ArvPayolutionApi\Request\RequestTypes;
 use ArvPayolutionApi\Request\ReversalRequestFactory;
+use ArvPayolutionApi\Response\ResponseContract;
 
 /**
  * Class InvoiceTest
@@ -28,9 +28,8 @@ use ArvPayolutionApi\Request\ReversalRequestFactory;
 class InvoiceTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var  RequestXmlMockFactory
+     * @var string
      */
-    protected $xmlMock;
     private $paymentMethod;
 
     /**
@@ -40,9 +39,8 @@ class InvoiceTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->xmlMock = new RequestXmlMockFactory();
         $this->xmlApi = ApiFactory::createXmlApi();
-        $this->paymentMethod = $paymentBrand = RequestPaymentTypes::PAYOLUTION_INVOICE;
+        $this->paymentMethod = RequestPaymentTypes::PAYOLUTION_INVOICE;
     }
 
     /**
@@ -55,12 +53,14 @@ class InvoiceTest extends \PHPUnit_Framework_TestCase
         $data = new PreCheckData();
         $data = $data->jsonSerialize();
 
-        $requestType = RequestTypes::PRE_CHECK;
+        $transactionId = TransactionHelper::getUniqueTransactionId(__METHOD__);
+        $data['context']['transactionId'] = $transactionId;
 
-        $response = $this->xmlApi->doRequest(
-            PreCheckRequestFactory::create($requestType, $this->paymentMethod, $data)
+        $response = $this->xmlApi->doRequest(PreCheckRequestFactory::create($this->paymentMethod, $data));
+        self::assertTrue(
+            $response->getSuccess(),
+            'Request was failed response was ' . $response->getErrorMessage()
         );
-        self::assertTrue($response->getSuccess());
 
         return $response->getUniqueID();
     }
@@ -71,16 +71,90 @@ class InvoiceTest extends \PHPUnit_Framework_TestCase
      *
      * @param $preCheckId
      *
-     * @return string
+     * @return ResponseContract
      */
     public function testPreAuthSuccessful($preCheckId)
     {
-        $response = $this->doPreAuth($preCheckId);
-        self::assertTrue($response->getSuccess(),
-            'Response was ' . print_r($response, true)
+        $transactionId = TransactionHelper::getUniqueTransactionId(__METHOD__);
+        $response = $this->doPreAuth($preCheckId, $transactionId);
+        self::assertTrue(
+            $response->getSuccess(),
+            'Request was failed response was ' . $response->getErrorMessage()
         );
 
-        return $response->getUniqueID();
+        return $response;
+    }
+
+    /**
+     * @group online
+     * @depends testPreAuthSuccessful
+     *
+     * @param ResponseContract $preAuth
+     *
+     * @return ResponseContract|\ArvPayolutionApi\Response\XmlApiResponse
+     */
+    public function testReAuthSuccessful($preAuth)
+    {
+        $transactionId = TransactionHelper::getUniqueTransactionId(__METHOD__);
+
+        $data = new ReAuthData();
+        $data = $data->jsonSerialize();
+        $data['context']['transactionId'] = $transactionId;
+
+        $request = ReAuthRequestFactory::create($this->paymentMethod, $data, $preAuth->getUniqueID());
+        $response = $this->xmlApi->doRequest(
+            $request
+        );
+        self::assertTrue(
+            $response->getSuccess(),
+            'Request was failed response was ' . $response->getErrorMessage()
+        );
+
+        return $response;
+    }
+
+    /**
+     * @group online
+     * @depends testReAuthSuccessful
+     *
+     * @param ResponseContract $reAuth
+     *
+     * @return string
+     */
+    public function testCaptureSuccessful($reAuth)
+    {
+        $response = $this->doCapture($reAuth);
+
+        self::assertTrue($response->getSuccess(),
+            'Response was ' . print_r($response, true));
+
+        return $reAuth;
+    }
+
+    /**
+     * @group online
+     * @depends testCaptureSuccessful
+     *
+     * @param ResponseContract $reAuth
+     *
+     * @return string
+     */
+    public function testRefundSuccessful($reAuth)
+    {
+        $transactionId = TransactionHelper::getUniqueTransactionId(__METHOD__);
+
+        $data = new RefundData();
+        $data = $data->jsonSerialize();
+        $data['context']['transactionId'] = $transactionId;
+
+        $request = RefundRequestFactory::create($this->paymentMethod, $data, $reAuth->getUniqueID());
+        $response = $this->xmlApi->doRequest($request);
+        self::assertTrue($response->getSuccess(),
+            'PreAuthId was ' . $reAuth->getUniqueID() . PHP_EOL .
+            'Response was ' . $response->getErrorMessage()
+        );
+
+        return $response;
     }
 
     /**
@@ -90,117 +164,43 @@ class InvoiceTest extends \PHPUnit_Framework_TestCase
      */
     public function testReversalSuccessful()
     {
-        $preAuth = $this->doPreAuth();
-        self::assertTrue($preAuth->getSuccess(),
-            'PreAuth failed. ' . $preAuth->getErrorMessage()
-        );
-        $capture = $this->doCapture($preAuth->getUniqueID());
-        self::assertTrue($capture->getSuccess(),
-            'Capture failed. Response was ' . $capture->getXml()->saveXML()
+        $transactionId = TransactionHelper::getUniqueTransactionId(__METHOD__);
+        $preAuth = $this->doPreAuth(null, $transactionId);
+        self::assertTrue(
+            $preAuth->getSuccess(),
+            'PreAuth failed: ' . $preAuth->getErrorMessage()
         );
 
         $data = new ReversalData();
         $data = $data->jsonSerialize();
+        $data['context']['transactionId'] = $preAuth->getTransactionID();
 
         $request = ReversalRequestFactory::create($this->paymentMethod, $data, $preAuth->getUniqueID());
-        $response = $this->xmlApi->doRequest($request);
-        self::assertTrue($response->getSuccess(),
-            'PreAuthId was ' . $preAuth->getUniqueID() . PHP_EOL .
-            'Capture was ' . $capture->getUniqueID() . PHP_EOL .
-            'Request was ' . $request->saveXML() . PHP_EOL .
-            'Response was ' . ($response->getXml() ? $response->getXml()->saveXML() : print_r($response, true))
-        );
-
-        return $response->getUniqueID();
-    }
-
-    /**
-     * @group online
-     * @depends testPreAuthSuccessful
-     *
-     * @param $preAuth
-     *
-     * @return string
-     */
-    public function testCaptureSuccessful($preAuth)
-    {
-        $response = $this->doCapture($preAuth);
-
-        self::assertTrue($response->getSuccess(),
-            'Response was ' . print_r($response, true));
-
-        return $response->getUniqueID();
-    }
-
-    /**
-     * @group online
-     * @depends testPreAuthSuccessful
-     * @depends testPreAuthSuccessful
-     *
-     * @param $preAuth
-     *
-     * @return string
-     */
-    public function testRefundSuccessful($preAuth)
-    {
-        $data = new RefundData();
-        $data = $data->jsonSerialize();
-
-        $requestType = RequestTypes::REFUND;
-
-        $request = RefundRequestFactory::create($this->paymentMethod, $data, $preAuth);
         $response = $this->xmlApi->doRequest(
             $request
         );
         self::assertTrue(
             $response->getSuccess(),
-            'Request was ' . $request->saveXML() . PHP_EOL .
-            'Response was ' . print_r($response, true));
+            'Request was failed response was ' . $response->getErrorMessage()
+        );
 
         return $response->getUniqueID();
-    }
-
-    /**
-     * @group online
-     *
-     * @return \ArvPayolutionApi\Response\ResponseContract|\ArvPayolutionApi\Response\XmlApiResponse
-     */
-    public function testReAuthSuccessful()
-    {
-        $preAuth = $this->doPreAuth();
-        self::assertTrue($preAuth->getSuccess(),
-            'PreAuth failed. Response was ' . $preAuth->getXml()->saveXML()
-        );
-
-        $data = new ReAuthData();
-        $data = $data->jsonSerialize();
-
-        $requestType = RequestTypes::RE_AUTH;
-
-        $request = ReAuthRequestFactory::create($this->paymentMethod, $data, $preAuth->getUniqueID());
-        $response = $this->xmlApi->doRequest(
-            $request
-        );
-        self::assertTrue(
-            $response->getSuccess(),
-            'Request was ' . $request->saveXML() . PHP_EOL .
-            'Response was ' . print_r($response, true));
-
-        return $response;
     }
 
     /**
      * @param null $preCheckId
+     * @param null $transactionId
      *
      * @return \ArvPayolutionApi\Response\ResponseContract|\ArvPayolutionApi\Response\XmlApiResponse
      */
-    private function doPreAuth($preCheckId = null)
+    private function doPreAuth($preCheckId = null, $transactionId = null)
     {
         $data = new PreAuthData();
         $data = $data->jsonSerialize();
 
-        $requestType = RequestTypes::PRE_AUTH;
-
+        if (!empty($transactionId)) {
+            $data['context']['transactionId'] = $transactionId;
+        }
         $request = PreAuthRequestFactory::create($this->paymentMethod, $data, $preCheckId);
         $response = $this->xmlApi->doRequest(
             $request
@@ -210,18 +210,18 @@ class InvoiceTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @param $preAuthUniqueId
+     * @param ResponseContract $preAuth
      *
      * @return \ArvPayolutionApi\Response\ResponseContract|\ArvPayolutionApi\Response\XmlApiResponse
      */
-    private function doCapture($preAuthUniqueId)
+    private function doCapture(ResponseContract $preAuth)
     {
         $data = new CaptureData();
         $data = $data->jsonSerialize();
 
-        $requestType = RequestTypes::CAPTURE;
+        $data['context']['transactionId'] = $preAuth->getTransactionID();
 
-        $request = CaptureRequestFactory::create($this->paymentMethod, $data, $preAuthUniqueId);
+        $request = CaptureRequestFactory::create($this->paymentMethod, $data, $preAuth->getUniqueID());
         $response = $this->xmlApi->doRequest(
             $request
         );

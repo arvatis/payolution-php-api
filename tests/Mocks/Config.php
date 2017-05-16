@@ -1,6 +1,6 @@
 <?php
 
-namespace ArvPayolutionApi\Helpers;
+namespace ArvPayolutionApi\Mocks;
 
 use ArvPayolutionApi\Request\RequestTypes;
 

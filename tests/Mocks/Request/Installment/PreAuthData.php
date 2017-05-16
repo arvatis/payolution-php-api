@@ -2,7 +2,7 @@
 
 namespace ArvPayolutionApi\Mocks\Request\Installment;
 
-use ArvPayolutionApi\Helpers\Config;
+use ArvPayolutionApi\Mocks\Config;
 use ArvPayolutionApi\Request\RequestTypes;
 
 class PreAuthData extends PreCheckData

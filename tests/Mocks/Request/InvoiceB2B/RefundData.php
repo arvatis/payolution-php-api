@@ -2,7 +2,7 @@
 
 namespace ArvPayolutionApi\Mocks\Request\InvoiceB2B;
 
-use ArvPayolutionApi\Helpers\Config;
+use ArvPayolutionApi\Mocks\Config;
 use ArvPayolutionApi\Mocks\Request\RequestDataAbstract;
 use ArvPayolutionApi\Mocks\Request\RequestDataContract;
 use ArvPayolutionApi\Request\RequestTypes;
