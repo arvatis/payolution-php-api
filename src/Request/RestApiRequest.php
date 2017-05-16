@@ -27,7 +27,7 @@ class RestApiRequest
     /**
      * @return string
      */
-    public function getSender(): string
+    public function getSender()
     {
         return $this->sender;
     }

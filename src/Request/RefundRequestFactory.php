@@ -21,7 +21,7 @@ class RefundRequestFactory extends RequestFactoryAbstract
     /**
      * @return string
      */
-    public static function getRequestVersion(): string
+    public static function getRequestVersion()
     {
         return self::API_VERSION_NUMBER_ONE;
     }
@@ -39,7 +39,7 @@ class RefundRequestFactory extends RequestFactoryAbstract
         return new XmlApiRequest($header, $transaction);
     }
 
-    public static function getRequestType(): string
+    public static function getRequestType()
     {
         return RequestTypes::REFUND;
     }

@@ -79,7 +79,7 @@ class Customer
     /**
      * @return string
      */
-    public function getCompany(): string
+    public function getCompany()
     {
         return (string) $this->company;
     }

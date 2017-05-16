@@ -4,7 +4,7 @@ namespace ArvPayolutionApi\Request;
 
 class CaptureRequestFactory extends RequestFactoryAbstract
 {
-    public static function getRequestType(): string
+    public static function getRequestType()
     {
         return RequestTypes::CAPTURE;
     }
@@ -12,7 +12,7 @@ class CaptureRequestFactory extends RequestFactoryAbstract
     /**
      * @return string
      */
-    public static function getRequestVersion(): string
+    public static function getRequestVersion()
     {
         return self::API_VERSION_NUMBER_ONE;
     }

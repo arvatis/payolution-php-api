@@ -10,7 +10,7 @@ class CalculationRequestFactory extends RequestFactoryAbstract
     /**
      * @return string
      */
-    public static function getRequestVersion(): string
+    public static function getRequestVersion()
     {
         return self::API_VERSION_NUMBER_TWO;
     }
@@ -40,7 +40,7 @@ class CalculationRequestFactory extends RequestFactoryAbstract
         return CalculationTransactionFactory::create(static::getRequestType(), $paymentBrand, $data, $referenceId);
     }
 
-    public static function getRequestType(): string
+    public static function getRequestType()
     {
         return RequestTypes::CALCULATION;
     }

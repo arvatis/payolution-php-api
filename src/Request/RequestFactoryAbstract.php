@@ -41,11 +41,11 @@ abstract class RequestFactoryAbstract
     /**
      * @return string
      */
-    abstract public static function getRequestVersion(): string;
+    abstract public static function getRequestVersion();
 
     abstract public static function createTransaction($paymentBrand, $data, $referenceId);
 
-    abstract public static function getRequestType(): string;
+    abstract public static function getRequestType();
 
     /**
      * @param $paymentBrand
