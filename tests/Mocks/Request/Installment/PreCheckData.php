@@ -50,18 +50,29 @@ class PreCheckData extends RequestDataAbstract implements RequestDataContract
     /**
      * @return array
      */
+    public function getCustomerAddress()
+    {
+        return [
+                'countryCode' => 'DE',
+                'postCode' => '41460',
+            ] + parent::getCustomerAddress();
+    }
+
+    /**
+     * @return array
+     */
     public function jsonSerialize()
     {
         return [
-           'context' => $this->getApiContext(),
-           'customer' => $this->getCustomer(),
-           'shippingAddress' => $this->getShippingAddress(),
-           'billingAddress' => $this->getCustomerAddress(),
-           'cart' => $this->getCart(),
-           'cartItems' => $this->getCartItems(),
-           'systemInfo' => $this->getSytemInfo(),
-           'account' => $this->getAccountData(),
-           'installment' => $this->getInstallmentData(),
-       ];
+            'context' => $this->getApiContext(),
+            'customer' => $this->getCustomer(),
+            'shippingAddress' => $this->getCustomerAddress(),
+            'billingAddress' => $this->getCustomerAddress(),
+            'cart' => $this->getCart(),
+            'cartItems' => $this->getCartItems(),
+            'systemInfo' => $this->getSytemInfo(),
+            'account' => $this->getAccountData(),
+            'installment' => $this->getInstallmentData(),
+        ];
     }
 }

@@ -125,7 +125,8 @@ class InvoiceTest extends \PHPUnit_Framework_TestCase
     {
         $response = $this->doCapture($reAuth);
 
-        self::assertTrue($response->getSuccess(),
+        self::assertTrue(
+            $response->getSuccess(),
             'Response was ' . print_r($response, true));
 
         return $reAuth;

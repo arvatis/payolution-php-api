@@ -48,6 +48,17 @@ class ReAuthData extends RequestDataAbstract implements RequestDataContract
     }
 
     /**
+     * @return array
+     */
+    public function getCustomerAddress()
+    {
+        return [
+                'countryCode' => 'DE',
+                'postCode' => '41460',
+            ] + parent::getCustomerAddress();
+    }
+
+    /**
      * Specify data which should be serialized to JSON
      *
      * @see http://php.net/manual/en/jsonserializable.jsonserialize.php
@@ -63,7 +74,7 @@ class ReAuthData extends RequestDataAbstract implements RequestDataContract
             'context' => $this->getApiContext(),
             'cartItems' => $this->getCartItems(),
             'systemInfo' => $this->getSytemInfo(),
-            'shippingAddress' => $this->getShippingAddress(),
+            'shippingAddress' => $this->getCustomerAddress(),
             'billingAddress' => $this->getCustomerAddress(),
             'cart' => $this->getCart(),
             'customer' => $this->getCustomer(),

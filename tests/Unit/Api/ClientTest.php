@@ -61,7 +61,10 @@ class ClientTest extends \PHPUnit_Framework_TestCase
             RequestTypes::PRE_CHECK)
         );
 
-        self::assertTrue($response->getSuccess(), 'Transaction id was: ' . $response->getUniqueID());
+        self::assertTrue(
+            $response->getSuccess(),
+            'Transaction id was: ' . $response->getUniqueID(),
+            $response->getErrorMessage());
     }
 
     /**

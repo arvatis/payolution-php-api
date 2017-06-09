@@ -1,6 +1,6 @@
 <?php
 
-namespace   ArvPayolutionApi\Mocks\Request\Installment;
+namespace ArvPayolutionApi\Mocks\Request\Installment;
 
 use ArvPayolutionApi\Mocks\Config;
 
@@ -17,18 +17,29 @@ class CalculationData extends PreCheckData
             ] + Config::getPaymentConfig('Installment', 'Calculation');
     }
 
+    /**
+     * @return array
+     */
+    public function getCustomerAddress()
+    {
+        return [
+                'countryCode' => 'DE',
+                'postCode' => '41460',
+            ] + parent::getCustomerAddress();
+    }
+
     public function jsonSerialize()
     {
         return [
-         'context' => $this->getApiContext(),
-         'customer' => '',
-         'shippingAddress' => $this->getShippingAddress(),
-         'billingAddress' => $this->getCustomerAddress(),
-         'cart' => $this->getCart(),
-         'cartItems' => $this->getCartItems(),
-         'systemInfo' => $this->getSytemInfo(),
-         'account' => $this->getAccountData(),
-         'installment' => $this->getInstallmentData(),
-     ];
+            'context' => $this->getApiContext(),
+            'customer' => '',
+            'shippingAddress' => $this->getCustomerAddress(),
+            'billingAddress' => $this->getCustomerAddress(),
+            'cart' => $this->getCart(),
+            'cartItems' => $this->getCartItems(),
+            'systemInfo' => $this->getSytemInfo(),
+            'account' => $this->getAccountData(),
+            'installment' => $this->getInstallmentData(),
+        ];
     }
 }

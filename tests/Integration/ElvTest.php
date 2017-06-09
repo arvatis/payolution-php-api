@@ -107,7 +107,7 @@ class ElvTest extends \PHPUnit_Framework_TestCase
         );
         self::assertTrue(
             $response->getSuccess(),
-            'Request was failed response was ' . $response->getErrorMessage()
+            print_r('Request was failed response was ' . $response->getErrorMessage())
         );
 
         return $response;
@@ -125,8 +125,10 @@ class ElvTest extends \PHPUnit_Framework_TestCase
     {
         $response = $this->doCapture($reAuth);
 
-        self::assertTrue($response->getSuccess(),
-            'Response was ' . print_r($response, true));
+        self::assertTrue(
+            $response->getSuccess(),
+            print_r('Request was failed response was ' . $response->getErrorMessage())
+        );
 
         return $reAuth;
     }

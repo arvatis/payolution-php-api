@@ -23,9 +23,9 @@
       </Contact>
       <Address>
         <Street>Spengergasse 37</Street>
-        <Zip>1050</Zip>
+        <Zip>41460</Zip>
         <City>Wien</City>
-        <Country>AT</Country>
+        <Country>DE</Country>
       </Address>
       <Name>
         <Given>Max</Given>
@@ -65,12 +65,11 @@
       <Criterion name="PAYOLUTION_CUSTOMER_GROUP">TOP</Criterion>
       <Criterion name="PAYOLUTION_SHIPPING_GIVEN">Max</Criterion>
       <Criterion name="PAYOLUTION_SHIPPING_FAMILY">Mustermann</Criterion>
-      <Criterion name="PAYOLUTION_SHIPPING_COUNTRY">AT</Criterion>
-      <Criterion name="PAYOLUTION_SHIPPING_CITY">Graz</Criterion>
-      <Criterion name="PAYOLUTION_SHIPPING_ZIP">1060</Criterion>
-      <Criterion name="PAYOLUTION_SHIPPING_STREET">Spengergasse 38</Criterion>
-      <Criterion name="PAYOLUTION_SHIPPING_COMPANY">Payolution Company</Criterion>
-      <Criterion name="PAYOLUTION_SHIPPING_TYPE">ALTERNATIVE_SHIPPING_ADDRESS</Criterion>
+      <Criterion name="PAYOLUTION_SHIPPING_COUNTRY">DE</Criterion>
+      <Criterion name="PAYOLUTION_SHIPPING_CITY">Wien</Criterion>
+      <Criterion name="PAYOLUTION_SHIPPING_ZIP">41460</Criterion>
+      <Criterion name="PAYOLUTION_SHIPPING_STREET">Spengergasse 37</Criterion>
+      <Criterion name="PAYOLUTION_SHIPPING_TYPE">EQUALS_BILLING_ADDRESS</Criterion>
     </Analysis>
   </Transaction>
 </Request>

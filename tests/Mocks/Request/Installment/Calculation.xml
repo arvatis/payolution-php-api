@@ -16,7 +16,7 @@
       </Presentation>
     </Payment>
     <Analysis>
-      <Criterion name="PAYOLUTION_CALCULATION_TARGET_COUNTRY">AT</Criterion>
+      <Criterion name="PAYOLUTION_CALCULATION_TARGET_COUNTRY">DE</Criterion>
     </Analysis>
   </Transaction>
 </Request>

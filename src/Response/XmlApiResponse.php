@@ -67,7 +67,7 @@ class XmlApiResponse extends ResponseAbstract implements ResponseContract
 
         return trim(
             $processingInfo->attributes() . ' ' . $processingInfo->Result . ' ' . $processingInfo->Status . ' '
-            . $processingInfo->Result->attributes() . ' ' . $processingInfo->Reason
+            . $processingInfo->Result->attributes() . ' ' . $processingInfo->Reason . ' ' . $processingInfo->Return
         );
     }
 

@@ -48,10 +48,8 @@ class InstallmentRequestTest extends \PHPUnit_Framework_TestCase
         $data = new PreCheckData();
         $data = $data->jsonSerialize();
 
-        $requestType = RequestTypes::PRE_CHECK;
-
         $this->assertSame(
-            RequestXmlMockFactory::getRequestXml($this->paymentMethod, $requestType)->saveXml(),
+            RequestXmlMockFactory::getRequestXml($this->paymentMethod, RequestTypes::PRE_CHECK)->saveXml(),
             PreCheckRequestFactory::create($this->paymentMethod, $data)->saveXml()
         );
     }
@@ -61,12 +59,11 @@ class InstallmentRequestTest extends \PHPUnit_Framework_TestCase
         $data = new PreAuthData();
         $data = $data->jsonSerialize();
 
-        $requestType = RequestTypes::PRE_AUTH;
         $previousRequestId = '53488b162da3e294012db761fd734288';
 
         $mockXml = RequestXmlMockFactory::getRequestXml(
             $this->paymentMethod,
-            $requestType
+            RequestTypes::PRE_AUTH
         )->saveXml();
         $this->assertSame(
             $mockXml,

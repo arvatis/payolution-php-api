@@ -21,12 +21,23 @@ class PreAuthData extends PreCheckData
     /**
      * @return array
      */
+    public function getCustomerAddress()
+    {
+        return [
+                'countryCode' => 'DE',
+                'postCode' => '41460',
+            ] + parent::getCustomerAddress();
+    }
+
+    /**
+     * @return array
+     */
     public function jsonSerialize()
     {
         return [
             'context' => $this->getApiContext(),
             'customer' => $this->getCustomer(),
-            'shippingAddress' => $this->getShippingAddress(),
+            'shippingAddress' => $this->getCustomerAddress(),
             'billingAddress' => $this->getCustomerAddress(),
             'cart' => $this->getCart(),
             'cartItems' => $this->getCartItems(),
