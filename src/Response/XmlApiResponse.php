@@ -77,7 +77,7 @@ class XmlApiResponse extends ResponseAbstract implements ResponseContract
      */
     public function getShortId()
     {
-        if ($this->getSuccess() || !property_exists($this->xml, 'Transaction')) {
+        if (!$this->getSuccess() || !property_exists($this->xml, 'Transaction')) {
             return '';
         }
         return (string)$this->xml->Transaction->Identification->ShortID;
@@ -88,7 +88,7 @@ class XmlApiResponse extends ResponseAbstract implements ResponseContract
      */
     public function getUniqueID()
     {
-        if ($this->getSuccess() || !property_exists($this->xml, 'Transaction')) {
+        if (!$this->getSuccess() || !property_exists($this->xml, 'Transaction')) {
             return '';
         }
         return (string)$this->xml->Transaction->Identification->UniqueID;
@@ -101,7 +101,7 @@ class XmlApiResponse extends ResponseAbstract implements ResponseContract
      */
     public function getTransactionID()
     {
-        if ($this->getSuccess() || !property_exists($this->xml, 'Transaction')) {
+        if (!$this->getSuccess() || !property_exists($this->xml, 'Transaction')) {
             return '';
         }
         return (string)$this->xml->Transaction->Identification->TransactionID;
