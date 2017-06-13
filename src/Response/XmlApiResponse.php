@@ -7,8 +7,8 @@ namespace ArvPayolutionApi\Response;
  */
 class XmlApiResponse extends ResponseAbstract implements ResponseContract
 {
-    const PROCESSING_STATUS_CODE_SUCCESS = 90;
-    const PROCESSING_REASON_CODE_SUCCESS = 0;
+    const PROCESSING_STATUS_CODE_SUCCESS = '90';
+    const PROCESSING_REASON_CODE_SUCCESS = '00';
     /**
      * @var  \SimpleXMLElement
      */
