@@ -80,7 +80,8 @@ class XmlApiResponse extends ResponseAbstract implements ResponseContract
         if (!$this->getSuccess() || !property_exists($this->xml, 'Transaction')) {
             return '';
         }
-        return (string)$this->xml->Transaction->Identification->ShortID;
+
+        return (string) $this->xml->Transaction->Identification->ShortID;
     }
 
     /**
@@ -91,7 +92,8 @@ class XmlApiResponse extends ResponseAbstract implements ResponseContract
         if (!$this->getSuccess() || !property_exists($this->xml, 'Transaction')) {
             return '';
         }
-        return (string)$this->xml->Transaction->Identification->UniqueID;
+
+        return (string) $this->xml->Transaction->Identification->UniqueID;
     }
 
     /**
@@ -104,6 +106,18 @@ class XmlApiResponse extends ResponseAbstract implements ResponseContract
         if (!$this->getSuccess() || !property_exists($this->xml, 'Transaction')) {
             return '';
         }
-        return (string)$this->xml->Transaction->Identification->TransactionID;
+
+        return (string) $this->xml->Transaction->Identification->TransactionID;
+    }
+
+    /**
+     * @return array
+     */
+    public function jsonSerialize()
+    {
+        $data = parent::jsonSerialize();
+        $data['success'] = $this->getSuccess();
+
+        return $data;
     }
 }
