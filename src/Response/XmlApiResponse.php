@@ -9,6 +9,7 @@ class XmlApiResponse extends ResponseAbstract implements ResponseContract
 {
     const PROCESSING_STATUS_CODE_SUCCESS = '90';
     const PROCESSING_REASON_CODE_SUCCESS = '00';
+    const PROCESSING_REASON_SUCCESS = 'Successful Processing';
     /**
      * @var  \SimpleXMLElement
      */
@@ -42,8 +43,8 @@ class XmlApiResponse extends ResponseAbstract implements ResponseContract
         if (!property_exists($this->xml, 'Transaction')) {
             return false;
         }
-
         $processingInfo = $this->xml->Transaction->Processing;
+        return $processingInfo->Reason == self::PROCESSING_REASON_SUCCESS;
         if (isset($processingInfo->Status['code']) && $processingInfo->Status['code'] == self::PROCESSING_STATUS_CODE_SUCCESS
             && isset($processingInfo->Reason['code']) && $processingInfo->Reason['code'] == self::PROCESSING_REASON_CODE_SUCCESS
         ) {
@@ -81,7 +82,7 @@ class XmlApiResponse extends ResponseAbstract implements ResponseContract
             return '';
         }
 
-        return (string) $this->xml->Transaction->Identification->ShortID;
+        return (string)$this->xml->Transaction->Identification->ShortID;
     }
 
     /**
@@ -93,7 +94,7 @@ class XmlApiResponse extends ResponseAbstract implements ResponseContract
             return '';
         }
 
-        return (string) $this->xml->Transaction->Identification->UniqueID;
+        return (string)$this->xml->Transaction->Identification->UniqueID;
     }
 
     /**
@@ -107,7 +108,7 @@ class XmlApiResponse extends ResponseAbstract implements ResponseContract
             return '';
         }
 
-        return (string) $this->xml->Transaction->Identification->TransactionID;
+        return (string)$this->xml->Transaction->Identification->TransactionID;
     }
 
     /**
