@@ -44,9 +44,9 @@ class XmlApiResponse extends ResponseAbstract implements ResponseContract
             return false;
         }
         $processingInfo = $this->xml->Transaction->Processing;
-        return $processingInfo->Reason == self::PROCESSING_REASON_SUCCESS;
-        if (isset($processingInfo->Status['code']) && $processingInfo->Status['code'] == self::PROCESSING_STATUS_CODE_SUCCESS
-            && isset($processingInfo->Reason['code']) && $processingInfo->Reason['code'] == self::PROCESSING_REASON_CODE_SUCCESS
+        // return (string) $processingInfo->Reason == self::PROCESSING_REASON_SUCCESS;
+        if (isset($processingInfo->Status['code']) && ((string)$processingInfo->Status['code']) === self::PROCESSING_STATUS_CODE_SUCCESS
+            && isset($processingInfo->Reason['code']) && ((string)$processingInfo->Reason['code']) === self::PROCESSING_REASON_CODE_SUCCESS
         ) {
             return true;
         }
