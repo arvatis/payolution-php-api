@@ -40,15 +40,16 @@ class XmlApiResponse extends ResponseAbstract implements ResponseContract
      */
     public function getSuccess()
     {
-        if (!property_exists($this->xml, 'Transaction')) {
+        try {
+            $processingInfo = $this->xml->Transaction->Processing;
+            // return (string) $processingInfo->Reason == self::PROCESSING_REASON_SUCCESS;
+            if (isset($processingInfo->Status['code']) && ((string)$processingInfo->Status['code']) === self::PROCESSING_STATUS_CODE_SUCCESS
+                && isset($processingInfo->Reason['code']) && ((string)$processingInfo->Reason['code']) === self::PROCESSING_REASON_CODE_SUCCESS
+            ) {
+                return true;
+            }
+        } catch (\Exception $e) {
             return false;
-        }
-        $processingInfo = $this->xml->Transaction->Processing;
-        // return (string) $processingInfo->Reason == self::PROCESSING_REASON_SUCCESS;
-        if (isset($processingInfo->Status['code']) && ((string)$processingInfo->Status['code']) === self::PROCESSING_STATUS_CODE_SUCCESS
-            && isset($processingInfo->Reason['code']) && ((string)$processingInfo->Reason['code']) === self::PROCESSING_REASON_CODE_SUCCESS
-        ) {
-            return true;
         }
 
         return false;
@@ -61,7 +62,7 @@ class XmlApiResponse extends ResponseAbstract implements ResponseContract
      */
     public function getErrorMessage()
     {
-        if ($this->getSuccess() || !property_exists($this->xml, 'Transaction')) {
+        if ($this->getSuccess()) {
             return '';
         }
         /** @var \SimpleXMLElement $processingInfo */
@@ -78,7 +79,7 @@ class XmlApiResponse extends ResponseAbstract implements ResponseContract
      */
     public function getShortId()
     {
-        if (!$this->getSuccess() || !property_exists($this->xml, 'Transaction')) {
+        if (!$this->getSuccess()) {
             return '';
         }
 
@@ -90,7 +91,7 @@ class XmlApiResponse extends ResponseAbstract implements ResponseContract
      */
     public function getUniqueID()
     {
-        if (!$this->getSuccess() || !property_exists($this->xml, 'Transaction')) {
+        if (!$this->getSuccess()) {
             return '';
         }
 
@@ -104,7 +105,7 @@ class XmlApiResponse extends ResponseAbstract implements ResponseContract
      */
     public function getTransactionID()
     {
-        if (!$this->getSuccess() || !property_exists($this->xml, 'Transaction')) {
+        if (!$this->getSuccess()) {
             return '';
         }
 
