@@ -50,9 +50,11 @@ XML;
         $xmlApiResponse = new XmlApiResponse(new \SimpleXMLElement($xml));
         self::assertTrue($xmlApiResponse->getSuccess());
         self::assertSame('8a82944a5ca14e22015ca166459a471b', $xmlApiResponse->getUniqueID());
+        self::assertSame('TRNH-FHTF-NSPB', $xmlApiResponse->getPaymentReference());
         $xmlApiResponseData = $xmlApiResponse->jsonSerialize();
         self::assertTrue($xmlApiResponseData['success']);
         self::assertSame('8a82944a5ca14e22015ca166459a471b', $xmlApiResponseData['uniqueID']);
+        self::assertSame('TRNH-FHTF-NSPB', $xmlApiResponseData['paymentReference']);
     }
 
     public function testErrorResponseCreation()

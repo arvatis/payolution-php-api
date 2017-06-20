@@ -10,6 +10,7 @@ class XmlApiResponse extends ResponseAbstract implements ResponseContract
     const PROCESSING_STATUS_CODE_SUCCESS = '90';
     const PROCESSING_REASON_CODE_SUCCESS = '00';
     const PROCESSING_REASON_SUCCESS = 'Successful Processing';
+    const PAYMENT_REFERENCE = 'PaymentReference';
     /**
      * @var  \SimpleXMLElement
      */
@@ -43,8 +44,8 @@ class XmlApiResponse extends ResponseAbstract implements ResponseContract
         try {
             $processingInfo = $this->xml->Transaction->Processing;
             // return (string) $processingInfo->Reason == self::PROCESSING_REASON_SUCCESS;
-            if (isset($processingInfo->Status['code']) && ((string)$processingInfo->Status['code']) === self::PROCESSING_STATUS_CODE_SUCCESS
-                && isset($processingInfo->Reason['code']) && ((string)$processingInfo->Reason['code']) === self::PROCESSING_REASON_CODE_SUCCESS
+            if (isset($processingInfo->Status['code']) && ((string) $processingInfo->Status['code']) === self::PROCESSING_STATUS_CODE_SUCCESS
+                && isset($processingInfo->Reason['code']) && ((string) $processingInfo->Reason['code']) === self::PROCESSING_REASON_CODE_SUCCESS
             ) {
                 return true;
             }
@@ -83,7 +84,7 @@ class XmlApiResponse extends ResponseAbstract implements ResponseContract
             return '';
         }
 
-        return (string)$this->xml->Transaction->Identification->ShortID;
+        return (string) $this->xml->Transaction->Identification->ShortID;
     }
 
     /**
@@ -95,7 +96,7 @@ class XmlApiResponse extends ResponseAbstract implements ResponseContract
             return '';
         }
 
-        return (string)$this->xml->Transaction->Identification->UniqueID;
+        return (string) $this->xml->Transaction->Identification->UniqueID;
     }
 
     /**
@@ -109,7 +110,7 @@ class XmlApiResponse extends ResponseAbstract implements ResponseContract
             return '';
         }
 
-        return (string)$this->xml->Transaction->Identification->TransactionID;
+        return (string) $this->xml->Transaction->Identification->TransactionID;
     }
 
     /**
@@ -118,8 +119,26 @@ class XmlApiResponse extends ResponseAbstract implements ResponseContract
     public function jsonSerialize()
     {
         $data = parent::jsonSerialize();
-        $data['success'] = $this->getSuccess();
 
         return $data;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPaymentReference()
+    {
+        if (!$this->getSuccess()) {
+            return '';
+        }
+        foreach ($this->xml->Transaction->Processing->ConnectorDetails->Result as $detail) {
+            if (isset($detail['name'])
+                && ((string) $detail['name']) === self::PAYMENT_REFERENCE
+            ) {
+                return (string) $detail;
+            }
+        }
+
+        return '';
     }
 }
