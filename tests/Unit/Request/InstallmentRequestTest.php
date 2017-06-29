@@ -37,7 +37,7 @@ class InstallmentRequestTest extends \PHPUnit_Framework_TestCase
      */
     private $paymentMethod;
 
-    public function setUp()
+    protected function setUp()
     {
         $this->xmlMock = new RequestXmlMockFactory();
         $this->paymentMethod = RequestPaymentTypes::PAYOLUTION_INS;

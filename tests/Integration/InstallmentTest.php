@@ -47,7 +47,7 @@ class InstallmentTest extends \PHPUnit_Framework_TestCase
      */
     private $paymentMethod;
 
-    public function setUp()
+    protected function setUp()
     {
         $this->paymentMethod = RequestPaymentTypes::PAYOLUTION_INS;
         $this->xmlApi = ApiFactory::createXmlApi();

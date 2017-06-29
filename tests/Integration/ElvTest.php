@@ -37,7 +37,7 @@ class ElvTest extends \PHPUnit_Framework_TestCase
      */
     private $xmlApi;
 
-    public function setUp()
+    protected function setUp()
     {
         $this->xmlApi = ApiFactory::createXmlApi();
         $this->paymentMethod = RequestPaymentTypes::PAYOLUTION_ELV;

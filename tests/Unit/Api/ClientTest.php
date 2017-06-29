@@ -41,7 +41,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     /** @var RequestDataGenerated $data */
     private $data;
 
-    public function setUp()
+    protected function setUp()
     {
         $this->data = new RequestDataGenerated();
         $this->xmlSerializer = XmlSerializerFactory::create();

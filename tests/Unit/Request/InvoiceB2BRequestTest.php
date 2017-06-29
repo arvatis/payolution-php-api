@@ -35,7 +35,7 @@ class InvoiceB2BRequestTest extends \PHPUnit_Framework_TestCase
      */
     private $paymentMethod;
 
-    public function setUp()
+    protected function setUp()
     {
         $this->xmlMock = new RequestXmlMockFactory();
         $this->paymentMethod = RequestPaymentTypes::PAYOLUTION_INVOICE_B2B;

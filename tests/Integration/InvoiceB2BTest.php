@@ -37,7 +37,7 @@ class InvoiceB2BTest extends \PHPUnit_Framework_TestCase
      */
     private $paymentMethod;
 
-    public function setUp()
+    protected function setUp()
     {
         $this->xmlApi = ApiFactory::createXmlApi();
         $this->paymentMethod = RequestPaymentTypes::PAYOLUTION_INVOICE_B2B;

@@ -21,7 +21,7 @@ class XmlSerializerTest extends \PHPUnit_Framework_TestCase
      */
     protected $xmlSerializer;
 
-    public function setUp()
+    protected function setUp()
     {
         $this->presentation = new Presentation(249.99, 'Trx 42', 'EUR');
         $this->xmlSerializer = XmlSerializerFactory::create();

@@ -38,7 +38,7 @@ class InvoiceRequestTest extends \PHPUnit_Framework_TestCase
     /** @var RequestDataGenerated $data */
     private $data;
 
-    public function setUp()
+    protected function setUp()
     {
         $this->xmlMock = new RequestXmlMockFactory();
         $this->paymentMethod = RequestPaymentTypes::PAYOLUTION_INVOICE;
