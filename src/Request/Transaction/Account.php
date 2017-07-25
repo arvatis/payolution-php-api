@@ -27,6 +27,7 @@ class Account
      */
     public function getBrand()
     {
+        //FIXME: validate brand?
         return str_replace('_B2B', '', $this->brand);
     }
 }

@@ -64,7 +64,7 @@ class RestApi
     /**
      * @param \SimpleXMLElement $xml
      *
-     * @return ResponseContract|XmlApiResponse
+     * @return ResponseContract|RestApiResponse
      */
     public function doRequest(\SimpleXMLElement $xml): ResponseContract
     {

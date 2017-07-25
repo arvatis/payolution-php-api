@@ -148,11 +148,12 @@ class InstallmentRequestTest extends \PHPUnit_Framework_TestCase
 
         $requestType = RequestTypes::CALCULATION;
 
+        $requestXml = RequestXmlMockFactory::getRequestXml(
+            RequestPaymentTypes::PAYOLUTION_INS,
+            $requestType
+        )->saveXml();
         $this->assertSame(
-            RequestXmlMockFactory::getRequestXml(
-                RequestPaymentTypes::PAYOLUTION_INS,
-                $requestType
-            )->saveXml(),
+            $requestXml,
             CalculationRequestFactory::create($this->paymentMethod, $data)->saveXml()
         );
     }
