@@ -1,6 +1,7 @@
 {
   "name": "arvatis/payolution-php-api",
   "description": "payolution api developed for the plentymarkets payolution plugin",
+  "version": "1.0.2-beta",
   "autoload": {
     "psr-4": {
       "ArvPayolutionApi\\": "src/"
