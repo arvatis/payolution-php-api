@@ -5,7 +5,6 @@ namespace ArvPayolutionApi\Api;
 use ArvPayolutionApi\Response\ClientErrorResponse;
 use ArvPayolutionApi\Response\ResponseContract;
 use ArvPayolutionApi\Response\RestApiResponse;
-use ArvPayolutionApi\Response\XmlApiResponse;
 use GuzzleHttp\Exception\BadResponseException;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\ServerException;

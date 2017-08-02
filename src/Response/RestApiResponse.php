@@ -38,11 +38,11 @@ class RestApiResponse extends ResponseAbstract implements ResponseContract
      */
     public function getSuccess()
     {
-        if (!property_exists($this->xml, 'Status')) {
+        try {
+            return $this->xml->Status == self::STATUS_SUCCESS;
+        } catch (\Exception $e) {
             return false;
         }
-
-        return $this->xml->Status == self::STATUS_SUCCESS;
     }
 
     /**
@@ -52,7 +52,7 @@ class RestApiResponse extends ResponseAbstract implements ResponseContract
      */
     public function getErrorMessage()
     {
-        if ($this->getSuccess() || !property_exists($this->xml, 'Status')) {
+        if ($this->getSuccess()) {
             return '';
         }
 
