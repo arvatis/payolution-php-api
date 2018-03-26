@@ -160,6 +160,7 @@ class RequestDataGenerated extends RequestDataAbstract implements RequestDataCon
             'cart' => $this->getCart(),
             'cartItems' => $this->getCartItems(),
             'systemInfo' => $this->getSytemInfo(),
+            'sessionId' => 'payolution_de_827ccb0eea8a706c4c34a16891f84e7b',
         ];
     }
 }

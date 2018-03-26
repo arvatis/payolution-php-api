@@ -73,6 +73,7 @@ class PreCheckData extends RequestDataAbstract implements RequestDataContract
             'systemInfo' => $this->getSytemInfo(),
             'account' => $this->getAccountData(),
             'installment' => $this->getInstallmentData(),
+            'sessionId' => 'payolution_de_827ccb0eea8a706c4c34a16891f84e7b',
         ];
     }
 }

@@ -3,7 +3,7 @@
 namespace ArvPayolutionApi\Request;
 
 /**
- * Class Types
+ * Class RequestPaymentTypes
  */
 class RequestPaymentTypes
 {

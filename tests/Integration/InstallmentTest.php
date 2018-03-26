@@ -300,10 +300,10 @@ class InstallmentTest extends \PHPUnit_Framework_TestCase
         $data = new CalculationData();
         $data = $data->jsonSerialize();
         $data['context']['transactionId'] = $transactionId;
-
+        print_r($data['context']);
         $request = CalculationRequestFactory::create($this->paymentMethod, $data);
         $response = $this->restApi->doRequest($request);
-
+//var_export($response->getPaymentPlans());
         return $response;
     }
 }

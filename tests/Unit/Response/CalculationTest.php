@@ -23,6 +23,7 @@ class CalculationTest extends \PHPUnit_Framework_TestCase
 
         self::assertSame(6, count($installments));
         self::assertSame(3, count($installments[3]['installments']));
+        self::assertEquals(12, $installments[12]['duration']);
     }
 
     /**

@@ -8,11 +8,11 @@
          convertErrorsToExceptions="true"
          convertNoticesToExceptions="true"
          convertWarningsToExceptions="true"
-         failOnRisky="true"
+         failOnRisky="false"
          failOnWarning="true"
          processIsolation="false"
-         stopOnError="false"
-         stopOnFailure="false"
+         stopOnError="true"
+         stopOnFailure="true"
          syntaxCheck="true"
          verbose="false"
 >
@@ -34,4 +34,7 @@
         <log type="junit" target="build/php/test-results.xml"/>
     </logging>
 
+    <php>
+        <includePath>./</includePath>
+    </php>
 </phpunit>

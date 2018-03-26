@@ -69,6 +69,7 @@
       <Criterion name="PAYOLUTION_SHIPPING_STREET">Spengergasse 38</Criterion>
       <Criterion name="PAYOLUTION_SHIPPING_COMPANY">Payolution Company</Criterion>
       <Criterion name="PAYOLUTION_SHIPPING_TYPE">ALTERNATIVE_SHIPPING_ADDRESS</Criterion>
+      <Criterion name="PAYOLUTION_SESSION_ID">payolution_de_827ccb0eea8a706c4c34a16891f84e7b</Criterion>
     </Analysis>
   </Transaction>
 </Request>

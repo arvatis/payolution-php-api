@@ -20,6 +20,7 @@ use ArvPayolutionApi\Request\Transaction\Analysis\Order;
 use ArvPayolutionApi\Request\Transaction\Analysis\OrderTracking;
 use ArvPayolutionApi\Request\Transaction\Analysis\PreCheck;
 use ArvPayolutionApi\Request\Transaction\Analysis\PreCheckId;
+use ArvPayolutionApi\Request\Transaction\Analysis\SessionId;
 use ArvPayolutionApi\Request\Transaction\Analysis\Shipping;
 use ArvPayolutionApi\Request\Transaction\Analysis\SystemInfo;
 use ArvPayolutionApi\Request\Transaction\Analysis\TaxAmount;
@@ -64,7 +65,8 @@ class AnalysisFactory
             ->add(new CompanyUuid($requestType, $referenceId, $data))
             ->add(new CompanyType($requestType, $referenceId, $data))
             ->add(new CompanyNo($requestType, $referenceId, $data))
-            ->add(new CalculationCountry($requestType, $referenceId, $data));
+            ->add(new CalculationCountry($requestType, $referenceId, $data))
+            ->add(new SessionId($requestType, $referenceId, $data));
 
         $criterionData = $composite->collect();
         $analysis = new Analysis();

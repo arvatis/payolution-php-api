@@ -74,7 +74,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     {
         $response = $this->xmlApi->doRequest(new \SimpleXMLElement('<xml></xml>'));
 
-        self::assertSame('NOK REJECTED_VALIDATION  Format Error', $response->getErrorMessage());
+        self::assertStringStartsWith('NOK REJECTED_VALIDATION  Format Error', $response->getErrorMessage());
     }
 
     /**
@@ -87,7 +87,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $response = $this->xmlApi->doRequest(
             PreAuthRequestFactory::create(RequestPaymentTypes::PAYOLUTION_INVOICE, $data)
         );
-        self::assertSame('VA.PA.60.95 NOK REJECTED_BANK  Authorization Error', $response->getErrorMessage());
+        self::assertStringStartsWith('VA.PA.60.95 NOK REJECTED_BANK  Authorization Error', $response->getErrorMessage());
     }
 
     /**

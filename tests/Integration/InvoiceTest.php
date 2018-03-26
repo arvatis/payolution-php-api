@@ -56,7 +56,8 @@ class InvoiceTest extends \PHPUnit_Framework_TestCase
         $transactionId = TransactionHelper::getUniqueTransactionId(__METHOD__);
         $data['context']['transactionId'] = $transactionId;
 
-        $response = $this->xmlApi->doRequest(PreCheckRequestFactory::create($this->paymentMethod, $data));
+        $request = PreCheckRequestFactory::create($this->paymentMethod, $data);
+        $response = $this->xmlApi->doRequest($request);
         self::assertTrue(
             $response->getSuccess(),
             'Request was failed response was ' . $response->getErrorMessage()

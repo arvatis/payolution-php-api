@@ -55,7 +55,6 @@ class ElvTest extends \PHPUnit_Framework_TestCase
 
         $transactionId = TransactionHelper::getUniqueTransactionId(__METHOD__);
         $data['context']['transactionId'] = $transactionId;
-
         $response = $this->xmlApi->doRequest(PreCheckRequestFactory::create($this->paymentMethod, $data));
         self::assertTrue(
             $response->getSuccess(),
@@ -198,6 +197,7 @@ class ElvTest extends \PHPUnit_Framework_TestCase
     private function doPreAuth($preCheckId = null, $transactionId = null)
     {
         $data = new PreAuthData();
+        unset($data['account']['bic']);
         $data = $data->jsonSerialize();
         $data['billingAddress']['country'] = 'DE';
         $data['shippingAddress']['country'] = 'DE';
