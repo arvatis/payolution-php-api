@@ -67,7 +67,10 @@
       <Criterion name="PAYOLUTION_TRX_TYPE">B2B</Criterion>
       <Criterion name="PAYOLUTION_COMPANY_NAME">Payolution Company</Criterion>
       <Criterion name="PAYOLUTION_COMPANY_UID">ATU4514545</Criterion>
-      <Criterion name="PAYOLUTION_COMPANY_TYPE">COMPANY</Criterion>
+      <Criterion name="PAYOLUTION_COMPANY_TYPE">SOLE</Criterion>
+      <Criterion name="PAYOLUTION_COMPANY_OWNER_FAMILY">Mustermann</Criterion>
+      <Criterion name="PAYOLUTION_COMPANY_OWNER_GIVEN">Max</Criterion>
+      <Criterion name="PAYOLUTION_COMPANY_OWNER_BIRTHDATE">1970-01-30</Criterion>
       <Criterion name="PAYOLUTION_SESSION_ID">payolution_de_827ccb0eea8a706c4c34a16891f84e7b</Criterion>
     </Analysis>
   </Transaction>

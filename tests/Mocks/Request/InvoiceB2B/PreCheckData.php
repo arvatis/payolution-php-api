@@ -41,8 +41,8 @@ class PreCheckData extends RequestDataAbstract implements RequestDataContract
         return [
             'name' => 'Payolution Company',
             'type' => 'COMPANY',
-            'registration_no' => '',
-            'vat_id' => 'ATU4514545',
+            'registrationNo' => '',
+            'vatId' => 'ATU4514545',
         ];
     }
 

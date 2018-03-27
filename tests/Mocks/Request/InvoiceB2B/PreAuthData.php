@@ -41,9 +41,11 @@ class PreAuthData extends RequestDataAbstract implements RequestDataContract
     {
         return [
             'name' => 'Payolution Company',
-            'type' => 'COMPANY',
-            'registration_no' => '',
-            'vat_id' => 'ATU4514545',
+            'type' => 'SOLE',
+            'registrationNo' => '',
+            'vatId' => 'ATU4514545',
+            'ownerFirstName' => "Max",
+            'ownerLastName' => "Mustermann",
         ];
     }
 

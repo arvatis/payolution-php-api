@@ -9,7 +9,7 @@ class CompanyUuid extends CompositeAbstract implements CompositeContract
      */
     public function isAvailable()
     {
-        return $this->isB2BRequest() && !empty($this->data['company']['vat_id']);
+        return $this->isB2BRequest() && !empty($this->data['company']['vatId']);
     }
 
     /**
@@ -17,6 +17,6 @@ class CompanyUuid extends CompositeAbstract implements CompositeContract
      */
     public function collect()
     {
-        return [CriterionNames::PAYOLUTION_COMPANY_VAT_ID => $this->data['company']['vat_id']];
+        return [CriterionNames::PAYOLUTION_COMPANY_VAT_ID => $this->data['company']['vatId']];
     }
 }

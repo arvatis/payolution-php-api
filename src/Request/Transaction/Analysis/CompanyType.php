@@ -29,8 +29,8 @@ class CompanyType extends CompositeAbstract implements CompositeContract
             return $data;
         }
         //TODO: move to own classes
-        $data[CriterionNames::PAYOLUTION_COMPANY_OWNER_FAMILY] = $this->data['customer']['lastName'];
-        $data[CriterionNames::PAYOLUTION_COMPANY_OWNER_GIVEN] = $this->data['customer']['firstName'];
+        $data[CriterionNames::PAYOLUTION_COMPANY_OWNER_FAMILY] = $this->data['company']['ownerLastName'];
+        $data[CriterionNames::PAYOLUTION_COMPANY_OWNER_GIVEN] = $this->data['company']['ownerFirstName'];
         $data[CriterionNames::PAYOLUTION_COMPANY_OWNER_BIRTHDATE] = $this->data['customer']['dob'];
 
         return $data;

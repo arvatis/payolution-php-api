@@ -4,6 +4,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+* udpate company type field names
 * add session_id to pre auth and pre check
 
 ## [0.4.0-dev]
