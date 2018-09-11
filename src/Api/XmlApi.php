@@ -5,7 +5,6 @@ namespace ArvPayolutionApi\Api;
 use ArvPayolutionApi\Response\ClientErrorResponse;
 use ArvPayolutionApi\Response\ResponseContract;
 use ArvPayolutionApi\Response\XmlApiResponse;
-use GuzzleHttp\Exception\BadResponseException;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\ServerException;
 
@@ -73,7 +72,6 @@ class XmlApi
             return new XmlApiResponse(new \SimpleXMLElement($responseBody));
         } catch (ClientException $e) {
         } catch (ServerException $e) {
-        } catch (BadResponseException $e) {
         } catch (\Exception $e) {
         }
 
